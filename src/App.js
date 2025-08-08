@@ -1,17 +1,17 @@
-// src/App.js
 import React, { useState } from 'react';
 import './App.css';
 
-// Импортируем все наши компоненты-калькуляторы
+// Импортируем все наши компоненты
 import Calculator from './components/Calculator';
 import GoldEfficiencyCalculator from './components/GoldEfficiencyCalculator';
 import AbilityHasteCalculator from './components/AbilityHasteCalculator';
 import TurretCalculator from './components/TurretCalculator';
 import SmiteTrainer from './components/SmiteTrainer';
 import FAQ from './components/FAQ';
+import ProSceneAnalyzer from './components/ProSceneAnalyzer';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('smite');
+  const [activeTab, setActiveTab] = useState('pro'); // По умолчанию открыта вкладка "Про-сцена"
   const [isFaqOpen, setIsFaqOpen] = useState(false);
 
   return (
@@ -52,6 +52,9 @@ function App() {
         <button className={activeTab === 'smite' ? 'active' : ''} onClick={() => setActiveTab('smite')}>
           Тренажер Смайта
         </button>
+        <button className={activeTab === 'pro' ? 'active' : ''} onClick={() => setActiveTab('pro')}>
+          Про-сцена
+        </button>
       </nav>
 
       <main>
@@ -67,9 +70,14 @@ function App() {
         {activeTab === 'turret' && <TurretCalculator />}
         
         {activeTab === 'smite' && <SmiteTrainer />}
+
+        {activeTab === 'pro' && (
+          <div className="pro-scene-container">
+            <ProSceneAnalyzer />
+          </div>
+        )}
       </main>
 
-      {/* Отображаем FAQ поверх всего, если isFaqOpen === true */}
       {isFaqOpen && <FAQ onClose={() => setIsFaqOpen(false)} />}
     </div>
   );
