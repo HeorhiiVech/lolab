@@ -1,0 +1,144 @@
+/* src/components/Calculator.css */
+.card {
+    background-color: #0F1A20;
+    border: 1px solid #C89B3C;
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #F0E6D2;
+    text-align: left;
+}
+    
+.results-display {
+    margin-top: 24px;
+    border-top: 1px solid #5a4b2c;
+    padding-top: 24px;
+}
+
+.results-summary {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.results-summary span {
+    font-size: 1em;
+    color: #a09480;
+}
+
+.results-summary p {
+    font-size: 1.8em;
+    margin: 5px 0;
+    color: #F0E6D2;
+}
+
+.gold-text {
+    color: #C89B3C;
+    font-weight: bold;
+}
+
+.results-details p {
+    text-align: left;
+    margin-bottom: 10px;
+    color: #a09480;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #1c2a33;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+    
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: #2c3e50;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+}
+    
+.slider:hover {
+    opacity: 1;
+}
+    
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #C89B3C;
+    cursor: pointer;
+}
+    
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #C89B3C;
+    cursor: pointer;
+}
+
+.lane-selector {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.lane-selector button {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #5a4b2c;
+    background-color: transparent;
+    color: #a09480;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1em;
+}
+
+.lane-selector button:hover {
+    border-color: #C89B3C;
+    color: #F0E6D2;
+}
+
+.lane-selector button.active {
+    background-color: #C89B3C;
+    color: #0A1014;
+    border-color: #C89B3C;
+    font-weight: bold;
+}
+
+.kill-equivalent {
+    text-align: center;
+    padding: 15px 0;
+    margin: 15px 0;
+    border-top: 1px solid #2c3e50;
+    border-bottom: 1px solid #2c3e50;
+    font-size: 1.1em;
+}
+
+.kill-equivalent strong {
+    color: #C89B3C;
+    font-weight: bold;
+}

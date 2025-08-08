@@ -1,0 +1,75 @@
+/* src/components/TurretCalculator.css */
+
+.turret-inputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.manual-input {
+  width: 95%;
+  padding: 10px;
+  background-color: #0A1014;
+  border: 1px solid #5a4b2c;
+  color: #F0E6D2;
+  font-size: 1.1em;
+  border-radius: 4px;
+}
+
+.manual-input:focus {
+    outline: none;
+    border-color: #C89B3C;
+}
+
+.turret-results {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #5a4b2c;
+}
+
+.survived-shots {
+  font-size: 1.5em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.shot-breakdown h4 {
+  text-align: left;
+  color: #a09480;
+}
+
+.shot-breakdown ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.shot-breakdown li {
+  background-color: #0A1014;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.shot-breakdown li.lethal {
+  background-color: #4a1c1c; /* Красный фон для смертельных выстрелов */
+  color: #ff8a8a;
+}
+
+.shot-breakdown li span {
+  font-weight: bold;
+  color: #F0E6D2;
+}
+
+.shot-breakdown li.lethal span {
+    color: #ffc9c9;
+}
+
+.cumulative-dmg {
+  color: #a09480;
+  font-weight: normal;
+  font-size: 0.8em;
+}

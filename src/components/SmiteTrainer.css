@@ -1,0 +1,175 @@
+/* src/components/SmiteTrainer.css */
+.trainer-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 250px;
+  background-color: #0A1014;
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  cursor: crosshair; /* Меняем курсор на прицел */
+}
+
+.character {
+  width: 80px;
+  height: 80px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  transition: transform 0.1s ease-in-out;
+  border-radius: 50%;
+  border: 2px solid #5a4b2c;
+}
+
+.ally {
+  background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/LeeSin_0.jpg');
+  border-color: #0ACBCS;
+}
+
+.enemy {
+  background-image: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Graves_0.jpg');
+  border-color: #e74c3c;
+}
+
+.character.attacking {
+  transform: scale(1.1);
+}
+
+.dragon-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dragon {
+  width: 150px;
+  height: 150px;
+  background-image: url('https://wiki.leagueoflegends.com/en-us/images/Infernal_Drake_Render.png?95a26');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+/* === НОВЫЙ СТИЛЬ ДЛЯ ЭФФЕКТА НАВЕДЕНИЯ === */
+.dragon.ready {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 15px #C89B3C); /* Золотое свечение */
+}
+
+.hp-bar-container {
+  width: 250px;
+  height: 30px;
+  background-color: #4a1c1c;
+  border: 2px solid #5a4b2c;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hp-bar {
+  background-color: #2ecc71;
+  height: 100%;
+  transition: width 0.2s linear;
+}
+
+.hp-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+}
+
+.game-controls, .smite-controls {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.start-button {
+  background-color: #C89B3C;
+  color: #0A1014;
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Cinzel', serif;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.start-button:hover {
+  background-color: #F0E6D2;
+}
+
+.result-message {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #C89B3C;
+  min-height: 25px;
+}
+
+.control-group {
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+}
+.control-group label {
+    margin-bottom: 5px;
+    display: block;
+    color: #a09480;
+}
+
+.smite-selector, .difficulty-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.smite-selector button, .difficulty-selector button {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #5a4b2c;
+  background-color: transparent;
+  color: #a09480;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9em;
+  font-family: 'Roboto', sans-serif;
+}
+
+.smite-selector button:hover, .difficulty-selector button:hover {
+  border-color: #C89B3C;
+  color: #F0E6D2;
+}
+
+.smite-selector button.active, .difficulty-selector button.active {
+  background-color: #C89B3C;
+  color: #0A1014;
+  border-color: #C89B3C;
+  font-weight: bold;
+}
+
+/* === НОВЫЕ СТИЛИ ДЛЯ ИНСТРУКЦИИ === */
+.smite-instruction {
+  font-size: 1.3em;
+  color: #a09480;
+}
+
+.smite-instruction kbd {
+  background-color: #0A1014;
+  border: 1px solid #C89B3C;
+  color: #F0E6D2;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: 'Cinzel', serif;
+  font-size: 1em;
+}

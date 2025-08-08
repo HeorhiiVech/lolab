@@ -1,0 +1,199 @@
+/* src/components/GoldEfficiencyCalculator.css */
+
+.build-section {
+  margin-bottom: 20px;
+}
+
+.build-slots {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.item-slot {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  background-color: #0A1014;
+  border: 2px dashed #5a4b2c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.item-slot:hover {
+  border-color: #C89B3C;
+}
+
+.item-slot img {
+  width: 100%;
+  height: 100%;
+}
+
+.plus-sign {
+  font-size: 40px;
+  color: #5a4b2c;
+  font-weight: bold;
+}
+
+.item-efficiency {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #C89B3C;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 3px 0 0 0;
+}
+
+.clear-slot-btn {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.item-slot:hover .clear-slot-btn {
+  opacity: 1;
+}
+
+.results-section {
+  border-top: 1px solid #5a4b2c;
+  padding-top: 15px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.total-results {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.total-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px 15px;
+  font-size: 0.9em;
+  color: #a09480;
+}
+
+.total-stats p {
+    margin: 5px 0;
+}
+.total-stats span {
+    color: #F0E6D2;
+    font-weight: bold;
+}
+
+
+/* Стили для модального окна */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #0F1A20;
+  border: 2px solid #C89B3C;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.item-choice {
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.item-choice:hover {
+  transform: scale(1.1);
+}
+
+.item-choice img {
+  width: 64px;
+  height: 64px;
+  border: 1px solid #5a4b2c;
+}
+
+.item-choice span {
+  display: none; /* Скрываем названия, чтобы не перегружать интерфейс */
+}
+
+/* Добавить в конец файла src/components/GoldEfficiencyCalculator.css */
+
+.search-bar {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #0A1014;
+  border: 1px solid #5a4b2c;
+  color: #F0E6D2;
+  font-size: 1em;
+  border-radius: 4px;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #C89B3C;
+}
+
+.item-choice {
+  position: relative; /* Нужно для всплывающей подсказки */
+}
+
+/* Улучшаем всплывающую подсказку по умолчанию */
+.item-choice[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 110%; /* Показываем над иконкой */
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background-color: #0A1014;
+  color: #F0E6D2;
+  border: 1px solid #C89B3C;
+  padding: 5px 10px;
+  border-radius: 4px;
+  z-index: 1;
+  font-size: 14px;
+}

@@ -1,0 +1,123 @@
+/* src/components/AbilityHasteCalculator.css */
+.calculator-section {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.ah-item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(54px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #0A1014;
+  border-radius: 4px;
+}
+
+.ah-item-choice {
+  width: 54px;
+  height: 54px;
+  cursor: pointer;
+  border: 2px solid #5a4b2c;
+  transition: all 0.2s;
+  opacity: 0.6;
+}
+
+.ah-item-choice:hover {
+  border-color: #C89B3C;
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.ah-item-choice.selected {
+  border-color: #0ACBCS; /* Бирюзовый акцент для выбранных */
+  opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #0ACBCS;
+}
+
+.ah-item-choice img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.manual-haste-input {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #0A1014;
+  border: 1px solid #5a4b2c;
+  color: #F0E6D2;
+  font-size: 1.2em;
+  border-radius: 4px;
+}
+
+.manual-haste-input:focus {
+  outline: none;
+  border-color: #C89B3C;
+}
+
+.ah-results {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #5a4b2c;
+}
+
+.result-box {
+  text-align: center;
+}
+
+.result-box span {
+  font-size: 1em;
+  color: #a09480;
+}
+
+.result-box p {
+  font-size: 2.5em;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+/* Добавить в конец файла src/components/AbilityHasteCalculator.css */
+
+.ah-examples {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #5a4b2c;
+  text-align: left;
+}
+
+.example-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Делаем две колонки для примеров */
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.example-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0A1014;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #2c3e50;
+}
+
+.original-cd {
+  color: #a09480;
+  text-decoration: line-through; /* Зачеркнутый текст для старого значения */
+}
+
+.example-item span {
+    color: #a09480;
+}
+
+.new-cd {
+  color: #0ACBCS; /* Бирюзовый акцент для нового значения */
+  font-weight: bold;
+  font-size: 1.1em;
+}
