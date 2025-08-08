@@ -181,19 +181,34 @@
   position: relative; /* Нужно для всплывающей подсказки */
 }
 
-/* Улучшаем всплывающую подсказку по умолчанию */
-.item-choice[title]:hover::after {
-  content: attr(title);
-  position: absolute;
-  bottom: 110%; /* Показываем над иконкой */
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  background-color: #0A1014;
-  color: #F0E6D2;
-  border: 1px solid #C89B3C;
-  padding: 5px 10px;
+.stat-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #2c3e50;
+}
+
+.filter-btn {
+  padding: 6px 12px;
+  border: 1px solid #5a4b2c;
+  background-color: transparent;
+  color: #a09480;
   border-radius: 4px;
-  z-index: 1;
-  font-size: 14px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: #C89B3C;
+  color: #F0E6D2;
+}
+
+.filter-btn.active {
+  background-color: #C89B3C;
+  color: #0A1014;
+  border-color: #C89B3C;
+  font-weight: bold;
 }

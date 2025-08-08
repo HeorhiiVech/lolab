@@ -9,9 +9,9 @@ function AbilityHasteCalculator() {
   const [totalHaste, setTotalHaste] = useState(0);
   const [cdr, setCdr] = useState(0);
 
-  // Примеры КД для отображения
   const exampleCooldowns = [8, 15, 60, 120];
 
+  // Фильтруем предметы по свойству abilityHaste верхнего уровня
   const itemsWithHaste = useMemo(() => 
     Object.values(items).filter(item => item.abilityHaste > 0)
   , []);
@@ -19,7 +19,8 @@ function AbilityHasteCalculator() {
   useEffect(() => {
     let hasteFromItems = 0;
     for (const itemId in selectedItems) {
-      if(items[itemId]) { // Добавим проверку на случай, если предмет не найден
+      if(items[itemId]) {
+        // Берем ускорение из свойства верхнего уровня
         hasteFromItems += items[itemId].abilityHaste;
       }
     }
@@ -44,7 +45,7 @@ function AbilityHasteCalculator() {
 
   return (
     <div className="card">
-      <h2>Калькулятор Ability Haste</h2>
+      <h2>Калькулятор перезарядки</h2>
 
       <div className="calculator-section">
         <h4>Выберите предметы:</h4>
@@ -83,8 +84,7 @@ function AbilityHasteCalculator() {
           <p className="gold-text">{cdr.toFixed(1)}%</p>
         </div>
       </div>
-
-      {/* === НОВЫЙ БЛОК С ПРИМЕРАМИ === */}
+      
       <div className="ah-examples">
         <h4>Примеры:</h4>
         <div className="example-grid">
@@ -100,8 +100,6 @@ function AbilityHasteCalculator() {
           })}
         </div>
       </div>
-      {/* === КОНЕЦ НОВОГО БЛОКА === */}
-
     </div>
   );
 }

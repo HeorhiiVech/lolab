@@ -32,6 +32,16 @@
     justify-content: space-around;
     text-align: center;
     margin-bottom: 20px;
+    gap: 10px;
+}
+
+.results-summary.extended div {
+    flex: 1;
+}
+
+.results-summary .total {
+    font-size: 1.5em;
+    color: #f1c40f;
 }
 
 .results-summary span {
@@ -54,6 +64,10 @@
     text-align: left;
     margin-bottom: 10px;
     color: #a09480;
+}
+
+.results-details strong {
+    color: #F0E6D2;
 }
 
 .detail-row {
@@ -141,4 +155,31 @@
 .kill-equivalent strong {
     color: #C89B3C;
     font-weight: bold;
+}
+
+.total-gold-banner {
+    background-color: #0A1014;
+    border: 1px solid #C89B3C;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 15px 0;
+}
+.total-gold-banner span {
+    color: #f1c40f;
+    font-size: 1.1em;
+}
+.total-gold-banner .total {
+    margin: 5px 0 0 0;
+}
+
+.ward-equivalent {
+  margin-top: -10px; /* Придвинем поближе к строке с киллами */
+  padding-bottom: 15px;
+  font-size: 0.9em;
+  color: #a09480; /* Сделаем текст чуть бледнее */
+  border-bottom: 1px solid #2c3e50;
+}
+
+.ward-equivalent strong {
+    color: #F0E6D2; /* А цифру сделаем ярче */
 }

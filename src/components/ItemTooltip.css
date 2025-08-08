@@ -1,0 +1,50 @@
+/* src/components/ItemTooltip.css */
+.item-tooltip {
+  min-width: 250px;
+  max-width: 300px;
+  background-color: #0A1014;
+  border: 2px solid #C89B3C;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 2000; /* Чтобы был поверх всего */
+  pointer-events: none; /* Чтобы не мешал кликам мыши */
+  text-align: left;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #5a4b2c;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.tooltip-header img {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.tooltip-name-cost h3 {
+  margin: 0;
+  color: #F0E6D2;
+  font-size: 1.1em;
+}
+
+.tooltip-name-cost p {
+  margin: 0;
+  font-size: 1em;
+}
+
+.tooltip-body p {
+  margin: 4px 0;
+  color: #0ACBCS; /* Бирюзовый для статов */
+}
+
+.tooltip-body .plaintext {
+  margin-top: 10px;
+  color: #a09480; /* Бледный для описания */
+  font-size: 0.9em;
+  line-height: 1.4;
+}

@@ -21,6 +21,7 @@
   border: 2px solid #5a4b2c;
   transition: all 0.2s;
   opacity: 0.6;
+  position: relative; 
 }
 
 .ah-item-choice:hover {
@@ -29,12 +30,35 @@
   transform: scale(1.05);
 }
 
+/* === ИЗМЕНЕННЫЙ БЛОК: УСИЛЕННАЯ ОБВОДКА === */
 .ah-item-choice.selected {
-  border-color: #0ACBCS; /* Бирюзовый акцент для выбранных */
   opacity: 1;
+  border-width: 3px; /* Делаем рамку толще */
+  border-color: #0DF0F0; /* Более яркий бирюзовый цвет */
   transform: scale(1.05);
-  box-shadow: 0 0 10px #0ACBCS;
+  /* Добавляем внутреннюю и внешнюю тень для эффекта "неонового" свечения */
+  box-shadow: 0 0 10px #0ACBCS, inset 0 0 5px rgba(10, 203, 205, 0.5);
 }
+
+.ah-item-choice.selected::after {
+  content: '✔';
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background-color: #0ACBCS;
+  color: #0A1014;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid #0A1014;
+}
+/* === КОНЕЦ ИЗМЕНЕННОГО БЛОКА === */
+
 
 .ah-item-choice img {
   width: 100%;
@@ -81,8 +105,6 @@
   font-weight: bold;
 }
 
-/* Добавить в конец файла src/components/AbilityHasteCalculator.css */
-
 .ah-examples {
   margin-top: 20px;
   padding-top: 20px;
@@ -92,7 +114,7 @@
 
 .example-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Делаем две колонки для примеров */
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-top: 10px;
 }
@@ -109,7 +131,7 @@
 
 .original-cd {
   color: #a09480;
-  text-decoration: line-through; /* Зачеркнутый текст для старого значения */
+  text-decoration: line-through;
 }
 
 .example-item span {
@@ -117,7 +139,7 @@
 }
 
 .new-cd {
-  color: #0ACBCS; /* Бирюзовый акцент для нового значения */
+  color: #0ACBCS;
   font-weight: bold;
   font-size: 1.1em;
 }

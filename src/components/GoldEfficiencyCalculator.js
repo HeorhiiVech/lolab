@@ -1,7 +1,18 @@
 // src/components/GoldEfficiencyCalculator.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { items, statGoldValues } from '../data/items.js';
+import ItemTooltip from './ItemTooltip';
 import './GoldEfficiencyCalculator.css';
+
+// Вынесем названия статов для фильтров в константу для удобства
+const FILTERABLE_STATS = {
+  attackDamage: 'Сила атаки',
+  abilityPower: 'Сила умений',
+  armor: 'Броня',
+  magicResist: 'Сопр. магии',
+  health: 'Здоровье',
+  attackSpeed: 'Скор. атаки',
+};
 
 function GoldEfficiencyCalculator() {
   const [build, setBuild] = useState(Array(6).fill(null));
@@ -13,8 +24,10 @@ function GoldEfficiencyCalculator() {
     totalCost: 0,
     totalEfficiency: 0,
   });
-  // === НОВОЕ СОСТОЯНИЕ ДЛЯ ПОИСКА ===
   const [searchTerm, setSearchTerm] = useState('');
+  const [hoveredItem, setHoveredItem] = useState(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [activeStatFilter, setActiveStatFilter] = useState(null);
 
   useEffect(() => {
     const newTotalStats = {};
@@ -28,17 +41,14 @@ function GoldEfficiencyCalculator() {
         let currentItemStatValue = 0;
 
         for (const stat in item.stats) {
+          // Сначала добавляем все статы в общую сводку
+          const statValue = item.stats[stat];
+          newTotalStats[stat] = (newTotalStats[stat] || 0) + statValue;
+
+          // Затем считаем стоимость только тех статов, у которых она есть
           if (statGoldValues[stat]) {
-            const statValue = item.stats[stat];
-            newTotalStats[stat] = (newTotalStats[stat] || 0) + statValue;
             currentItemStatValue += statValue * statGoldValues[stat];
           }
-        }
-        
-        // Добавляем стоимость Ability Haste, если он есть
-        if (item.abilityHaste > 0) {
-            currentItemStatValue += item.abilityHaste * statGoldValues.abilityHaste;
-            newTotalStats['abilityHaste'] = (newTotalStats['abilityHaste'] || 0) + item.abilityHaste;
         }
 
         newEfficiencies[index] = item.cost > 0 ? Math.round((currentItemStatValue / item.cost) * 100) : 0;
@@ -53,10 +63,11 @@ function GoldEfficiencyCalculator() {
       totalEfficiency: newTotalCost > 0 ? Math.round((totalStatValue / newTotalCost) * 100) : 0,
     });
   }, [build]);
-
+  
   const handleSlotClick = (index) => {
     setActiveSlot(index);
-    setSearchTerm(''); // Сбрасываем поиск при открытии окна
+    setSearchTerm('');
+    setActiveStatFilter(null);
     setIsModalOpen(true);
   };
 
@@ -74,14 +85,28 @@ function GoldEfficiencyCalculator() {
     setBuild(newBuild);
   };
 
-  // === НОВАЯ ЛОГИКА ФИЛЬТРАЦИИ ПРЕДМЕТОВ ===
-  const filteredItems = Object.values(items).filter(item => 
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleStatFilterClick = (statKey) => {
+    setActiveStatFilter(prevFilter => (prevFilter === statKey ? null : statKey));
+  };
+  
+  const filteredItems = useMemo(() => {
+    let tempItems = Object.values(items);
+
+    if (activeStatFilter) {
+      tempItems = tempItems.filter(item => item.stats[activeStatFilter] > 0);
+    }
+
+    if (searchTerm.length > 0) {
+      tempItems = tempItems.filter(item => 
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    return tempItems;
+  }, [activeStatFilter, searchTerm]);
 
   return (
     <div className="card">
-      <h2>Калькулятор голд эффективности</h2>
+      <h2>Калькулятор золотой эффективности</h2>
       
       <div className="build-section">
         <h3>Ваша сборка:</h3>
@@ -120,7 +145,19 @@ function GoldEfficiencyCalculator() {
         <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h3>Выберите предмет для слота #{activeSlot + 1}</h3>
-            {/* === НОВОЕ ПОЛЕ ВВОДА ДЛЯ ПОИСКА === */}
+            
+            <div className="stat-filters">
+              {Object.entries(FILTERABLE_STATS).map(([key, name]) => (
+                <button
+                  key={key}
+                  className={`filter-btn ${activeStatFilter === key ? 'active' : ''}`}
+                  onClick={() => handleStatFilterClick(key)}
+                >
+                  {name}
+                </button>
+              ))}
+            </div>
+
             <input 
               type="text"
               placeholder="Поиск по названию..."
@@ -130,15 +167,26 @@ function GoldEfficiencyCalculator() {
             />
             <div className="item-grid">
               {filteredItems.map((item) => (
-                <div key={item.id} className="item-choice" onClick={() => handleItemSelect(item)} title={item.name}>
+                <div 
+                  key={item.id} 
+                  className="item-choice" 
+                  onClick={() => handleItemSelect(item)}
+                  onMouseEnter={(e) => {
+                    setHoveredItem(item);
+                    setTooltipPosition({ x: e.clientX, y: e.clientY });
+                  }}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  onMouseMove={(e) => setTooltipPosition({ x: e.clientX, y: e.clientY })}
+                >
                   <img src={item.imageUrl} alt={item.name} />
-                  {/* Теперь название предмета показывается во всплывающей подсказке */}
                 </div>
               ))}
             </div>
           </div>
         </div>
       )}
+      
+      {hoveredItem && <ItemTooltip item={hoveredItem} position={tooltipPosition} />}
     </div>
   );
 }
