@@ -53,7 +53,7 @@ function SmiteTrainer() {
   }, [gameState, dragonHp, smiteDmg, difficulty, smiteableTimestamp]);
   
   const handleKeyPress = useCallback((event) => {
-    if (gameState === 'active' && (event.key.toLowerCase() === 'd' || event.key.toLowerCase() === 'f')) {
+    if (gameState === 'active' && (event.key.toLowerCase() === 'd','в' || event.key.toLowerCase() === 'f','а')) {
       handleSmite();
     }
   }, [gameState, handleSmite]); // FIX: Добавляем handleSmite в зависимости
