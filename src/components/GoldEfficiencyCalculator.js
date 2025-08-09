@@ -106,7 +106,7 @@ function GoldEfficiencyCalculator() {
 
   return (
     <div className="card">
-      <h2>Калькулятор золотой эффективности</h2>
+      <h2>Калькулятор голд эффективности</h2>
       
       <div className="build-section">
         <h3>Ваша сборка:</h3>
