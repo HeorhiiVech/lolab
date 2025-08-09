@@ -13,7 +13,7 @@ body {
 
 /* --- СТИЛИ ДЛЯ ШАПКИ И ЕЕ АНИМАЦИИ --- */
 .header-section {
-  background-image: url('./assets/background.png');
+  background-image: url('./assets/background.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
