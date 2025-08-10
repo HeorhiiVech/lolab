@@ -1,0 +1,197 @@
+/* src/components/TierListMaker.css */
+
+/* --- Общие контроли над тирлистом --- */
+.tierlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.tierlist-header h2 {
+    margin: 0;
+}
+.tierlist-controls {
+    display: flex;
+    gap: 10px;
+}
+.tierlist-controls button {
+    padding: 8px 16px;
+    background-color: #C89B3C;
+    color: #0A1014;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+}
+
+/* --- Макет: Две колонки --- */
+.tierlist-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+.tierlist-main {
+    flex-grow: 1; 
+}
+.champion-pool-section.card {
+    width: 600px;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.tier-row {
+    display: flex;
+    margin-bottom: 4px;
+    min-height: 80px;
+    background-color: #0A1014;
+    border: 1px solid #2c3e50;
+}
+.tier-label {
+    width: 140px; /* <-- ИЗМЕНЕНИЕ: Ширина увеличена до 140px */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: #111;
+    position: relative;
+    border-right: 1px solid #2c3e50;
+}
+
+.tier-label textarea {
+    background: none;
+    border: none;
+    color: inherit;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    font-size: 1em;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    line-height: 1.2;
+    resize: none;
+    overflow: hidden;
+}
+
+.color-picker-popover {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 105%;
+}
+.champion-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    flex-grow: 1;
+    padding: 5px;
+    transition: background-color 0.2s ease;
+}
+.champion-container.dragging-over {
+    background-color: #1c2a33;
+}
+.champion-icon {
+    width: 60px;
+    height: 60px;
+    margin: 2px;
+    position: relative;
+}
+.champion-icon img {
+    width: 100%;
+    height: 100%;
+}
+.champion-pool-section .search-bar {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #0A1014;
+    border: 1px solid #5a4b2c;
+    color: #F0E6D2;
+}
+.champion-pool-section .pool {
+    height: 500px;
+    overflow-y: auto;
+    background-color: #0A1014;
+    border: 1px dashed #5a4b2c;
+    padding: 5px;
+}
+.delete-champ-btn {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  background-color: #e74c3c;
+  color: white;
+  border: 1px solid #0A1014;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.champion-icon:hover .delete-champ-btn {
+  opacity: 1;
+}
+
+.delete-tier-btn {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    background: rgba(0,0,0,0.3);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    line-height: 18px;
+    text-align: center;
+}
+.delete-tier-btn:hover {
+    background: rgba(0,0,0,0.6);
+}
+.color-picker-btn {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.color-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.5);
+}
+
+.screenshot-text {
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    font-size: 1em;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    color: inherit;
+    line-height: 1.2;
+    white-space: pre-wrap;
+}

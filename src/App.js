@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
+// Импортируем все наши компоненты
 import Calculator from './components/Calculator';
 import GoldEfficiencyCalculator from './components/GoldEfficiencyCalculator';
 import AbilityHasteCalculator from './components/AbilityHasteCalculator';
@@ -9,15 +10,15 @@ import TurretCalculator from './components/TurretCalculator';
 import SmiteTrainer from './components/SmiteTrainer';
 import FAQ from './components/FAQ';
 import ProSceneAnalyzer from './components/ProSceneAnalyzer';
+import TierListMaker from './components/TierListMaker'; // 1. Импортируем новый компонент
 
 function App() {
-  const [activeTab, setActiveTab] = useState('pro');
+  const [activeTab, setActiveTab] = useState('tierlist'); // По умолчанию открыт Тирлист Мейкер
   const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
 
   return (
     <div className={`App ${isHeaderCollapsed ? 'header-collapsed' : ''}`}>
-      {/* Кнопка-стрелка теперь живет отдельно и позиционируется относительно всего App */}
       <button 
         className="collapse-toggle-btn" 
         onClick={() => setIsHeaderCollapsed(!isHeaderCollapsed)} 
@@ -46,6 +47,7 @@ function App() {
             <button className={activeTab === 'turret' ? 'active' : ''} onClick={() => setActiveTab('turret')}>Калькулятор Башен</button>
             <button className={activeTab === 'smite' ? 'active' : ''} onClick={() => setActiveTab('smite')}>Тренажер Смайта</button>
             <button className={activeTab === 'pro' ? 'active' : ''} onClick={() => setActiveTab('pro')}>Про-сцена</button>
+            <button className={activeTab === 'tierlist' ? 'active' : ''} onClick={() => setActiveTab('tierlist')}>Тирлист Мейкер</button>
           </div>
         </nav>
       </div>
@@ -62,6 +64,7 @@ function App() {
           {activeTab === 'turret' && <TurretCalculator />}
           {activeTab === 'smite' && <SmiteTrainer />}
           {activeTab === 'pro' && <ProSceneAnalyzer />}
+          {activeTab === 'tierlist' && <TierListMaker />}
         </div>
       </main>
 

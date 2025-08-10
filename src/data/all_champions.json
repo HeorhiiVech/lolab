@@ -1,0 +1,2228 @@
+{
+    "version": "15.15.1",
+    "data": {
+        "Aatrox": {
+            "id": "Aatrox",
+            "name": "Атрокс",
+            "image": {
+                "full": "Aatrox.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 0,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Ahri": {
+            "id": "Ahri",
+            "name": "Ари",
+            "image": {
+                "full": "Ahri.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 48,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Akali": {
+            "id": "Akali",
+            "name": "Акали",
+            "image": {
+                "full": "Akali.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 96,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Akshan": {
+            "id": "Akshan",
+            "name": "Акшан",
+            "image": {
+                "full": "Akshan.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 144,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Alistar": {
+            "id": "Alistar",
+            "name": "Алистар",
+            "image": {
+                "full": "Alistar.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 192,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Ambessa": {
+            "id": "Ambessa",
+            "name": "Амбесса",
+            "image": {
+                "full": "Ambessa.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 240,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Amumu": {
+            "id": "Amumu",
+            "name": "Амуму",
+            "image": {
+                "full": "Amumu.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 288,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Anivia": {
+            "id": "Anivia",
+            "name": "Анивия",
+            "image": {
+                "full": "Anivia.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 336,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Annie": {
+            "id": "Annie",
+            "name": "Энни",
+            "image": {
+                "full": "Annie.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 384,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Aphelios": {
+            "id": "Aphelios",
+            "name": "Афелий",
+            "image": {
+                "full": "Aphelios.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 432,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Ashe": {
+            "id": "Ashe",
+            "name": "Эш",
+            "image": {
+                "full": "Ashe.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 0,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "AurelionSol": {
+            "id": "AurelionSol",
+            "name": "Аурелион Сол",
+            "image": {
+                "full": "AurelionSol.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 48,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Aurora": {
+            "id": "Aurora",
+            "name": "Аврора",
+            "image": {
+                "full": "Aurora.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 96,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Azir": {
+            "id": "Azir",
+            "name": "Азир",
+            "image": {
+                "full": "Azir.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 144,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Bard": {
+            "id": "Bard",
+            "name": "Бард",
+            "image": {
+                "full": "Bard.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 192,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Belveth": {
+            "id": "Belveth",
+            "name": "Бел'Вет",
+            "image": {
+                "full": "Belveth.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 240,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Blitzcrank": {
+            "id": "Blitzcrank",
+            "name": "Блицкранк",
+            "image": {
+                "full": "Blitzcrank.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 288,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Brand": {
+            "id": "Brand",
+            "name": "Брэнд",
+            "image": {
+                "full": "Brand.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 336,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Braum": {
+            "id": "Braum",
+            "name": "Браум",
+            "image": {
+                "full": "Braum.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 384,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Briar": {
+            "id": "Briar",
+            "name": "Брайер",
+            "image": {
+                "full": "Briar.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 432,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Caitlyn": {
+            "id": "Caitlyn",
+            "name": "Кейтлин",
+            "image": {
+                "full": "Caitlyn.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 0,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Camille": {
+            "id": "Camille",
+            "name": "Камилла",
+            "image": {
+                "full": "Camille.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 48,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Cassiopeia": {
+            "id": "Cassiopeia",
+            "name": "Кассиопея",
+            "image": {
+                "full": "Cassiopeia.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 96,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Chogath": {
+            "id": "Chogath",
+            "name": "Чо'Гат",
+            "image": {
+                "full": "Chogath.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 144,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Corki": {
+            "id": "Corki",
+            "name": "Корки",
+            "image": {
+                "full": "Corki.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 192,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Darius": {
+            "id": "Darius",
+            "name": "Дариус",
+            "image": {
+                "full": "Darius.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 240,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Diana": {
+            "id": "Diana",
+            "name": "Диана",
+            "image": {
+                "full": "Diana.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 288,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Draven": {
+            "id": "Draven",
+            "name": "Дрейвен",
+            "image": {
+                "full": "Draven.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 336,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "DrMundo": {
+            "id": "DrMundo",
+            "name": "Доктор Мундо",
+            "image": {
+                "full": "DrMundo.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 384,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Ekko": {
+            "id": "Ekko",
+            "name": "Экко",
+            "image": {
+                "full": "Ekko.png",
+                "sprite": "champion0.png",
+                "group": "champion",
+                "x": 432,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Elise": {
+            "id": "Elise",
+            "name": "Элиза",
+            "image": {
+                "full": "Elise.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 0,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Evelynn": {
+            "id": "Evelynn",
+            "name": "Эвелинн",
+            "image": {
+                "full": "Evelynn.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 48,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Ezreal": {
+            "id": "Ezreal",
+            "name": "Эзреаль",
+            "image": {
+                "full": "Ezreal.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 96,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Fiddlesticks": {
+            "id": "Fiddlesticks",
+            "name": "Фиддлстикс",
+            "image": {
+                "full": "Fiddlesticks.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 144,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Fiora": {
+            "id": "Fiora",
+            "name": "Фиора",
+            "image": {
+                "full": "Fiora.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 192,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Fizz": {
+            "id": "Fizz",
+            "name": "Физз",
+            "image": {
+                "full": "Fizz.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 240,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Galio": {
+            "id": "Galio",
+            "name": "Галио",
+            "image": {
+                "full": "Galio.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 288,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Gangplank": {
+            "id": "Gangplank",
+            "name": "Гангпланк",
+            "image": {
+                "full": "Gangplank.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 336,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Garen": {
+            "id": "Garen",
+            "name": "Гарен",
+            "image": {
+                "full": "Garen.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 384,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Gnar": {
+            "id": "Gnar",
+            "name": "Гнар",
+            "image": {
+                "full": "Gnar.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 432,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Gragas": {
+            "id": "Gragas",
+            "name": "Грагас",
+            "image": {
+                "full": "Gragas.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 0,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Graves": {
+            "id": "Graves",
+            "name": "Грейвз",
+            "image": {
+                "full": "Graves.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 48,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Gwen": {
+            "id": "Gwen",
+            "name": "Гвен",
+            "image": {
+                "full": "Gwen.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 96,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Hecarim": {
+            "id": "Hecarim",
+            "name": "Гекарим",
+            "image": {
+                "full": "Hecarim.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 144,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Heimerdinger": {
+            "id": "Heimerdinger",
+            "name": "Хеймердингер",
+            "image": {
+                "full": "Heimerdinger.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 192,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Hwei": {
+            "id": "Hwei",
+            "name": "Хвэй",
+            "image": {
+                "full": "Hwei.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 240,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Illaoi": {
+            "id": "Illaoi",
+            "name": "Иллаой",
+            "image": {
+                "full": "Illaoi.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 288,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Irelia": {
+            "id": "Irelia",
+            "name": "Ирелия",
+            "image": {
+                "full": "Irelia.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 336,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Ivern": {
+            "id": "Ivern",
+            "name": "Иверн",
+            "image": {
+                "full": "Ivern.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 384,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Janna": {
+            "id": "Janna",
+            "name": "Жанна",
+            "image": {
+                "full": "Janna.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 432,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "JarvanIV": {
+            "id": "JarvanIV",
+            "name": "Джарван IV",
+            "image": {
+                "full": "JarvanIV.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 0,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Jax": {
+            "id": "Jax",
+            "name": "Джакс",
+            "image": {
+                "full": "Jax.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 48,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Jayce": {
+            "id": "Jayce",
+            "name": "Джейс",
+            "image": {
+                "full": "Jayce.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 96,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Jhin": {
+            "id": "Jhin",
+            "name": "Джин",
+            "image": {
+                "full": "Jhin.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 144,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Jinx": {
+            "id": "Jinx",
+            "name": "Джинкс",
+            "image": {
+                "full": "Jinx.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 192,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Kaisa": {
+            "id": "Kaisa",
+            "name": "Кай'Са",
+            "image": {
+                "full": "Kaisa.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 240,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Kalista": {
+            "id": "Kalista",
+            "name": "Калиста",
+            "image": {
+                "full": "Kalista.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 288,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Karma": {
+            "id": "Karma",
+            "name": "Карма",
+            "image": {
+                "full": "Karma.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 336,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Karthus": {
+            "id": "Karthus",
+            "name": "Картус",
+            "image": {
+                "full": "Karthus.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 384,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Kassadin": {
+            "id": "Kassadin",
+            "name": "Кассадин",
+            "image": {
+                "full": "Kassadin.png",
+                "sprite": "champion1.png",
+                "group": "champion",
+                "x": 432,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Katarina": {
+            "id": "Katarina",
+            "name": "Катарина",
+            "image": {
+                "full": "Katarina.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 0,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Kayle": {
+            "id": "Kayle",
+            "name": "Кейл",
+            "image": {
+                "full": "Kayle.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 48,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Kayn": {
+            "id": "Kayn",
+            "name": "Каин",
+            "image": {
+                "full": "Kayn.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 96,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Kennen": {
+            "id": "Kennen",
+            "name": "Кеннен",
+            "image": {
+                "full": "Kennen.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 144,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Khazix": {
+            "id": "Khazix",
+            "name": "Ка'Зикс",
+            "image": {
+                "full": "Khazix.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 192,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Kindred": {
+            "id": "Kindred",
+            "name": "Киндред",
+            "image": {
+                "full": "Kindred.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 240,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Kled": {
+            "id": "Kled",
+            "name": "Клед",
+            "image": {
+                "full": "Kled.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 288,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "KogMaw": {
+            "id": "KogMaw",
+            "name": "Ког'Мао",
+            "image": {
+                "full": "KogMaw.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 336,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "KSante": {
+            "id": "KSante",
+            "name": "К'Санте",
+            "image": {
+                "full": "KSante.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 384,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Leblanc": {
+            "id": "Leblanc",
+            "name": "Ле Блан",
+            "image": {
+                "full": "Leblanc.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 432,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "LeeSin": {
+            "id": "LeeSin",
+            "name": "Ли Син",
+            "image": {
+                "full": "LeeSin.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 0,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Leona": {
+            "id": "Leona",
+            "name": "Леона",
+            "image": {
+                "full": "Leona.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 48,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Lillia": {
+            "id": "Lillia",
+            "name": "Лиллия",
+            "image": {
+                "full": "Lillia.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 96,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Lissandra": {
+            "id": "Lissandra",
+            "name": "Лиссандра",
+            "image": {
+                "full": "Lissandra.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 144,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Lucian": {
+            "id": "Lucian",
+            "name": "Люциан",
+            "image": {
+                "full": "Lucian.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 192,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Lulu": {
+            "id": "Lulu",
+            "name": "Лулу",
+            "image": {
+                "full": "Lulu.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 240,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Lux": {
+            "id": "Lux",
+            "name": "Люкс",
+            "image": {
+                "full": "Lux.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 288,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Malphite": {
+            "id": "Malphite",
+            "name": "Мальфит",
+            "image": {
+                "full": "Malphite.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 336,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Malzahar": {
+            "id": "Malzahar",
+            "name": "Мальзахар",
+            "image": {
+                "full": "Malzahar.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 384,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Maokai": {
+            "id": "Maokai",
+            "name": "Маокай",
+            "image": {
+                "full": "Maokai.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 432,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "MasterYi": {
+            "id": "MasterYi",
+            "name": "Мастер Йи",
+            "image": {
+                "full": "MasterYi.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 0,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Mel": {
+            "id": "Mel",
+            "name": "Мэл",
+            "image": {
+                "full": "Mel.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 48,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Milio": {
+            "id": "Milio",
+            "name": "Милио",
+            "image": {
+                "full": "Milio.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 96,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "MissFortune": {
+            "id": "MissFortune",
+            "name": "Мисс Фортуна",
+            "image": {
+                "full": "MissFortune.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 144,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "MonkeyKing": {
+            "id": "MonkeyKing",
+            "name": "Вуконг",
+            "image": {
+                "full": "MonkeyKing.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 192,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Mordekaiser": {
+            "id": "Mordekaiser",
+            "name": "Мордекайзер",
+            "image": {
+                "full": "Mordekaiser.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 240,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Morgana": {
+            "id": "Morgana",
+            "name": "Моргана",
+            "image": {
+                "full": "Morgana.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 288,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Naafiri": {
+            "id": "Naafiri",
+            "name": "Наафири",
+            "image": {
+                "full": "Naafiri.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 336,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Nami": {
+            "id": "Nami",
+            "name": "Нами",
+            "image": {
+                "full": "Nami.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 384,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Nasus": {
+            "id": "Nasus",
+            "name": "Насус",
+            "image": {
+                "full": "Nasus.png",
+                "sprite": "champion2.png",
+                "group": "champion",
+                "x": 432,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Nautilus": {
+            "id": "Nautilus",
+            "name": "Наутилус",
+            "image": {
+                "full": "Nautilus.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 0,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Neeko": {
+            "id": "Neeko",
+            "name": "Нико",
+            "image": {
+                "full": "Neeko.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 48,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Nidalee": {
+            "id": "Nidalee",
+            "name": "Нидали",
+            "image": {
+                "full": "Nidalee.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 96,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Nilah": {
+            "id": "Nilah",
+            "name": "Нила",
+            "image": {
+                "full": "Nilah.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 144,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Nocturne": {
+            "id": "Nocturne",
+            "name": "Ноктюрн",
+            "image": {
+                "full": "Nocturne.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 192,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Nunu": {
+            "id": "Nunu",
+            "name": "Нуну и Виллумп",
+            "image": {
+                "full": "Nunu.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 240,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Olaf": {
+            "id": "Olaf",
+            "name": "Олаф",
+            "image": {
+                "full": "Olaf.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 288,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Orianna": {
+            "id": "Orianna",
+            "name": "Орианна",
+            "image": {
+                "full": "Orianna.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 336,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Ornn": {
+            "id": "Ornn",
+            "name": "Орн",
+            "image": {
+                "full": "Ornn.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 384,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Pantheon": {
+            "id": "Pantheon",
+            "name": "Пантеон",
+            "image": {
+                "full": "Pantheon.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 432,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Poppy": {
+            "id": "Poppy",
+            "name": "Поппи",
+            "image": {
+                "full": "Poppy.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 0,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Pyke": {
+            "id": "Pyke",
+            "name": "Пайк",
+            "image": {
+                "full": "Pyke.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 48,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Qiyana": {
+            "id": "Qiyana",
+            "name": "Киана",
+            "image": {
+                "full": "Qiyana.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 96,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Quinn": {
+            "id": "Quinn",
+            "name": "Квинн",
+            "image": {
+                "full": "Quinn.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 144,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Rakan": {
+            "id": "Rakan",
+            "name": "Рэйкан",
+            "image": {
+                "full": "Rakan.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 192,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Rammus": {
+            "id": "Rammus",
+            "name": "Раммус",
+            "image": {
+                "full": "Rammus.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 240,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "RekSai": {
+            "id": "RekSai",
+            "name": "Рек'Сай",
+            "image": {
+                "full": "RekSai.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 288,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Rell": {
+            "id": "Rell",
+            "name": "Релл",
+            "image": {
+                "full": "Rell.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 336,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Renata": {
+            "id": "Renata",
+            "name": "Рената Гласк",
+            "image": {
+                "full": "Renata.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 384,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Renekton": {
+            "id": "Renekton",
+            "name": "Ренектон",
+            "image": {
+                "full": "Renekton.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 432,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Rengar": {
+            "id": "Rengar",
+            "name": "Ренгар",
+            "image": {
+                "full": "Rengar.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 0,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Riven": {
+            "id": "Riven",
+            "name": "Ривен",
+            "image": {
+                "full": "Riven.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 48,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Rumble": {
+            "id": "Rumble",
+            "name": "Рамбл",
+            "image": {
+                "full": "Rumble.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 96,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Ryze": {
+            "id": "Ryze",
+            "name": "Райз",
+            "image": {
+                "full": "Ryze.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 144,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Samira": {
+            "id": "Samira",
+            "name": "Самира",
+            "image": {
+                "full": "Samira.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 192,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Sejuani": {
+            "id": "Sejuani",
+            "name": "Седжуани",
+            "image": {
+                "full": "Sejuani.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 240,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Senna": {
+            "id": "Senna",
+            "name": "Сенна",
+            "image": {
+                "full": "Senna.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 288,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Seraphine": {
+            "id": "Seraphine",
+            "name": "Серафина",
+            "image": {
+                "full": "Seraphine.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 336,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Sett": {
+            "id": "Sett",
+            "name": "Сетт",
+            "image": {
+                "full": "Sett.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 384,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Shaco": {
+            "id": "Shaco",
+            "name": "Шако",
+            "image": {
+                "full": "Shaco.png",
+                "sprite": "champion3.png",
+                "group": "champion",
+                "x": 432,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Shen": {
+            "id": "Shen",
+            "name": "Шен",
+            "image": {
+                "full": "Shen.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 0,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Shyvana": {
+            "id": "Shyvana",
+            "name": "Шивана",
+            "image": {
+                "full": "Shyvana.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 48,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Singed": {
+            "id": "Singed",
+            "name": "Синджед",
+            "image": {
+                "full": "Singed.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 96,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Sion": {
+            "id": "Sion",
+            "name": "Сион",
+            "image": {
+                "full": "Sion.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 144,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Sivir": {
+            "id": "Sivir",
+            "name": "Сивир",
+            "image": {
+                "full": "Sivir.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 192,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Skarner": {
+            "id": "Skarner",
+            "name": "Скарнер",
+            "image": {
+                "full": "Skarner.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 240,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Smolder": {
+            "id": "Smolder",
+            "name": "Смолдер",
+            "image": {
+                "full": "Smolder.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 288,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Sona": {
+            "id": "Sona",
+            "name": "Сона",
+            "image": {
+                "full": "Sona.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 336,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Soraka": {
+            "id": "Soraka",
+            "name": "Сорака",
+            "image": {
+                "full": "Soraka.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 384,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Swain": {
+            "id": "Swain",
+            "name": "Свейн",
+            "image": {
+                "full": "Swain.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 432,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Sylas": {
+            "id": "Sylas",
+            "name": "Сайлас",
+            "image": {
+                "full": "Sylas.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 0,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Syndra": {
+            "id": "Syndra",
+            "name": "Синдра",
+            "image": {
+                "full": "Syndra.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 48,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "TahmKench": {
+            "id": "TahmKench",
+            "name": "Таам Кенч",
+            "image": {
+                "full": "TahmKench.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 96,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Taliyah": {
+            "id": "Taliyah",
+            "name": "Талия",
+            "image": {
+                "full": "Taliyah.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 144,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Talon": {
+            "id": "Talon",
+            "name": "Талон",
+            "image": {
+                "full": "Talon.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 192,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Taric": {
+            "id": "Taric",
+            "name": "Тарик",
+            "image": {
+                "full": "Taric.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 240,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Teemo": {
+            "id": "Teemo",
+            "name": "Тимо",
+            "image": {
+                "full": "Teemo.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 288,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Thresh": {
+            "id": "Thresh",
+            "name": "Треш",
+            "image": {
+                "full": "Thresh.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 336,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Tristana": {
+            "id": "Tristana",
+            "name": "Тристана",
+            "image": {
+                "full": "Tristana.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 384,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Trundle": {
+            "id": "Trundle",
+            "name": "Трандл",
+            "image": {
+                "full": "Trundle.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 432,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Tryndamere": {
+            "id": "Tryndamere",
+            "name": "Триндамир",
+            "image": {
+                "full": "Tryndamere.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 0,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "TwistedFate": {
+            "id": "TwistedFate",
+            "name": "Твистед Фэйт",
+            "image": {
+                "full": "TwistedFate.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 48,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Twitch": {
+            "id": "Twitch",
+            "name": "Твич",
+            "image": {
+                "full": "Twitch.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 96,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Udyr": {
+            "id": "Udyr",
+            "name": "Удир",
+            "image": {
+                "full": "Udyr.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 144,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Urgot": {
+            "id": "Urgot",
+            "name": "Ургот",
+            "image": {
+                "full": "Urgot.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 192,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Varus": {
+            "id": "Varus",
+            "name": "Варус",
+            "image": {
+                "full": "Varus.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 240,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Vayne": {
+            "id": "Vayne",
+            "name": "Вейн",
+            "image": {
+                "full": "Vayne.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 288,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Veigar": {
+            "id": "Veigar",
+            "name": "Вейгар",
+            "image": {
+                "full": "Veigar.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 336,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Velkoz": {
+            "id": "Velkoz",
+            "name": "Вел'Коз",
+            "image": {
+                "full": "Velkoz.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 384,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Vex": {
+            "id": "Vex",
+            "name": "Векс",
+            "image": {
+                "full": "Vex.png",
+                "sprite": "champion4.png",
+                "group": "champion",
+                "x": 432,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Vi": {
+            "id": "Vi",
+            "name": "Вай",
+            "image": {
+                "full": "Vi.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 0,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Viego": {
+            "id": "Viego",
+            "name": "Виего",
+            "image": {
+                "full": "Viego.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 48,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Viktor": {
+            "id": "Viktor",
+            "name": "Виктор",
+            "image": {
+                "full": "Viktor.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 96,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Vladimir": {
+            "id": "Vladimir",
+            "name": "Владимир",
+            "image": {
+                "full": "Vladimir.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 144,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Volibear": {
+            "id": "Volibear",
+            "name": "Волибир",
+            "image": {
+                "full": "Volibear.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 192,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Warwick": {
+            "id": "Warwick",
+            "name": "Варвик",
+            "image": {
+                "full": "Warwick.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 240,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Xayah": {
+            "id": "Xayah",
+            "name": "Шая",
+            "image": {
+                "full": "Xayah.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 288,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Xerath": {
+            "id": "Xerath",
+            "name": "Зерат",
+            "image": {
+                "full": "Xerath.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 336,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "XinZhao": {
+            "id": "XinZhao",
+            "name": "Ксин Жао",
+            "image": {
+                "full": "XinZhao.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 384,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Yasuo": {
+            "id": "Yasuo",
+            "name": "Ясуо",
+            "image": {
+                "full": "Yasuo.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 432,
+                "y": 0,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Yone": {
+            "id": "Yone",
+            "name": "Ёнэ",
+            "image": {
+                "full": "Yone.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 0,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Yorick": {
+            "id": "Yorick",
+            "name": "Йорик",
+            "image": {
+                "full": "Yorick.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 48,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Yunara": {
+            "id": "Yunara",
+            "name": "Юнара",
+            "image": {
+                "full": "Yunara.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 96,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Yuumi": {
+            "id": "Yuumi",
+            "name": "Юми",
+            "image": {
+                "full": "Yuumi.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 144,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Zac": {
+            "id": "Zac",
+            "name": "Зак",
+            "image": {
+                "full": "Zac.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 192,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Zed": {
+            "id": "Zed",
+            "name": "Зед",
+            "image": {
+                "full": "Zed.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 240,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Zeri": {
+            "id": "Zeri",
+            "name": "Зери",
+            "image": {
+                "full": "Zeri.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 288,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Ziggs": {
+            "id": "Ziggs",
+            "name": "Зиггс",
+            "image": {
+                "full": "Ziggs.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 336,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Zilean": {
+            "id": "Zilean",
+            "name": "Зилеан",
+            "image": {
+                "full": "Zilean.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 384,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Zoe": {
+            "id": "Zoe",
+            "name": "Зои",
+            "image": {
+                "full": "Zoe.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 432,
+                "y": 48,
+                "w": 48,
+                "h": 48
+            }
+        },
+        "Zyra": {
+            "id": "Zyra",
+            "name": "Зайра",
+            "image": {
+                "full": "Zyra.png",
+                "sprite": "champion5.png",
+                "group": "champion",
+                "x": 0,
+                "y": 96,
+                "w": 48,
+                "h": 48
+            }
+        }
+    }
+}
