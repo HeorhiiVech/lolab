@@ -140,6 +140,7 @@ function ProSceneAnalyzer() {
                             <button className={tournament === 'All' ? 'active' : ''} onClick={() => setTournament('All')}>Все</button>
                             <button className={tournament === 'LCK' ? 'active' : ''} onClick={() => setTournament('LCK')}>LCK</button>
                             <button className={tournament === 'LEC' ? 'active' : ''} onClick={() => setTournament('LEC')}>LEC</button>
+                            <button className={tournament === 'LPL' ? 'active' : ''} onClick={() => setTournament('LPL')}>LPL</button>
                         </div>
                     </div>
                     <div className="control-group">
