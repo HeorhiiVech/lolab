@@ -59,18 +59,25 @@
   width: 100%;
 }
 
-/* Добавить в конец файла ProSceneAnalyzer.css */
-
+/* *
+* ВОТ ОНО, КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ
+*
+*/
 .pro-scene-card {
-    max-width: none; /* Убираем ограничение по ширине для этой карточки */
+    width: 60% !important;
+    max-width: none !important;
 }
 
 .table-container {
     margin-top: 30px;
     width: 100%;
-    overflow-x: auto; /* Добавляем горизонтальную прокрутку для маленьких экранов */
+    overflow-x: auto; /* Этот скролл у вас уже есть для горизонтали */
     border: 1px solid #5a4b2c;
     border-radius: 4px;
+
+    /* ДОБАВЛЯЕМ ЭТИ ДВЕ СТРОКИ */
+    max-height: 500px; /* Ограничиваем высоту (подберите значение, которое вам нравится) */
+    overflow-y: auto;  /* Добавляем вертикальный скролл, если таблица не помещается */
 }
 
 .pro-table {
@@ -83,7 +90,7 @@
     padding: 10px 12px;
     text-align: center;
     border-bottom: 1px solid #2c3e50;
-    white-space: nowrap; /* Запрещаем перенос строк в ячейках */
+    white-space: nowrap;
 }
 
 .pro-table thead {
@@ -102,7 +109,6 @@
     color: #F0E6D2;
 }
 
-/* Стили для стрелочек сортировки */
 .pro-table th.sorted-asc::after,
 .pro-table th.sorted-desc::after {
     content: '';
@@ -127,5 +133,36 @@
 }
 
 .pro-table tbody tr:hover {
+    background-color: #1c2a33;
+}
+
+/* ДОБАВИТЬ В КОНЕЦ ФАЙЛА ProSceneAnalyzer.css */
+
+/* 1. Делаем все заголовки (верхнюю строку) "липкими" */
+.pro-table th {
+    position: sticky;
+    top: 0; /* Прилипаем к верху контейнера */
+    /* Фон обязателен, чтобы прокручиваемые строки не были видны под заголовком */
+    background-color: #0F1A20; 
+    z-index: 10;
+}
+
+/* 2. Делаем все ячейки первого столбца "липкими" */
+.pro-table tbody td:first-child {
+    position: sticky;
+    left: 0; /* Прилипаем к левому краю контейнера */
+    /* Фон также обязателен, чтобы другие столбцы не были видны под ним при прокрутке */
+    background-color: #111A29;
+    z-index: 5;
+}
+
+/* 3. Отдельно стилизуем заголовок первого столбца (ячейка "Player") */
+.pro-table th:first-child {
+    left: 0; /* Она должна быть "липкой" и по горизонтали */
+    z-index: 20; /* Делаем z-index самым высоким, чтобы она была поверх всех */
+}
+
+/* 4. Сохраняем фон при наведении на строку для прилипшей ячейки */
+.pro-table tbody tr:hover td:first-child {
     background-color: #1c2a33;
 }

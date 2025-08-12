@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 // Импортируем все наши компоненты
@@ -10,12 +10,49 @@ import TurretCalculator from './components/TurretCalculator';
 import SmiteTrainer from './components/SmiteTrainer';
 import FAQ from './components/FAQ';
 import ProSceneAnalyzer from './components/ProSceneAnalyzer';
-import TierListMaker from './components/TierListMaker'; // 1. Импортируем новый компонент
+import TierListMaker from './components/TierListMaker';
+
+// Импорты для авторизации
+// ДОБАВЛЕНЫ db, doc, и getDoc для чтения данных пользователя
+import { auth, db } from './firebase-config'; 
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import LoginModal from './components/LoginModal';
+
 
 function App() {
-  const [activeTab, setActiveTab] = useState('tierlist'); // По умолчанию открыт Тирлист Мейкер
+  const [activeTab, setActiveTab] = useState('tierlist');
   const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
+  
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  // Следим за состоянием авторизации
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // Пользователь вошел. Загружаем его данные из Firestore.
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          // Сохраняем все данные пользователя (email, nickname, etc.)
+          setCurrentUser({ uid: user.uid, ...userDocSnap.data() });
+        } else {
+          // На случай, если в auth есть, а в базе нет
+          setCurrentUser(user); 
+        }
+      } else {
+        // Пользователь вышел
+        setCurrentUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut(auth);
+  };
 
   return (
     <div className={`App ${isHeaderCollapsed ? 'header-collapsed' : ''}`}>
@@ -27,10 +64,25 @@ function App() {
         {isHeaderCollapsed ? '↓' : '↑'}
       </button>
 
+      <LoginModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+
       <div className="header-section">
         <div className="header-wrapper">
           <header className="App-header">
             <h1>lolab by heovech</h1>
+            <div className="login-controls">
+              {currentUser ? (
+                <>
+                  {/* ИЗМЕНЕНО: Отображаем никнейм, а если его нет - то email */}
+                  <span>{currentUser.nickname || currentUser.email}</span>
+                  <button onClick={handleLogout} className="login-button">Выйти</button>
+                </>
+              ) : (
+                <button onClick={() => setModalOpen(true)} className="login-button">
+                  Войти
+                </button>
+              )}
+            </div>
           </header>
           <div className="header-buttons">
             <button onClick={() => setIsFaqOpen(true)} className="faq-button" title="FAQ">?</button>
@@ -42,7 +94,7 @@ function App() {
 
         <nav className="tabs">
           <div className="tab-buttons-wrapper">
-            <button className={activeTab === 'farm' ? 'active' : ''} onClick={() => setActiveTab('farm')}>Калькулятор Фарма</button>
+             <button className={activeTab === 'farm' ? 'active' : ''} onClick={() => setActiveTab('farm')}>Калькулятор Фарма</button>
             <button className={activeTab === 'items' ? 'active' : ''} onClick={() => setActiveTab('items')}>Калькуляторы Предметов</button>
             <button className={activeTab === 'turret' ? 'active' : ''} onClick={() => setActiveTab('turret')}>Калькулятор Башен</button>
             <button className={activeTab === 'smite' ? 'active' : ''} onClick={() => setActiveTab('smite')}>Тренажер Смайта</button>
@@ -53,7 +105,7 @@ function App() {
       </div>
 
       <main>
-        <div className="content-wrapper">
+        <div className={`content-wrapper ${activeTab === 'pro' ? 'content-wrapper-pro' : ''}`}>
           {activeTab === 'farm' && <Calculator />}
           {activeTab === 'items' && (
             <div className="calculators-container">
@@ -62,7 +114,7 @@ function App() {
             </div>
           )}
           {activeTab === 'turret' && <TurretCalculator />}
-          {activeTab === 'smite' && <SmiteTrainer />}
+          {activeTab === 'smite' && <SmiteTrainer currentUser={currentUser} />} 
           {activeTab === 'pro' && <ProSceneAnalyzer />}
           {activeTab === 'tierlist' && <TierListMaker />}
         </div>

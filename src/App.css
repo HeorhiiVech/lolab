@@ -11,24 +11,19 @@ body {
   text-align: center;
 }
 
-/* --- СТИЛИ ДЛЯ ШАПКИ И ЕЕ АНИМАЦИИ --- */
 .header-section {
   background-image: url('./assets/background.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
   border-bottom: 2px solid #5a4b2c;
-  
-  /* Анимация уезжания вверх с помощью margin-top */
   transition: margin-top 0.5s ease-in-out;
-  margin-top: 0; /* Изначальное положение */
+  margin-top: 0;
 }
 
-/* Когда шапка свернута, она уезжает за пределы экрана */
 .App.header-collapsed .header-section {
-  margin-top: -250px; /* Уезжает вверх (значение должно быть больше высоты шапки) */
+  margin-top: -250px;
 }
-
 
 .header-wrapper {
   position: relative;
@@ -48,6 +43,38 @@ body {
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
+.login-controls {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 10;
+}
+
+.login-controls span {
+  font-family: 'Cinzel', serif;
+  color: #f0e6d2;
+  font-size: 1.1em;
+}
+
+.login-controls .login-button {
+  font-family: 'Cinzel', serif;
+  background-color: transparent;
+  border: 1px solid #c89b3c;
+  color: #c8aa6e;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.login-controls .login-button:hover {
+  background-color: #c89b3c;
+  color: #0a1014;
+}
+
 .header-buttons {
     position: absolute;
     top: 20px;
@@ -56,15 +83,11 @@ body {
     gap: 10px;
 }
 
-/* --- СТИЛИ ДЛЯ КНОПКИ-СТРЕЛКИ И ЕЕ АНИМАЦИИ --- */
 .collapse-toggle-btn {
-  /* Позиционируем ее поверх всего в правом углу */
   position: fixed;
-  top: 155px; /* Изначальное положение на уровне вкладок */
+  top: 155px; 
   right: 20px;
   z-index: 1001;
-
-  /* Стиль как у кнопок в шапке */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,7 +98,6 @@ body {
   color: #a09480;
   background-color: #0F1A20;
   cursor: pointer;
-  
   font-size: 1.5em;
   padding: 0;
   transition: all 0.5s ease-in-out;
@@ -86,7 +108,6 @@ body {
   background-color: #2c3e50;
   transform: scale(1.1);
 }
-/* Когда шапка свернута, кнопка опускается вниз */
 .App.header-collapsed .collapse-toggle-btn {
   top: 10px;
 }
@@ -171,14 +192,18 @@ main {
   background-image: linear-gradient(to bottom, #0E181E, #111a29, #0A1014);
   padding: 30px 0;
 }
+
+/* СТАНДАРТНЫЙ КОНТЕЙНЕР (ВСЕ СТРАНИЦЫ КРОМЕ ПРО-СЦЕНЫ) */
 .content-wrapper {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
+  /* ЭТИ СВОЙСТВА НУЖНЫ, ЧТОБЫ КОНТЕНТ ЦЕНТРИРОВАЛСЯ ПРАВИЛЬНО */
+  display: flex;
+  justify-content: center;
 }
-.content-wrapper .card + .card {
-    margin-top: 30px;
-}
+
+/* КОНТЕЙНЕР ДЛЯ КАЛЬКУЛЯТОРОВ ПРЕДМЕТОВ */
 .calculators-container {
   display: flex;
   flex-wrap: wrap; 
@@ -189,4 +214,10 @@ main {
   flex: 1;
   min-width: 450px;
   margin-top: 0 !important;
+}
+
+/* РАСШИРЕННЫЙ КОНТЕЙНЕР (ТОЛЬКО ДЛЯ ПРО-СЦЕНЫ) */
+.content-wrapper.content-wrapper-pro {
+  max-width: none; /* Снимаем ограничение по максимальной ширине */
+  width: 100%;      /* Задаем ширину почти во весь экран */
 }
