@@ -1,3 +1,4 @@
+// src/components/TierListMaker.js
 import React, { useState, useEffect, useMemo } from 'react';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, useDroppable } from '@dnd-kit/core';
 import { SortableContext, useSortable, arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
@@ -46,7 +47,6 @@ function DroppableTierRow({ tierId, tier, children }) {
         </SortableContext>
     );
 }
-// --- ИЗМЕНЕНИЕ: Добавлены иконки для ролей ---
 const roleIcons = {
     Fighter: '⚔️',
     Tank: '🛡️',
@@ -70,7 +70,6 @@ function TierListMaker() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeColorPicker, setActiveColorPicker] = useState(null);
   
-  // --- НОВОЕ: Состояние для хранения активного фильтра по тегу ---
   const [activeTag, setActiveTag] = useState('All');
 
   useEffect(() => {
@@ -81,13 +80,11 @@ function TierListMaker() {
     setChampionPool(allChampions.sort((a, b) => a.name.localeCompare(b.name)));
   }, []);
 
-  // --- НОВОЕ: Получаем список всех уникальных тегов для кнопок ---
   const allTags = useMemo(() => {
     const tags = new Set(championPool.flatMap(champ => champ.tags));
     return ['All', ...Array.from(tags).sort()];
   }, [championPool]);
 
-  // --- ИЗМЕНЕНИЕ: Логика фильтрации теперь учитывает и поиск, и теги ---
   const filteredChampions = championPool.filter(champ => {
     const nameMatch = champ.name.toLowerCase().includes(searchTerm.toLowerCase());
     const tagMatch = activeTag === 'All' || champ.tags.includes(activeTag);
@@ -95,7 +92,6 @@ function TierListMaker() {
   });
 
   const sensors = useSensors(useSensor(PointerSensor), useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }));
-  // ... (остальные функции-обработчики без изменений) ...
     const findContainer = (id) => {
     if (id === 'pool' || championPool.find(c => c.instanceId === id)) return 'pool';
     for (const tierId in tiers) {
@@ -219,29 +215,65 @@ function TierListMaker() {
       });
   };
 
+    // --- ИЗМЕНЕНИЕ: Полностью переписанная функция для скачивания ---
     const downloadImage = () => {
-    const originalElement = document.getElementById('tierlist-layout');
-    if (!originalElement) return;
-    html2canvas(originalElement, {
-        backgroundColor: '#0F1A20',
-        useCORS: true,
-        scale: 2,
-        onclone: (document) => { 
-            const cloneButtons = document.querySelectorAll('.delete-champ-btn, .tier-move-controls, .delete-tier-btn, .color-picker-btn');
-            cloneButtons.forEach(btn => btn.style.visibility = 'hidden');
-        }
-    }).then(canvas => {
-        const image = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.href = image;
-        link.download = 'lolab-tierlist.png';
-        link.click();
-    });
+        // Указываем на новый, правильный элемент для "фотографирования"
+        const captureElement = document.getElementById('tierlist-capture-area');
+        if (!captureElement) return;
+
+        html2canvas(captureElement, {
+            useCORS: true,
+            scale: 2, // Улучшенное разрешение
+            backgroundColor: '#0F1A20', // Фон для картинки
+
+            // Эта функция выполнится на клоне элемента перед созданием снимка
+            onclone: (clonedDocument) => {
+                const root = clonedDocument.getElementById('tierlist-capture-area');
+                if (!root) return;
+
+                // 1. Прячем все кнопки и иконки на клоне
+                const controlsToHide = root.querySelectorAll('button, .tier-move-controls');
+                controlsToHide.forEach(control => control.style.visibility = 'hidden');
+
+                // 2. Заменяем все <textarea> на простые <span>, чтобы текст не обрезался
+                const tierLabels = root.querySelectorAll('.tier-label');
+                tierLabels.forEach(label => {
+                    const textarea = label.querySelector('textarea');
+                    if (textarea) {
+                        const textSpan = clonedDocument.createElement('span');
+                        textSpan.textContent = textarea.value;
+
+                        // Копируем ключевые стили из textarea в наш новый span
+                        const computedStyle = window.getComputedStyle(textarea);
+                        textSpan.style.cssText = textarea.style.cssText; // Копируем встроенные стили
+                        textSpan.style.fontFamily = computedStyle.fontFamily;
+                        textSpan.style.fontSize = computedStyle.fontSize;
+                        textSpan.style.fontWeight = computedStyle.fontWeight;
+                        textSpan.style.color = computedStyle.color;
+                        textSpan.style.textAlign = computedStyle.textAlign;
+                        textSpan.style.lineHeight = computedStyle.lineHeight;
+                        // Добавляем стили, чтобы текст правильно переносился
+                        textSpan.style.whiteSpace = 'pre-wrap'; 
+                        textSpan.style.display = 'block';
+
+                        textarea.style.display = 'none'; // Прячем оригинальный textarea
+                        label.appendChild(textSpan); // Добавляем наш "безопасный" span
+                    }
+                });
+            }
+        }).then(canvas => {
+            const image = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = image;
+            link.download = 'my-tierlist.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
     };
 
   return (
     <div className="tierlist-container">
-      {/* ... (Header and main layout structure) ... */}
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
             <div className="tierlist-header">
                 <h2>Тирлист Мейкер</h2>
@@ -251,9 +283,10 @@ function TierListMaker() {
                     <button onClick={downloadImage}>Скачать картинку</button>
                 </div>
             </div>
-
-            <div className="tierlist-layout" id="tierlist-layout">
-                <div className="tierlist-main">
+            
+            {/* --- ИЗМЕНЕНИЕ: ID для захвата перенесен на нужный блок --- */}
+            <div className="tierlist-layout">
+                <div className="tierlist-main" id="tierlist-capture-area">
                     {tierOrder.map((tierId, index) => {
                         const tier = tiers[tierId];
                         if (!tier) return null;
@@ -296,7 +329,6 @@ function TierListMaker() {
                         className="search-bar"
                     />
                     
-                    {/* --- НОВОЕ: Блок с кнопками-фильтрами --- */}
                     <div className="tag-filters">
                         {allTags.map(tag => (
                             <button
