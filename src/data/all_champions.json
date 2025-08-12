@@ -12,7 +12,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter"
+            ]
         },
         "Ahri": {
             "id": "Ahri",
@@ -25,7 +28,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Assassin"
+            ]
         },
         "Akali": {
             "id": "Akali",
@@ -38,7 +45,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin"
+            ]
         },
         "Akshan": {
             "id": "Akshan",
@@ -51,7 +61,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Assassin"
+            ]
         },
         "Alistar": {
             "id": "Alistar",
@@ -64,7 +78,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Support"
+            ]
         },
         "Ambessa": {
             "id": "Ambessa",
@@ -77,7 +95,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Amumu": {
             "id": "Amumu",
@@ -90,7 +112,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Support"
+            ]
         },
         "Anivia": {
             "id": "Anivia",
@@ -103,7 +129,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Annie": {
             "id": "Annie",
@@ -116,7 +145,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Aphelios": {
             "id": "Aphelios",
@@ -129,7 +162,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "Ashe": {
             "id": "Ashe",
@@ -142,7 +178,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Support"
+            ]
         },
         "AurelionSol": {
             "id": "AurelionSol",
@@ -155,7 +195,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Aurora": {
             "id": "Aurora",
@@ -168,7 +211,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Assassin"
+            ]
         },
         "Azir": {
             "id": "Azir",
@@ -181,7 +228,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Marksman"
+            ]
         },
         "Bard": {
             "id": "Bard",
@@ -194,7 +245,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Belveth": {
             "id": "Belveth",
@@ -207,7 +262,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter"
+            ]
         },
         "Blitzcrank": {
             "id": "Blitzcrank",
@@ -220,7 +278,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Support"
+            ]
         },
         "Brand": {
             "id": "Brand",
@@ -233,7 +295,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Braum": {
             "id": "Braum",
@@ -246,7 +312,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Support"
+            ]
         },
         "Briar": {
             "id": "Briar",
@@ -259,7 +329,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Caitlyn": {
             "id": "Caitlyn",
@@ -272,7 +346,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "Camille": {
             "id": "Camille",
@@ -285,7 +362,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Cassiopeia": {
             "id": "Cassiopeia",
@@ -298,7 +379,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Chogath": {
             "id": "Chogath",
@@ -311,7 +395,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Mage"
+            ]
         },
         "Corki": {
             "id": "Corki",
@@ -324,7 +412,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Mage"
+            ]
         },
         "Darius": {
             "id": "Darius",
@@ -337,7 +429,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Diana": {
             "id": "Diana",
@@ -350,7 +446,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Draven": {
             "id": "Draven",
@@ -363,7 +463,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "DrMundo": {
             "id": "DrMundo",
@@ -376,7 +479,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Fighter"
+            ]
         },
         "Ekko": {
             "id": "Ekko",
@@ -389,7 +496,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin",
+                "Mage"
+            ]
         },
         "Elise": {
             "id": "Elise",
@@ -402,7 +513,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin",
+                "Mage"
+            ]
         },
         "Evelynn": {
             "id": "Evelynn",
@@ -415,7 +530,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin",
+                "Mage"
+            ]
         },
         "Ezreal": {
             "id": "Ezreal",
@@ -428,7 +547,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Mage"
+            ]
         },
         "Fiddlesticks": {
             "id": "Fiddlesticks",
@@ -441,7 +564,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Fiora": {
             "id": "Fiora",
@@ -454,7 +581,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Fizz": {
             "id": "Fizz",
@@ -467,7 +598,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin",
+                "Fighter"
+            ]
         },
         "Galio": {
             "id": "Galio",
@@ -480,7 +615,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Mage"
+            ]
         },
         "Gangplank": {
             "id": "Gangplank",
@@ -493,7 +632,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter"
+            ]
         },
         "Garen": {
             "id": "Garen",
@@ -506,7 +648,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Gnar": {
             "id": "Gnar",
@@ -519,7 +665,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Gragas": {
             "id": "Gragas",
@@ -532,7 +682,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Mage"
+            ]
         },
         "Graves": {
             "id": "Graves",
@@ -545,7 +699,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "Gwen": {
             "id": "Gwen",
@@ -558,7 +715,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter"
+            ]
         },
         "Hecarim": {
             "id": "Hecarim",
@@ -571,7 +731,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Heimerdinger": {
             "id": "Heimerdinger",
@@ -584,7 +748,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Hwei": {
             "id": "Hwei",
@@ -597,7 +765,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Illaoi": {
             "id": "Illaoi",
@@ -610,7 +782,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Irelia": {
             "id": "Irelia",
@@ -623,7 +799,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Ivern": {
             "id": "Ivern",
@@ -636,7 +816,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Janna": {
             "id": "Janna",
@@ -649,7 +833,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "JarvanIV": {
             "id": "JarvanIV",
@@ -662,7 +850,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Jax": {
             "id": "Jax",
@@ -675,7 +867,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter"
+            ]
         },
         "Jayce": {
             "id": "Jayce",
@@ -688,7 +883,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Marksman"
+            ]
         },
         "Jhin": {
             "id": "Jhin",
@@ -701,7 +900,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Mage"
+            ]
         },
         "Jinx": {
             "id": "Jinx",
@@ -714,7 +917,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "Kaisa": {
             "id": "Kaisa",
@@ -727,7 +933,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Mage"
+            ]
         },
         "Kalista": {
             "id": "Kalista",
@@ -740,7 +950,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "Karma": {
             "id": "Karma",
@@ -753,7 +966,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Karthus": {
             "id": "Karthus",
@@ -766,7 +983,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Kassadin": {
             "id": "Kassadin",
@@ -779,7 +999,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin",
+                "Mage"
+            ]
         },
         "Katarina": {
             "id": "Katarina",
@@ -792,7 +1016,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin",
+                "Mage"
+            ]
         },
         "Kayle": {
             "id": "Kayle",
@@ -805,7 +1033,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Marksman"
+            ]
         },
         "Kayn": {
             "id": "Kayn",
@@ -818,7 +1050,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Kennen": {
             "id": "Kennen",
@@ -831,7 +1067,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Khazix": {
             "id": "Khazix",
@@ -844,7 +1083,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin"
+            ]
         },
         "Kindred": {
             "id": "Kindred",
@@ -857,7 +1099,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "Kled": {
             "id": "Kled",
@@ -870,7 +1115,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter"
+            ]
         },
         "KogMaw": {
             "id": "KogMaw",
@@ -883,7 +1131,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Mage"
+            ]
         },
         "KSante": {
             "id": "KSante",
@@ -896,7 +1148,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Fighter"
+            ]
         },
         "Leblanc": {
             "id": "Leblanc",
@@ -909,7 +1165,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin",
+                "Mage"
+            ]
         },
         "LeeSin": {
             "id": "LeeSin",
@@ -922,7 +1182,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Leona": {
             "id": "Leona",
@@ -935,7 +1199,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Support"
+            ]
         },
         "Lillia": {
             "id": "Lillia",
@@ -948,7 +1216,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Mage"
+            ]
         },
         "Lissandra": {
             "id": "Lissandra",
@@ -961,7 +1233,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Lucian": {
             "id": "Lucian",
@@ -974,7 +1249,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Assassin"
+            ]
         },
         "Lulu": {
             "id": "Lulu",
@@ -987,7 +1266,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Lux": {
             "id": "Lux",
@@ -1000,7 +1283,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Malphite": {
             "id": "Malphite",
@@ -1013,7 +1300,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Mage"
+            ]
         },
         "Malzahar": {
             "id": "Malzahar",
@@ -1026,7 +1317,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Maokai": {
             "id": "Maokai",
@@ -1039,7 +1333,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Support"
+            ]
         },
         "MasterYi": {
             "id": "MasterYi",
@@ -1052,7 +1350,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Mel": {
             "id": "Mel",
@@ -1065,7 +1367,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Milio": {
             "id": "Milio",
@@ -1078,7 +1384,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "MissFortune": {
             "id": "MissFortune",
@@ -1091,7 +1401,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Mage"
+            ]
         },
         "MonkeyKing": {
             "id": "MonkeyKing",
@@ -1104,7 +1418,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Mordekaiser": {
             "id": "Mordekaiser",
@@ -1117,7 +1435,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Mage"
+            ]
         },
         "Morgana": {
             "id": "Morgana",
@@ -1130,7 +1452,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Naafiri": {
             "id": "Naafiri",
@@ -1143,7 +1469,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin",
+                "Fighter"
+            ]
         },
         "Nami": {
             "id": "Nami",
@@ -1156,7 +1486,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Nasus": {
             "id": "Nasus",
@@ -1169,7 +1503,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Nautilus": {
             "id": "Nautilus",
@@ -1182,7 +1520,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Support"
+            ]
         },
         "Neeko": {
             "id": "Neeko",
@@ -1195,7 +1537,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Nidalee": {
             "id": "Nidalee",
@@ -1208,7 +1554,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin",
+                "Mage"
+            ]
         },
         "Nilah": {
             "id": "Nilah",
@@ -1221,7 +1571,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Nocturne": {
             "id": "Nocturne",
@@ -1234,7 +1588,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Nunu": {
             "id": "Nunu",
@@ -1247,7 +1605,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Mage"
+            ]
         },
         "Olaf": {
             "id": "Olaf",
@@ -1260,7 +1622,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Orianna": {
             "id": "Orianna",
@@ -1273,7 +1639,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Ornn": {
             "id": "Ornn",
@@ -1286,7 +1656,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank"
+            ]
         },
         "Pantheon": {
             "id": "Pantheon",
@@ -1299,7 +1672,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Poppy": {
             "id": "Poppy",
@@ -1312,7 +1689,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Fighter"
+            ]
         },
         "Pyke": {
             "id": "Pyke",
@@ -1325,7 +1706,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Assassin"
+            ]
         },
         "Qiyana": {
             "id": "Qiyana",
@@ -1338,7 +1723,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin"
+            ]
         },
         "Quinn": {
             "id": "Quinn",
@@ -1351,7 +1739,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Assassin"
+            ]
         },
         "Rakan": {
             "id": "Rakan",
@@ -1364,7 +1756,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support"
+            ]
         },
         "Rammus": {
             "id": "Rammus",
@@ -1377,7 +1772,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank"
+            ]
         },
         "RekSai": {
             "id": "RekSai",
@@ -1390,7 +1788,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Rell": {
             "id": "Rell",
@@ -1403,7 +1805,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Support"
+            ]
         },
         "Renata": {
             "id": "Renata",
@@ -1416,7 +1822,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Renekton": {
             "id": "Renekton",
@@ -1429,7 +1839,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Rengar": {
             "id": "Rengar",
@@ -1442,7 +1856,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin",
+                "Fighter"
+            ]
         },
         "Riven": {
             "id": "Riven",
@@ -1455,7 +1873,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Rumble": {
             "id": "Rumble",
@@ -1468,7 +1890,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Mage"
+            ]
         },
         "Ryze": {
             "id": "Ryze",
@@ -1481,7 +1907,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Samira": {
             "id": "Samira",
@@ -1494,7 +1923,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Assassin"
+            ]
         },
         "Sejuani": {
             "id": "Sejuani",
@@ -1507,7 +1940,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank"
+            ]
         },
         "Senna": {
             "id": "Senna",
@@ -1520,7 +1956,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Marksman"
+            ]
         },
         "Seraphine": {
             "id": "Seraphine",
@@ -1533,7 +1973,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Sett": {
             "id": "Sett",
@@ -1546,7 +1990,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Shaco": {
             "id": "Shaco",
@@ -1559,7 +2007,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin"
+            ]
         },
         "Shen": {
             "id": "Shen",
@@ -1572,7 +2023,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank"
+            ]
         },
         "Shyvana": {
             "id": "Shyvana",
@@ -1585,7 +2039,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Mage"
+            ]
         },
         "Singed": {
             "id": "Singed",
@@ -1598,7 +2056,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Mage"
+            ]
         },
         "Sion": {
             "id": "Sion",
@@ -1611,7 +2073,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Fighter"
+            ]
         },
         "Sivir": {
             "id": "Sivir",
@@ -1624,7 +2090,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "Skarner": {
             "id": "Skarner",
@@ -1637,7 +2106,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Fighter"
+            ]
         },
         "Smolder": {
             "id": "Smolder",
@@ -1650,7 +2123,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Mage"
+            ]
         },
         "Sona": {
             "id": "Sona",
@@ -1663,7 +2140,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Soraka": {
             "id": "Soraka",
@@ -1676,7 +2157,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Swain": {
             "id": "Swain",
@@ -1689,7 +2174,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Sylas": {
             "id": "Sylas",
@@ -1702,7 +2191,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Assassin"
+            ]
         },
         "Syndra": {
             "id": "Syndra",
@@ -1715,7 +2208,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "TahmKench": {
             "id": "TahmKench",
@@ -1728,7 +2224,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Support"
+            ]
         },
         "Taliyah": {
             "id": "Taliyah",
@@ -1741,7 +2241,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Talon": {
             "id": "Talon",
@@ -1754,7 +2258,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin"
+            ]
         },
         "Taric": {
             "id": "Taric",
@@ -1767,7 +2274,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Tank"
+            ]
         },
         "Teemo": {
             "id": "Teemo",
@@ -1780,7 +2291,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Mage"
+            ]
         },
         "Thresh": {
             "id": "Thresh",
@@ -1793,7 +2308,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Tank"
+            ]
         },
         "Tristana": {
             "id": "Tristana",
@@ -1806,7 +2325,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Assassin"
+            ]
         },
         "Trundle": {
             "id": "Trundle",
@@ -1819,7 +2342,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Tryndamere": {
             "id": "Tryndamere",
@@ -1832,7 +2359,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "TwistedFate": {
             "id": "TwistedFate",
@@ -1845,7 +2376,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Marksman"
+            ]
         },
         "Twitch": {
             "id": "Twitch",
@@ -1858,7 +2393,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Assassin"
+            ]
         },
         "Udyr": {
             "id": "Udyr",
@@ -1871,7 +2410,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Urgot": {
             "id": "Urgot",
@@ -1884,7 +2427,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Varus": {
             "id": "Varus",
@@ -1897,7 +2444,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Mage"
+            ]
         },
         "Vayne": {
             "id": "Vayne",
@@ -1910,7 +2461,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman",
+                "Assassin"
+            ]
         },
         "Veigar": {
             "id": "Veigar",
@@ -1923,7 +2478,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Velkoz": {
             "id": "Velkoz",
@@ -1936,7 +2494,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "Vex": {
             "id": "Vex",
@@ -1949,7 +2511,10 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Vi": {
             "id": "Vi",
@@ -1962,7 +2527,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Viego": {
             "id": "Viego",
@@ -1975,7 +2544,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Viktor": {
             "id": "Viktor",
@@ -1988,7 +2561,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Vladimir": {
             "id": "Vladimir",
@@ -2001,7 +2577,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Fighter"
+            ]
         },
         "Volibear": {
             "id": "Volibear",
@@ -2014,7 +2594,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Warwick": {
             "id": "Warwick",
@@ -2027,7 +2611,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Xayah": {
             "id": "Xayah",
@@ -2040,7 +2628,10 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "Xerath": {
             "id": "Xerath",
@@ -2053,7 +2644,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         },
         "XinZhao": {
             "id": "XinZhao",
@@ -2066,7 +2661,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Yasuo": {
             "id": "Yasuo",
@@ -2079,7 +2678,11 @@
                 "y": 0,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Yone": {
             "id": "Yone",
@@ -2092,7 +2695,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Assassin"
+            ]
         },
         "Yorick": {
             "id": "Yorick",
@@ -2105,7 +2712,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Fighter",
+                "Tank"
+            ]
         },
         "Yunara": {
             "id": "Yunara",
@@ -2118,7 +2729,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "Yuumi": {
             "id": "Yuumi",
@@ -2131,7 +2745,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Zac": {
             "id": "Zac",
@@ -2144,7 +2762,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Tank",
+                "Fighter"
+            ]
         },
         "Zed": {
             "id": "Zed",
@@ -2157,7 +2779,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Assassin"
+            ]
         },
         "Zeri": {
             "id": "Zeri",
@@ -2170,7 +2795,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Marksman"
+            ]
         },
         "Ziggs": {
             "id": "Ziggs",
@@ -2183,7 +2811,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Zilean": {
             "id": "Zilean",
@@ -2196,7 +2827,11 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Support",
+                "Mage"
+            ]
         },
         "Zoe": {
             "id": "Zoe",
@@ -2209,7 +2844,10 @@
                 "y": 48,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage"
+            ]
         },
         "Zyra": {
             "id": "Zyra",
@@ -2222,7 +2860,11 @@
                 "y": 96,
                 "w": 48,
                 "h": 48
-            }
+            },
+            "tags": [
+                "Mage",
+                "Support"
+            ]
         }
     }
 }

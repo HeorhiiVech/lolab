@@ -25,9 +25,10 @@ for filename in os.listdir(champions_folder_path):
             champion_file_content = json.load(f)
             for champ_id, champ_data in champion_file_content.get('data', {}).items():
                 all_champions_data[champ_id] = {
-                    'id': champ_data['id'],      # Английское имя для поиска
-                    'name': champ_data['name'],    # Русское имя для подсказок
-                    'image': champ_data['image']
+                    'id': champ_data['id'],
+                    'name': champ_data['name'],
+                    'image': champ_data['image'],
+                    'tags': champ_data['tags'] # <--- ДОБАВЛЕНА ЭТА СТРОКА
                 }
 
 # Сохраняем данные и версию вместе
@@ -35,6 +36,9 @@ output_data = {
     "version": version,
     "data": all_champions_data
 }
+
+# Создаем директорию, если она не существует
+os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
 
 with open(output_file_path, 'w', encoding='utf-8') as f:
     json.dump(output_data, f, ensure_ascii=False, indent=4)

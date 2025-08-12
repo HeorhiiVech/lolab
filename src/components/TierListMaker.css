@@ -1,11 +1,29 @@
 /* src/components/TierListMaker.css */
 
+.tierlist-container {
+    padding-left: 0; /* <--- ВОТ ЭТА СТРОКА */
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.tierlist-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    width: 1600px; /* Жесткая ширина для всего макета */
+    margin: 0; /* Убираем авто-центрирование, чтобы прижать к левому краю */
+}
+
 /* --- Общие контроли над тирлистом --- */
 .tierlist-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    /* Ограничиваем ширину хедера, чтобы он соответствовал .tierlist-layout */
+    max-width: 1600px;
 }
 .tierlist-header h2 {
     margin: 0;
@@ -24,14 +42,8 @@
     font-family: 'Cinzel', serif;
 }
 
-/* --- Макет: Две колонки --- */
-.tierlist-layout {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-}
 .tierlist-main {
-    flex-grow: 1; 
+    flex-grow: 1;
 }
 .champion-pool-section.card {
     width: 600px;
@@ -41,13 +53,40 @@
 
 .tier-row {
     display: flex;
+    align-items: stretch;
     margin-bottom: 4px;
     min-height: 80px;
-    background-color: #0A1014;
-    border: 1px solid #2c3e50;
 }
+
+.tier-move-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+.tier-move-btn {
+    background: #2c3e50;
+    border: 1px solid #455a64;
+    color: #F0E6D2;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1;
+}
+.tier-move-btn:hover:not(:disabled) {
+    background: #4A6572;
+}
+.tier-move-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
 .tier-label {
-    width: 140px; /* <-- ИЗМЕНЕНИЕ: Ширина увеличена до 140px */
+    width: 140px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -56,9 +95,8 @@
     font-weight: bold;
     color: #111;
     position: relative;
-    border-right: 1px solid #2c3e50;
+    border: 1px solid #2c3e50;
 }
-
 .tier-label textarea {
     background: none;
     border: none;
@@ -68,7 +106,7 @@
     text-align: center;
     width: 100%;
     font-size: 1em;
-    padding: 10px 5px;
+    padding: 10px 25px;
     box-sizing: border-box;
     line-height: 1.2;
     resize: none;
@@ -89,6 +127,9 @@
     flex-grow: 1;
     padding: 5px;
     transition: background-color 0.2s ease;
+    background-color: #0A1014;
+    border: 1px solid #2c3e50;
+    border-left: none;
 }
 .champion-container.dragging-over {
     background-color: #1c2a33;
@@ -111,13 +152,7 @@
     border: 1px solid #5a4b2c;
     color: #F0E6D2;
 }
-.champion-pool-section .pool {
-    height: 500px;
-    overflow-y: auto;
-    background-color: #0A1014;
-    border: 1px dashed #5a4b2c;
-    padding: 5px;
-}
+
 .delete-champ-btn {
   position: absolute;
   top: -2px;
@@ -182,16 +217,41 @@
     background-color: white;
     border: 1px solid rgba(0,0,0,0.5);
 }
+/* --- Стили для фильтров по тегам --- */
+.tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px; /* Отступ между фильтрами и списком чемпионов */
+}
 
-.screenshot-text {
-    font-family: 'Cinzel', serif;
+.tag-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #0A1014;
+    border: 1px solid #5a4b2c;
+    color: #C89B3C;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.tag-filter-btn:hover {
+    border-color: #C89B3C;
+    color: #F0E6D2;
+}
+
+/* Стиль для активной кнопки-фильтра */
+.tag-filter-btn.active {
+    background-color: #C89B3C;
+    color: #0A1014;
+    border-color: #C89B3C;
     font-weight: bold;
-    text-align: center;
-    width: 100%;
-    font-size: 1em;
-    padding: 10px 5px;
-    box-sizing: border-box;
-    color: inherit;
-    line-height: 1.2;
-    white-space: pre-wrap;
+}
+
+.tag-icon {
+    font-size: 16px;
 }
