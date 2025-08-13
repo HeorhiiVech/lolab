@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 // Импортируем все наши компоненты
+import Home from './components/Home';
 import Calculator from './components/Calculator';
 import GoldEfficiencyCalculator from './components/GoldEfficiencyCalculator';
 import AbilityHasteCalculator from './components/AbilityHasteCalculator';
@@ -21,7 +22,7 @@ import LoginModal from './components/LoginModal';
 
 
 function App() {
-  const [activeTab, setActiveTab] = useState('tierlist');
+  const [activeTab, setActiveTab] = useState('home');
   const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
   
@@ -94,7 +95,8 @@ function App() {
 
         <nav className="tabs">
           <div className="tab-buttons-wrapper">
-             <button className={activeTab === 'farm' ? 'active' : ''} onClick={() => setActiveTab('farm')}>Калькулятор Фарма</button>
+            <button className={activeTab === 'home' ? 'active' : ''} onClick={() => setActiveTab('home')}>Главная</button>
+            <button className={activeTab === 'farm' ? 'active' : ''} onClick={() => setActiveTab('farm')}>Калькулятор Фарма</button>
             <button className={activeTab === 'items' ? 'active' : ''} onClick={() => setActiveTab('items')}>Калькуляторы Предметов</button>
             <button className={activeTab === 'turret' ? 'active' : ''} onClick={() => setActiveTab('turret')}>Калькулятор Башен</button>
             <button className={activeTab === 'smite' ? 'active' : ''} onClick={() => setActiveTab('smite')}>Тренажер Смайта</button>
@@ -106,6 +108,7 @@ function App() {
 
       <main>
         <div className={`content-wrapper ${activeTab === 'pro' ? 'content-wrapper-pro' : ''}`}>
+          {activeTab === 'home' && <Home />} 
           {activeTab === 'farm' && <Calculator />}
           {activeTab === 'items' && (
             <div className="calculators-container">
