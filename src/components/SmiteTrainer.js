@@ -231,7 +231,7 @@ function SmiteTrainer({ currentUser }) {
                         leaderboard.map((user, index) => (
                             <li key={user.id} className={currentUser && user.id === currentUser.uid ? 'current-user-highlight' : ''}>
                                 <span className="leaderboard-rank">{index + 1}.</span>
-                                <span className="leaderboard-nickname" title={user.email}>
+                                <span className="leaderboard-nickname">
                                     {user.nickname || user.email.split('@')[0]}
                                 </span>
                                 <span className="leaderboard-score">
