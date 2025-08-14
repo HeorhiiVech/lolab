@@ -237,6 +237,7 @@ function SmiteTrainer({ currentUser }) {
                     <div className="my-record-container">
                          <div className="my-record-row">
                              <span className="my-record-label">{myRecord.nickname}</span>
+                             <span className="my-record-stat">Текущая серия: <strong>{currentStreak}</strong></span>
                          </div>
                          <div className="my-record-row">
                             <span className="my-record-stat">Реакция: <strong>{myRecord.highScore || 'N/A'} мс</strong></span>
