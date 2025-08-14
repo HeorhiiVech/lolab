@@ -7,7 +7,7 @@ import './ProSceneAnalyzer.css';
 
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, ChartDataLabels);
 
-const allMetricsForAxes = ['KDA', 'KP', 'KS%', 'DTH%', 'DPM', 'DMG%', 'CSPM', 'GOLD%', 'GD10', 'XPD10', 'CSD10', 'WPM', 'CWPM', 'WCPM'];
+const allMetricsForAxes = ['KDA', 'KP', 'KS%', 'DTH%', 'DPM', 'DMG%', 'CSPM', 'GOLD%', 'GD10', 'XPD10', 'EGPM', 'CSD10', 'WPM', 'CWPM', 'WCPM'];
 const allColumnsForTable = ['Player', 'Team', 'Pos', 'GP', 'W%', 'CTR%', 'K', 'D', 'A', 'KDA', 'KP', 'KS%', 'DTH%', 'FB%', 'GD10', 'XPD10', 'CSD10', 'CSPM', 'CS%P15', 'DPM', 'DMG%', 'D%P15', 'TDPG', 'EGPM', 'GOLD%', 'STL', 'WPM', 'CWPM', 'WCPM'];
 
 // Принимаем onPlayerSelect как свойство (prop)
