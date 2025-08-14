@@ -74,16 +74,6 @@ function SmiteTrainer({ currentUser }) {
         } else { setMyRecord(null); }
     }, [currentUser]);
 
-    // Загружаем данные при монтировании и при смене пользователя/фильтра
-    useEffect(() => {
-        fetchLeaderboard();
-    }, [fetchLeaderboard, sortBy]);
-
-    useEffect(() => {
-        fetchMyRecord();
-    }, [fetchMyRecord, currentUser]);
-
-
     // Функция сохранения лучшего стрика
     const saveBestStreak = useCallback(async () => {
         if (currentUser && currentStreak > 0) {
@@ -96,8 +86,24 @@ function SmiteTrainer({ currentUser }) {
                 }
             } catch (error) { console.error("Ошибка сохранения стрика:", error); }
         }
-        setCurrentStreak(0); // Сбрасываем стрик для новой игры
     }, [currentUser, currentStreak, fetchMyRecord]);
+    
+    // Загружаем данные при монтировании и при смене пользователя/фильтра
+    useEffect(() => {
+        fetchLeaderboard();
+    }, [fetchLeaderboard, sortBy]);
+
+    useEffect(() => {
+        fetchMyRecord();
+    }, [fetchMyRecord, currentUser]);
+
+    // Этот хук сохранит результат, когда пользователь уходит со страницы
+    useEffect(() => {
+        // Функция, которая будет вызвана при "размонтировании" компонента
+        return () => {
+            saveBestStreak();
+        }
+    }, [saveBestStreak]); // Зависимость от saveBestStreak важна
 
     // Ваша логика
     const smiteDmg = smiteType === 'base' ? BASE_SMITE_DMG : smiteType === 'primal' ? PRIMAL_SMITE_DMG : MINION_SMITE_DMG;
@@ -113,7 +119,8 @@ function SmiteTrainer({ currentUser }) {
         if (hpBeforeSmite <= smiteDmg) {
             if (difficulty === 'medium' && Math.random() < 0.3) {
                 setResultMessage('Украдено! Вражеский лесник оказался быстрее.');
-                saveBestStreak(); // Сохраняем стрик даже при проигрыше
+                saveBestStreak(); // Сохраняем стрик при проигрыше
+                setCurrentStreak(0); // Сбрасываем стрик
             } else {
                 setResultMessage(`Отличный смайт! Реакция: ${reaction}мс`);
                 setCurrentStreak(prev => prev + 1); // Увеличиваем стрик
@@ -133,6 +140,7 @@ function SmiteTrainer({ currentUser }) {
         } else {
             setResultMessage(`Слишком рано! Оставалось ${Math.round(hpBeforeSmite)} HP.`);
             saveBestStreak(); // Стрик сброшен, сохраняем лучший результат
+            setCurrentStreak(0); // Сбрасываем стрик
         }
     }, [gameState, dragonHp, smiteDmg, difficulty, smiteableTimestamp, currentUser, fetchLeaderboard, fetchMyRecord, saveBestStreak]);
     
@@ -163,7 +171,13 @@ function SmiteTrainer({ currentUser }) {
                 const newHp = Math.max(0, prevHp - damageDealt);
                 if (prevHp > smiteDmg && newHp <= smiteDmg && !smiteableTimestamp) { setSmiteableTimestamp(Date.now()); setSmiteWindowHp(newHp); }
                 if (smiteWindowHp !== null && settings.aiWindow !== Infinity) {
-                    if (newHp <= smiteWindowHp - settings.aiWindow) { setGameState('finished'); setResultMessage(`Слишком медленно! Враг засмайтил в окне ${settings.aiWindow} HP.`); saveBestStreak(); clearInterval(gameTick); }
+                    if (newHp <= smiteWindowHp - settings.aiWindow) { 
+                        setGameState('finished'); 
+                        setResultMessage(`Слишком медленно! Враг засмайтил в окне ${settings.aiWindow} HP.`); 
+                        saveBestStreak();
+                        setCurrentStreak(0);
+                        clearInterval(gameTick); 
+                    }
                 }
                 return newHp;
             });
@@ -172,11 +186,15 @@ function SmiteTrainer({ currentUser }) {
     }, [gameState, difficulty, smiteDmg, smiteableTimestamp, smiteWindowHp, saveBestStreak]);
 
     useEffect(() => {
-        if (dragonHp === 0 && gameState === 'active') { setGameState('finished'); setResultMessage('Дракон убит, но не вами!'); saveBestStreak(); }
+        if (dragonHp === 0 && gameState === 'active') { 
+            setGameState('finished'); 
+            setResultMessage('Дракон убит, но не вами!'); 
+            saveBestStreak(); 
+            setCurrentStreak(0);
+        }
     }, [dragonHp, gameState, saveBestStreak]);
 
     const startGame = () => {
-        saveBestStreak(); // Сохраняем стрик перед началом новой игры
         setDragonHp(DRAGON_MAX_HP);
         setResultMessage('');
         setGameState('active');
