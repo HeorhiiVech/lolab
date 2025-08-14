@@ -5,25 +5,19 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import proData from '../data/pro_data.json';
 import './ProSceneAnalyzer.css';
 
-// Регистрируем все необходимые компоненты для Chart.js
 ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, ChartDataLabels);
 
-// Список всех метрик, которые можно выбрать для осей
 const allMetricsForAxes = ['KDA', 'KP', 'KS%', 'DTH%', 'DPM', 'DMG%', 'CSPM', 'GOLD%', 'GD10', 'XPD10', 'CSD10', 'WPM', 'CWPM', 'WCPM'];
-// Список всех колонок для таблицы
 const allColumnsForTable = ['Player', 'Team', 'Pos', 'GP', 'W%', 'CTR%', 'K', 'D', 'A', 'KDA', 'KP', 'KS%', 'DTH%', 'FB%', 'GD10', 'XPD10', 'CSD10', 'CSPM', 'CS%P15', 'DPM', 'DMG%', 'D%P15', 'TDPG', 'EGPM', 'GOLD%', 'STL', 'WPM', 'CWPM', 'WCPM'];
 
-
-function ProSceneAnalyzer() {
-    // --- Состояния для фильтров ---
+// Принимаем onPlayerSelect как свойство (prop)
+function ProSceneAnalyzer({ onPlayerSelect }) {
     const [tournament, setTournament] = useState('All');
     const [role, setRole] = useState('All');
     const [xAxisStat, setXAxisStat] = useState('KDA');
     const [yAxisStat, setYAxisStat] = useState('DPM');
-    // --- Состояние для сортировки таблицы ---
     const [sortConfig, setSortConfig] = useState({ key: 'Player', direction: 'ascending' });
 
-    // --- Фильтрация данных ---
     const filteredData = useMemo(() => {
         let data = proData;
         if (tournament !== 'All') {
@@ -35,30 +29,21 @@ function ProSceneAnalyzer() {
         return data;
     }, [role, tournament]);
 
-    // --- Сортировка отфильтрованных данных для таблицы ---
     const sortedAndFilteredData = useMemo(() => {
         let sortableData = [...filteredData];
         if (sortConfig.key) {
             sortableData.sort((a, b) => {
-                // Проверяем, является ли колонка числовой
                 const isNumeric = !isNaN(parseFloat(a[sortConfig.key])) && isFinite(a[sortConfig.key]);
-
                 const valA = isNumeric ? parseFloat(a[sortConfig.key]) : a[sortConfig.key];
                 const valB = isNumeric ? parseFloat(b[sortConfig.key]) : b[sortConfig.key];
-
-                if (valA < valB) {
-                    return sortConfig.direction === 'ascending' ? -1 : 1;
-                }
-                if (valA > valB) {
-                    return sortConfig.direction === 'ascending' ? 1 : -1;
-                }
+                if (valA < valB) return sortConfig.direction === 'ascending' ? -1 : 1;
+                if (valA > valB) return sortConfig.direction === 'ascending' ? 1 : -1;
                 return 0;
             });
         }
         return sortableData;
     }, [filteredData, sortConfig]);
 
-    // --- Функция для изменения сортировки ---
     const requestSort = (key) => {
         let direction = 'ascending';
         if (sortConfig.key === key && sortConfig.direction === 'ascending') {
@@ -67,23 +52,15 @@ function ProSceneAnalyzer() {
         setSortConfig({ key, direction });
     };
 
-    // --- Функция для получения CSS-класса для заголовка колонки ---
     const getSortClassName = (name) => {
-        if (!sortConfig || sortConfig.key !== name) {
-            return '';
-        }
+        if (!sortConfig || sortConfig.key !== name) return '';
         return sortConfig.direction === 'ascending' ? 'sorted-asc' : 'sorted-desc';
     };
 
-    // --- Настройка данных для графика ---
     const chartData = {
         datasets: [{
             label: 'Игроки',
-            data: filteredData.map(player => ({
-                x: player[xAxisStat],
-                y: player[yAxisStat],
-                player: player 
-            })),
+            data: filteredData.map(player => ({ x: player[xAxisStat], y: player[yAxisStat], player: player })),
             backgroundColor: 'rgba(200, 155, 60, 0.7)',
             pointRadius: 10,
             pointHoverRadius: 15,
@@ -92,8 +69,15 @@ function ProSceneAnalyzer() {
         }]
     };
 
-    // --- Настройка отображения графика ---
     const chartOptions = {
+        // При клике на точку на графике, вызываем onPlayerSelect
+        onClick: (evt, elements) => {
+            if (elements.length > 0) {
+                const playerIndex = elements[0].index;
+                const player = filteredData[playerIndex];
+                onPlayerSelect(player);
+            }
+        },
         scales: {
             x: { title: { display: true, text: xAxisStat, color: '#F0E6D2', font: { size: 14 } }, ticks: { color: '#a09480' } },
             y: { title: { display: true, text: yAxisStat, color: '#F0E6D2', font: { size: 14 } }, ticks: { color: '#a09480' } }
@@ -102,14 +86,8 @@ function ProSceneAnalyzer() {
             legend: { display: false },
             tooltip: {
                 callbacks: {
-                    label: function(context) {
-                        const playerData = context.raw.player;
-                        return `${playerData.Player} (${playerData.Team})`;
-                    },
-                    afterLabel: function(context) {
-                        const playerData = context.raw.player;
-                        return `${yAxisStat}: ${playerData[yAxisStat]} | ${xAxisStat}: ${playerData[xAxisStat]}`;
-                    }
+                    label: (context) => `${context.raw.player.Player} (${context.raw.player.Team})`,
+                    afterLabel: (context) => `${yAxisStat}: ${context.raw.player[yAxisStat]} | ${xAxisStat}: ${context.raw.player[xAxisStat]}`
                 }
             },
             datalabels: {
@@ -117,13 +95,8 @@ function ProSceneAnalyzer() {
                 color: '#F0E6D2',
                 align: 'bottom',
                 offset: 12,
-                font: {
-                    size: 13,
-                    family: 'Roboto',
-                },
-                formatter: (value, context) => {
-                    return context.chart.data.datasets[0].data[context.dataIndex].player.Player;
-                }
+                font: { size: 13, family: 'Roboto' },
+                formatter: (value, context) => context.chart.data.datasets[0].data[context.dataIndex].player.Player
             }
         },
         maintainAspectRatio: false
@@ -184,7 +157,8 @@ function ProSceneAnalyzer() {
                     </thead>
                     <tbody>
                         {sortedAndFilteredData.map((player, index) => (
-                            <tr key={`${player.Player}-${index}`}>
+                            // При клике на строку таблицы, вызываем onPlayerSelect
+                            <tr key={`${player.Player}-${index}`} onClick={() => onPlayerSelect(player)}>
                                 {allColumnsForTable.map(metric => (
                                     <td key={`${metric}-${player.Player}`}>{player[metric]}</td>
                                 ))}

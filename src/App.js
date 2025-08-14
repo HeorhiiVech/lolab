@@ -1,8 +1,7 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-// Импортируем все наши компоненты
+// Компоненты
 import Home from './components/Home';
 import Calculator from './components/Calculator';
 import GoldEfficiencyCalculator from './components/GoldEfficiencyCalculator';
@@ -11,77 +10,123 @@ import TurretCalculator from './components/TurretCalculator';
 import SmiteTrainer from './components/SmiteTrainer';
 import FAQ from './components/FAQ';
 import ProSceneAnalyzer from './components/ProSceneAnalyzer';
+import PlayerProfile from './components/PlayerProfile';
+import UserCabinet from './components/UserCabinet';
+import LoginModal from './components/LoginModal';
+import TeamAnalyzer from './components/TeamAnalyzer';
+import TeamProfile from './components/TeamProfile';
+import GlobalSearch from './components/GlobalSearch';
 import TierListMaker from './components/TierListMaker';
 
-// Импорты для авторизации
-// ДОБАВЛЕНЫ db, doc, и getDoc для чтения данных пользователя
+// Firebase
 import { auth, db } from './firebase-config'; 
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import LoginModal from './components/LoginModal';
-
+import { doc, onSnapshot } from "firebase/firestore";
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
-  
   const [isModalOpen, setModalOpen] = useState(false);
+  
   const [currentUser, setCurrentUser] = useState(null);
+  const [userData, setUserData] = useState(null);
+  
+  const [viewingPlayers, setViewingPlayers] = useState([]);
+  const [viewingTeams, setViewingTeams] = useState([]);
 
-  // Следим за состоянием авторизации
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // Пользователь вошел. Загружаем его данные из Firestore.
-        const userDocRef = doc(db, "users", user.uid);
-        const userDocSnap = await getDoc(userDocRef);
-        if (userDocSnap.exists()) {
-          // Сохраняем все данные пользователя (email, nickname, etc.)
-          setCurrentUser({ uid: user.uid, ...userDocSnap.data() });
-        } else {
-          // На случай, если в auth есть, а в базе нет
-          setCurrentUser(user); 
-        }
-      } else {
-        // Пользователь вышел
-        setCurrentUser(null);
-      }
-    });
-    return () => unsubscribe();
+    const unsubscribeAuth = onAuthStateChanged(auth, user => { setCurrentUser(user); });
+    return () => unsubscribeAuth();
   }, []);
+
+  useEffect(() => {
+    let unsubscribeDb = null;
+    if (currentUser) {
+      const userRef = doc(db, "users", currentUser.uid);
+      unsubscribeDb = onSnapshot(userRef, (doc) => {
+        setUserData(doc.exists() ? doc.data() : null);
+      });
+    } else {
+      setUserData(null);
+    }
+    return () => { if (unsubscribeDb) unsubscribeDb(); };
+  }, [currentUser]);
 
   const handleLogout = async () => {
     await signOut(auth);
+    setActiveTab('home');
+  };
+  
+  const handlePlayerSelect = (player) => { setViewingPlayers([player]); setViewingTeams([]); setActiveTab(''); };
+  const addComparisonPlayer = (player) => { if (viewingPlayers.length === 1 && viewingPlayers[0].Player !== player.Player) setViewingPlayers(prev => [...prev, player]); };
+  const removeComparisonPlayer = () => { setViewingPlayers(prev => [prev[0]]); };
+
+  const handleTeamSelect = (team) => { setViewingTeams([team]); setViewingPlayers([]); setActiveTab(''); };
+  const addComparisonTeam = (team) => { if (viewingTeams.length === 1 && viewingTeams[0].Team !== team.Team) setViewingTeams(prev => [...prev, team]); };
+  const removeComparisonTeam = () => { setViewingTeams(prev => [prev[0]]); };
+
+  const handleBackToMain = () => {
+    setViewingPlayers([]);
+    setViewingTeams([]);
+    setActiveTab('pro');
+  };
+
+  const renderContent = () => {
+    if (viewingPlayers.length > 0) {
+      return <PlayerProfile 
+                players={viewingPlayers}
+                onBack={handleBackToMain}
+                onPlayerSelect={handlePlayerSelect}
+                onTeamSelect={handleTeamSelect}
+                onAddCompare={addComparisonPlayer}
+                onRemoveCompare={removeComparisonPlayer}
+                currentUser={currentUser}
+                userData={userData}
+             />;
+    }
+    if (viewingTeams.length > 0) {
+      return <TeamProfile 
+                teams={viewingTeams} 
+                onBack={handleBackToMain} 
+                onPlayerSelect={handlePlayerSelect} // Добавлено
+                onTeamSelect={handleTeamSelect} 
+                onAddCompare={addComparisonTeam} 
+                onRemoveCompare={removeComparisonTeam} 
+             />;
+    }
+    
+    switch (activeTab) {
+      case 'home': return <Home />;
+      case 'farm': return <Calculator />;
+      case 'items': return <div className="calculators-container"><GoldEfficiencyCalculator /><AbilityHasteCalculator /></div>;
+      case 'turret': return <TurretCalculator />;
+      case 'smite': return <SmiteTrainer currentUser={currentUser} />;
+      case 'pro': return <ProSceneAnalyzer onPlayerSelect={handlePlayerSelect} />;
+      case 'teams': return <TeamAnalyzer onTeamSelect={handleTeamSelect} />;
+      case 'tierlist': return <TierListMaker />;
+      case 'cabinet': return <UserCabinet userData={userData} onPlayerSelect={handlePlayerSelect} onTeamSelect={handleTeamSelect} />;
+      default: return <Home />;
+    }
   };
 
   return (
     <div className={`App ${isHeaderCollapsed ? 'header-collapsed' : ''}`}>
-      <button 
-        className="collapse-toggle-btn" 
-        onClick={() => setIsHeaderCollapsed(!isHeaderCollapsed)} 
-        title="Свернуть/Развернуть"
-      >
-        {isHeaderCollapsed ? '↓' : '↑'}
-      </button>
-
+      <button className="collapse-toggle-btn" onClick={() => setIsHeaderCollapsed(!isHeaderCollapsed)} title="Свернуть/Развернуть">{isHeaderCollapsed ? '↓' : '↑'}</button>
       <LoginModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
-
       <div className="header-section">
         <div className="header-wrapper">
           <header className="App-header">
             <h1>lolab by heovech</h1>
+            <GlobalSearch currentUser={currentUser} userData={userData} onPlayerSelect={handlePlayerSelect} onTeamSelect={handleTeamSelect} />
             <div className="login-controls">
               {currentUser ? (
                 <>
-                  {/* ИЗМЕНЕНО: Отображаем никнейм, а если его нет - то email */}
-                  <span>{currentUser.nickname || currentUser.email}</span>
+                  <span>{userData?.nickname || currentUser.email}</span>
                   <button onClick={handleLogout} className="login-button">Выйти</button>
                 </>
               ) : (
-                <button onClick={() => setModalOpen(true)} className="login-button">
-                  Войти
-                </button>
+                <button onClick={() => setModalOpen(true)} className="login-button">Войти</button>
               )}
             </div>
           </header>
@@ -92,7 +137,6 @@ function App() {
             </a>
           </div>
         </div>
-
         <nav className="tabs">
           <div className="tab-buttons-wrapper">
             <button className={activeTab === 'home' ? 'active' : ''} onClick={() => setActiveTab('home')}>Главная</button>
@@ -100,29 +144,18 @@ function App() {
             <button className={activeTab === 'items' ? 'active' : ''} onClick={() => setActiveTab('items')}>Калькуляторы Предметов</button>
             <button className={activeTab === 'turret' ? 'active' : ''} onClick={() => setActiveTab('turret')}>Калькулятор Башен</button>
             <button className={activeTab === 'smite' ? 'active' : ''} onClick={() => setActiveTab('smite')}>Тренажер Смайта</button>
-            <button className={activeTab === 'pro' ? 'active' : ''} onClick={() => setActiveTab('pro')}>Про-сцена</button>
+            <button className={activeTab === 'pro' ? 'active' : ''} onClick={() => setActiveTab('pro')}>Игроки</button>
+            <button className={activeTab === 'teams' ? 'active' : ''} onClick={() => setActiveTab('teams')}>Команды</button>
             <button className={activeTab === 'tierlist' ? 'active' : ''} onClick={() => setActiveTab('tierlist')}>Тирлист Мейкер</button>
+            {currentUser && (<button className={activeTab === 'cabinet' ? 'active' : ''} onClick={() => setActiveTab('cabinet')}>Профиль</button>)}
           </div>
         </nav>
       </div>
-
       <main>
-        <div className={`content-wrapper ${activeTab === 'pro' ? 'content-wrapper-pro' : ''}`}>
-          {activeTab === 'home' && <Home />} 
-          {activeTab === 'farm' && <Calculator />}
-          {activeTab === 'items' && (
-            <div className="calculators-container">
-              <GoldEfficiencyCalculator />
-              <AbilityHasteCalculator />
-            </div>
-          )}
-          {activeTab === 'turret' && <TurretCalculator />}
-          {activeTab === 'smite' && <SmiteTrainer currentUser={currentUser} />} 
-          {activeTab === 'pro' && <ProSceneAnalyzer />}
-          {activeTab === 'tierlist' && <TierListMaker />}
+        <div className={`content-wrapper ${activeTab === 'pro' || activeTab === 'teams' || viewingPlayers.length > 0 || viewingTeams.length > 0 ? 'content-wrapper-pro' : ''}`}>
+          {renderContent()}
         </div>
       </main>
-
       {isFaqOpen && <FAQ onClose={() => setIsFaqOpen(false)} />}
     </div>
   );

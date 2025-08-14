@@ -15,6 +15,27 @@
     align-items: flex-end;
 }
 
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.control-group label {
+    text-align: left;
+    font-size: 0.9em;
+    color: #a09480;
+}
+
+.control-group select {
+    padding: 8px;
+    background-color: #0A1014;
+    color: #F0E6D2;
+    border: 1px solid #5a4b2c;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
 .role-filter {
     display: flex;
     flex-wrap: wrap;
@@ -44,40 +65,31 @@
     font-weight: bold;
 }
 
-.axes-selectors select {
-    padding: 8px;
-    background-color: #0A1014;
-    color: #F0E6D2;
-    border: 1px solid #5a4b2c;
-    border-radius: 4px;
-    font-size: 1em;
-}
-
 .chart-container {
   position: relative;
   height: 650px;
   width: 100%;
+  cursor: pointer; /* Добавляем курсор, чтобы показать кликабельность */
 }
 
-/* *
-* ВОТ ОНО, КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ
-*
-*/
+/* --- ИЗМЕНЕНИЕ ЗДЕСЬ --- */
 .pro-scene-card {
-    width: 60% !important;
-    max-width: none !important;
+    /* Занимает почти всю ширину родителя... */
+    width: 56%;
+    /* ...но не больше 1600px, чтобы не растягиваться на больших экранах */
+    max-width: 1600px;
+    /* И центрируется по горизонтали */
+    margin: 0 auto;
 }
 
 .table-container {
     margin-top: 30px;
     width: 100%;
-    overflow-x: auto; /* Этот скролл у вас уже есть для горизонтали */
+    overflow-x: auto;
     border: 1px solid #5a4b2c;
     border-radius: 4px;
-
-    /* ДОБАВЛЯЕМ ЭТИ ДВЕ СТРОКИ */
-    max-height: 500px; /* Ограничиваем высоту (подберите значение, которое вам нравится) */
-    overflow-y: auto;  /* Добавляем вертикальный скролл, если таблица не помещается */
+    max-height: 500px; 
+    overflow-y: auto;
 }
 
 .pro-table {
@@ -100,7 +112,10 @@
 .pro-table th {
     cursor: pointer;
     user-select: none;
-    position: relative;
+    position: sticky;
+    top: 0;
+    background-color: #0F1A20; 
+    z-index: 10;
     color: #a09480;
     transition: color 0.2s;
 }
@@ -128,41 +143,38 @@
 }
 
 
-.pro-table tbody tr:nth-child(even) {
-    background-color: #0c1418;
+.pro-table tbody tr {
+    transition: background-color 0.2s;
 }
 
 .pro-table tbody tr:hover {
     background-color: #1c2a33;
+    cursor: pointer; /* Добавляем курсор, чтобы показать кликабельность */
 }
 
-/* ДОБАВИТЬ В КОНЕЦ ФАЙЛА ProSceneAnalyzer.css */
-
-/* 1. Делаем все заголовки (верхнюю строку) "липкими" */
-.pro-table th {
-    position: sticky;
-    top: 0; /* Прилипаем к верху контейнера */
-    /* Фон обязателен, чтобы прокручиваемые строки не были видны под заголовком */
-    background-color: #0F1A20; 
-    z-index: 10;
+.pro-table tbody tr:nth-child(even) {
+    background-color: #0c1418;
 }
 
-/* 2. Делаем все ячейки первого столбца "липкими" */
+.pro-table th:first-child,
 .pro-table tbody td:first-child {
     position: sticky;
-    left: 0; /* Прилипаем к левому краю контейнера */
-    /* Фон также обязателен, чтобы другие столбцы не были видны под ним при прокрутке */
-    background-color: #111A29;
+    left: 0;
     z-index: 5;
+    background-color: #111A29; /* Фон для прилипшей ячейки */
 }
 
-/* 3. Отдельно стилизуем заголовок первого столбца (ячейка "Player") */
-.pro-table th:first-child {
-    left: 0; /* Она должна быть "липкой" и по горизонтали */
-    z-index: 20; /* Делаем z-index самым высоким, чтобы она была поверх всех */
+/* Нужно убедиться, что фон для четных строк тоже применяется к прилипшей ячейке */
+.pro-table tbody tr:nth-child(even) td:first-child {
+    background-color: #0c1418;
 }
 
-/* 4. Сохраняем фон при наведении на строку для прилипшей ячейки */
+/* И фон при наведении тоже */
 .pro-table tbody tr:hover td:first-child {
     background-color: #1c2a33;
+}
+
+.pro-table th:first-child {
+    z-index: 20; /* Заголовок должен быть поверх ячеек */
+    background-color: #0F1A20; /* И у него тоже должен быть фон */
 }

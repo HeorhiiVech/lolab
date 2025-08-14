@@ -43,11 +43,14 @@ function LoginModal({ isOpen, onClose }) {
         }
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            // При регистрации создаем документ со всеми необходимыми полями
             await setDoc(doc(db, "users", userCredential.user.uid), {
                 email: userCredential.user.email,
                 nickname: nickname,
                 highScore: null,
-                winStreak: 0
+                winStreak: 0,
+                favoritePlayers: [],
+                favoriteTeams: [] // Добавляем поле для команд
             });
             onClose();
         } catch (error) {
