@@ -6,6 +6,23 @@ import TeamSearch from './TeamSearch';
 
 ChartJS.register(RadarController, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
+// Словарь с описаниями для статистик
+const statDescriptions = {
+    'EGR': 'Ерли гейм рейтинг',
+    'MLR': 'Мид\\лейт рейтинг',
+    'FB%': 'Первое убийство',
+    'FT%': 'Первый тавер',
+    'F3T%': '% игр, в которых команда забирает первой 3 вышки',
+    'PPG': 'Сколько пластин в среднем за игру ломает команда',
+    'HLD%': 'Контроль Герольдов',
+    'GRB%': 'Контроль Грабсов',
+    'FD%': 'Первый дракон',
+    'FBN%': 'Первый Нашор',
+    'LNE%': 'Средняя доля от общего количества крипов на лайнах за игру',
+    'JNG%': 'Средняя доля от общего количества крипов в джангле за игру'
+};
+
+
 const ComparisonSearchModal = ({ onSelect, onClose, currentTeam }) => (
     <div className="modal-overlay" onClick={onClose}>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -33,19 +50,14 @@ const TeamProfile = ({ teams, onBack, onTeamSelect, onAddCompare, onRemoveCompar
         return teamData.filter(t => t.Tournament === comparisonTournament);
     }, [comparisonTournament]);
 
-    // --- НОВАЯ ЛОГИКА ОТОБРАЖЕНИЯ СТАТИСТИКИ ---
     const isLPL = team1.Tournament === 'LPL';
 
-    // Определяем статы для многогранника (теперь одинаковые для всех)
     const radarLabels = ['KD', 'GSPD', 'FB%', 'FT%', 'HLD%', 'GRB%', 'FD%', 'LNE%', 'JNG%'];
 
-    // Определяем статы для подробной таблицы в зависимости от региона
     let detailedStats;
     if (isLPL) {
-        // Для LPL показываем только их набор статов
         detailedStats = ['KD', 'GSPD', 'FB%', 'FT%', 'HLD%', 'GRB%', 'FD%', 'LNE%', 'JNG%', 'WPM'];
     } else {
-        // Для других регионов показываем их расширенный набор
         detailedStats = ['KD', 'GSPD', 'EGR', 'MLR', 'GD15', 'FB%', 'FT%', 'F3T%', 'PPG', 'HLD%', 'GRB%', 'FD%', 'FBN%', 'LNE%', 'JNG%', 'WPM'];
     }
     
@@ -147,19 +159,23 @@ const TeamProfile = ({ teams, onBack, onTeamSelect, onAddCompare, onRemoveCompar
                             )}
                             {detailedStats.map(stat => {
                                 const val1 = team1[stat];
+                                const description = statDescriptions[stat]; // Получаем описание для стата
+
                                 if (team2) {
                                     const val2 = team2[stat];
                                     const winnerClass = getStatWinnerClass(stat, val1, val2);
                                     return (
                                         <React.Fragment key={stat}>
-                                            <div className="stat-name">{stat}</div>
+                                            {/* Добавляем title, если есть описание */}
+                                            <div className="stat-name" title={description}>{stat}</div>
                                             <div className={`stat-value ${winnerClass}`}>{val1 != null ? val1 : 'N/A'}</div>
                                             <div className={`stat-value ${winnerClass === 'better' ? 'worse' : (winnerClass === 'worse' ? 'better' : '')}`}>{val2 != null ? val2 : 'N/A'}</div>
                                         </React.Fragment>
                                     );
                                 } else {
                                     return (
-                                        <div className="stat-item" key={stat}>
+                                        // Добавляем title, если есть описание
+                                        <div className="stat-item" key={stat} title={description}>
                                             <span className="stat-name">{stat}</span>
                                             <span className="stat-value">{val1 != null ? val1 : 'N/A'}</span>
                                         </div>
