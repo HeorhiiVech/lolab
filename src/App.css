@@ -64,7 +64,7 @@ body {
   font-size: 1.1em;
 }
 
-.login-controls .login-button {
+.login-controls .login-button, .profile-button {
   font-family: 'Cinzel', serif;
   background-color: transparent;
   border: 1px solid #c89b3c;
@@ -75,9 +75,15 @@ body {
   border-radius: 4px;
 }
 
-.login-controls .login-button:hover {
+.login-controls .login-button:hover, .profile-button:hover {
   background-color: #c89b3c;
   color: #0a1014;
+}
+
+.profile-button.active {
+    background-color: #c89b3c;
+    color: #0a1014;
+    font-weight: bold;
 }
 
 .header-buttons {
@@ -190,6 +196,91 @@ body {
   position: relative;
   top: 2px;
   opacity: 1;
+}
+
+/* Стили для выпадающего списка */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: 1px solid #2c3e50;
+  border-bottom: none;
+  background-color: #0A1014;
+  color: #a09480;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px 5px 0 0;
+  opacity: 0.7;
+}
+
+.dropdown:hover .dropbtn {
+  color: #F0E6D2;
+  background-color: #1c2a33;
+  opacity: 1;
+}
+.dropdown .dropbtn {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: 1px solid #2c3e50;
+  border-bottom: none;
+  background-color: #0A1014;
+  color: #a09480;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px 5px 0 0;
+  opacity: 0.7;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #0F1A20;
+  min-width: 240px; /* Можете настроить под самую длинную строку */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border: 1px solid #5a4b2c;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+}
+
+.dropdown-content button {
+  /* 1. ПОЛНЫЙ СБРОС стандартных стилей кнопки */
+  background: transparent;
+  border: none;
+  margin: 0;
+  font: inherit; /* Наследуем шрифт от родителя */
+  color: inherit; /* Наследуем цвет от родителя */
+  cursor: pointer;
+  
+  /* 2. ПРИМЕНЕНИЕ вашего дизайна (как было у ссылок) */
+  font-family: 'Cinzel', serif;
+  color: #a09480;
+  padding: 12px 16px;
+  text-decoration: none;
+  font-size: 1em;
+  transition: background-color 0.3s, color 0.3s;
+
+  /* 3. ВЫРАВНИВАНИЕ и РАЗМЕР */
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-content button:hover {
+  background-color: #1c2a33;
+  color: #F0E6D2;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 

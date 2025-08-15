@@ -19,7 +19,7 @@ import GlobalSearch from './components/GlobalSearch';
 import TierListMaker from './components/TierListMaker';
 
 // Firebase
-import { auth, db } from './firebase-config'; 
+import { auth, db } from './firebase-config';
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 
@@ -74,7 +74,7 @@ function App() {
 
   const renderContent = () => {
     if (viewingPlayers.length > 0) {
-      return <PlayerProfile 
+      return <PlayerProfile
                 players={viewingPlayers}
                 onBack={handleBackToMain}
                 onPlayerSelect={handlePlayerSelect}
@@ -86,13 +86,13 @@ function App() {
              />;
     }
     if (viewingTeams.length > 0) {
-      return <TeamProfile 
-                teams={viewingTeams} 
-                onBack={handleBackToMain} 
+      return <TeamProfile
+                teams={viewingTeams}
+                onBack={handleBackToMain}
                 onPlayerSelect={handlePlayerSelect} // Добавлено
-                onTeamSelect={handleTeamSelect} 
-                onAddCompare={addComparisonTeam} 
-                onRemoveCompare={removeComparisonTeam} 
+                onTeamSelect={handleTeamSelect}
+                onAddCompare={addComparisonTeam}
+                onRemoveCompare={removeComparisonTeam}
              />;
     }
     
@@ -123,6 +123,7 @@ function App() {
               {currentUser ? (
                 <>
                   <span>{userData?.nickname || currentUser.email}</span>
+                  <button onClick={() => setActiveTab('cabinet')} className={`profile-button ${activeTab === 'cabinet' ? 'active' : ''}`}>Профиль</button>
                   <button onClick={handleLogout} className="login-button">Выйти</button>
                 </>
               ) : (
@@ -140,14 +141,26 @@ function App() {
         <nav className="tabs">
           <div className="tab-buttons-wrapper">
             <button className={activeTab === 'home' ? 'active' : ''} onClick={() => setActiveTab('home')}>Главная</button>
-            <button className={activeTab === 'farm' ? 'active' : ''} onClick={() => setActiveTab('farm')}>Калькулятор Фарма</button>
-            <button className={activeTab === 'items' ? 'active' : ''} onClick={() => setActiveTab('items')}>Калькуляторы Предметов</button>
-            <button className={activeTab === 'turret' ? 'active' : ''} onClick={() => setActiveTab('turret')}>Калькулятор Башен</button>
+            
+            <div className="dropdown">
+              <button className="dropbtn">Калькуляторы</button>
+              <div className="dropdown-content">
+                <button  onClick={() => setActiveTab('farm')}>Калькулятор Фарма</button>
+                <button  onClick={() => setActiveTab('items')}>Калькуляторы Предметов</button>
+                <button  onClick={() => setActiveTab('turret')}>Калькулятор Башен</button>
+              </div>
+            </div>
+
+            <div className="dropdown">
+              <button className="dropbtn">Киберспорт</button>
+              <div className="dropdown-content">
+                <button  onClick={() => setActiveTab('pro')}>Игроки</button>
+                <button  onClick={() => setActiveTab('teams')}>Команды</button>
+              </div>
+            </div>
+
             <button className={activeTab === 'smite' ? 'active' : ''} onClick={() => setActiveTab('smite')}>Тренажер Смайта</button>
-            <button className={activeTab === 'pro' ? 'active' : ''} onClick={() => setActiveTab('pro')}>Игроки</button>
-            <button className={activeTab === 'teams' ? 'active' : ''} onClick={() => setActiveTab('teams')}>Команды</button>
             <button className={activeTab === 'tierlist' ? 'active' : ''} onClick={() => setActiveTab('tierlist')}>Тирлист Мейкер</button>
-            {currentUser && (<button className={activeTab === 'cabinet' ? 'active' : ''} onClick={() => setActiveTab('cabinet')}>Профиль</button>)}
           </div>
         </nav>
       </div>
