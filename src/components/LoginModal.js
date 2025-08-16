@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { auth, db } from '../firebase-config';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 
 const modalStyles = {
     overlay: {
@@ -43,13 +44,12 @@ function LoginModal({ isOpen, onClose }) {
         }
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            // При регистрации создаем документ со всеми необходимыми полями
             await setDoc(doc(db, "users", userCredential.user.uid), {
                 email: userCredential.user.email,
                 nickname: nickname,
-                highScore: null, // Оставляем для совместимости, если нужно
-                winStreak: 0,    // Оставляем для совместимости, если нужно
-                rating: 1000,     // Новое поле рейтинга!
+                rating: 1000,
+                weekly_pt: 0,
+                lastPlayedTimestamp: serverTimestamp(),
                 favoritePlayers: [],
                 favoriteTeams: [] 
             });

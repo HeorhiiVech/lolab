@@ -23,36 +23,56 @@
     margin-bottom: 20px;
 }
 
-.smite-records {
-    display: flex;
-    gap: 30px;
+/* --- НОВЫЕ СТИЛИ ДЛЯ ПРОГРЕСС-БАРА --- */
+.rank-progress-container {
     background-color: #0A1014;
-    padding: 20px;
+    padding: 20px 25px;
     border-radius: 8px;
-    justify-content: center; /* Центрируем единственный элемент */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.record-item {
-    flex: 1;
-    max-width: 400px; /* Ограничим ширину для лучшего вида */
-    text-align: center;
-}
-
-.record-label {
-    display: block;
-    font-size: 1.1em;
+.rank-progress-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.9em;
     color: #a09480;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
 }
 
-.record-value {
-    display: block;
-    font-size: 2em;
-    font-weight: bold;
+.rank-progress-header strong {
     color: #F0E6D2;
-    font-family: 'Cinzel', serif;
 }
 
+.progress-bar-background {
+    width: 100%;
+    height: 20px;
+    background-color: #1e2833;
+    border: 1px solid #2c3e50;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.5s ease-in-out;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.rank-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #a09480;
+}
+
+/* --- СТИЛИ ДЛЯ ИЗБРАННОГО (без изменений) --- */
 .favorites-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
