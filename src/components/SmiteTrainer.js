@@ -14,6 +14,7 @@ import {
   updateDoc,
   serverTimestamp,
   increment,
+  documentId
 } from "firebase/firestore";
 
 // --- Константы игры ---
@@ -35,57 +36,18 @@ const ENEMY_Q_COOLDOWN = 7000;
 const NORMAL_ATTACK_INTERVAL = 850;
 const FAST_ATTACK_INTERVAL = 600;
 
-// ИЗМЕНЕНО: Новая функция для получения полной информации о ранге
+// Функция для определения ранга
 const getRankInfo = (points) => {
     const pts = points || 1000;
-
-    const ranks = [
-        { threshold: 0, name: 'Железо', color: '#817364' },
-        { threshold: 3000, name: 'Бронза', color: '#CD7F32' },
-        { threshold: 6000, name: 'Серебро', color: '#C0C0C0' },
-        { threshold: 9000, name: 'Платина', color: '#E5E4E2' },
-        { threshold: 12000, name: 'Изумруд', color: '#50C878' },
-        { threshold: 15000, name: 'Даймонд', color: '#B9F2FF' },
-        { threshold: 20000, name: 'Мастер', color: '#9d00ff' },
-        { threshold: 25000, name: 'Грандмастер', color: '#ff0000' },
-        { threshold: 30000, name: 'Челленджер', color: '#F4C430' }
-    ];
-
-    let currentRank = ranks[0];
-    let nextRank = ranks[1];
-
-    for (let i = 0; i < ranks.length; i++) {
-        if (pts >= ranks[i].threshold) {
-            currentRank = ranks[i];
-            nextRank = (i < ranks.length - 1) ? ranks[i + 1] : null;
-        }
-    }
-
-    if (!nextRank) {
-        return {
-            ...currentRank,
-            nextRankName: 'Максимум',
-            nextRankIn: null,
-            progress: 100,
-            totalPoints: pts
-        };
-    }
-
-    const rankStartPoints = currentRank.threshold;
-    const rankEndPoints = nextRank.threshold;
-    const pointsInCurrentRank = pts - rankStartPoints;
-    const pointsNeededForRank = rankEndPoints - rankStartPoints;
-    
-    const progress = (pointsInCurrentRank / pointsNeededForRank) * 100;
-    const nextRankIn = rankEndPoints - pts;
-
-    return {
-        ...currentRank,
-        nextRankName: nextRank.name,
-        nextRankIn,
-        progress,
-        totalPoints: pts
-    };
+    if (pts < 3000) return { name: 'Железо', color: '#817364' };
+    if (pts < 6000) return { name: 'Бронза', color: '#CD7F32' };
+    if (pts < 9000) return { name: 'Серебро', color: '#C0C0C0' };
+    if (pts < 12000) return { name: 'Платина', color: '#E5E4E2' };
+    if (pts < 15000) return { name: 'Изумруд', color: '#50C878' };
+    if (pts < 20000) return { name: 'Даймонд', color: '#B9F2FF' };
+    if (pts < 25000) return { name: 'Мастер', color: '#9d00ff' };
+    if (pts < 30000) return { name: 'Грандмастер', color: '#ff0000' };
+    return { name: 'Челленджер', color: '#F4C430' };
 };
 
 // Функция для проверки, прошла ли неделя
@@ -128,6 +90,7 @@ function SmiteTrainer({ currentUser }) {
     const [damageNumbers, setDamageNumbers] = useState([]);
     const [leaderboard, setLeaderboard] = useState([]);
     const [weeklyLeaderboard, setWeeklyLeaderboard] = useState([]);
+    const [hallOfFame, setHallOfFame] = useState([]); // НОВОЕ
     const [myRecord, setMyRecord] = useState(null);
     const [showEShockwave, setShowEShockwave] = useState(false);
     const [showQProjectile, setShowQProjectile] = useState(false);
@@ -148,6 +111,19 @@ function SmiteTrainer({ currentUser }) {
                 setLeaderboard(leaders);
             }
         } catch (error) { console.error(`Ошибка при загрузке ладдера (${type}):`, error); }
+    }, []);
+
+    // НОВАЯ ФУНКЦИЯ
+    const fetchHallOfFame = useCallback(async () => {
+        try {
+            const archivesCollection = collection(db, 'weekly_archives');
+            const q = query(archivesCollection, orderBy(documentId(), 'desc'), limit(20));
+            const querySnapshot = await getDocs(q);
+            const archives = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setHallOfFame(archives);
+        } catch (error) {
+            console.error("Ошибка при загрузке зала славы:", error);
+        }
     }, []);
 
     const fetchMyRecord = useCallback(async () => {
@@ -192,8 +168,9 @@ function SmiteTrainer({ currentUser }) {
     useEffect(() => {
         fetchLeaderboard('total');
         fetchLeaderboard('weekly');
+        fetchHallOfFame(); // НОВОЕ
         fetchMyRecord();
-    }, [fetchLeaderboard, fetchMyRecord, currentUser]);
+    }, [fetchLeaderboard, fetchMyRecord, fetchHallOfFame, currentUser]);
 
     const showDamageNumber = useCallback((amount, type) => {
         let leftPosition = '40%';
@@ -508,7 +485,6 @@ function SmiteTrainer({ currentUser }) {
                     {blindCircles.map(circle => (<div key={circle.id} className="blind-circle" style={{ top: circle.top, left: circle.left }} onClick={() => handleCircleClick(circle.id)}></div>))}
                 </div>
 
-                {/* НОВЫЙ БЛОК ПРОГРЕССА */}
                 {myRecord && (
                      <div className="rank-progress-container on-trainer-page">
                         <div className="rank-progress-header">
@@ -563,6 +539,20 @@ function SmiteTrainer({ currentUser }) {
                                 </li>
                             )
                         })) : (<p>На этой неделе еще никто не играл.</p>)}
+                    </ol>
+                </div>
+
+                {/* НОВЫЙ БЛОК */}
+                <div className="leaderboard-container hall-of-fame">
+                    <h3>Зал славы</h3>
+                    <ol className="leaderboard-list">
+                        {hallOfFame.length > 0 ? (hallOfFame.map((archive) => (
+                            <li key={archive.id} className="hall-of-fame-entry">
+                                <span className="week-label">Неделя #{archive.id.split('-')[1]}</span>
+                                <span className="winner-name">🏆 {archive.winner.nickname}</span>
+                                <span className="winner-score">{archive.winner.weekly_pt} pt.</span>
+                            </li>
+                        ))) : (<p>Архив предыдущих недель пуст.</p>)}
                     </ol>
                 </div>
             </div>

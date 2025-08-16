@@ -22,6 +22,8 @@
     display: flex;
     gap: 20px;
     margin-top: 17px;
+    flex-wrap: wrap; /* Позволяет переносить блоки */
+    justify-content: center;
 }
 
 .leaderboard-container {
@@ -33,6 +35,7 @@
   width: 380px; 
   display: flex;
   flex-direction: column;
+  flex-shrink: 0; /* Запрещает блокам сжиматься */
 }
 
 .leaderboard-container h3 {
@@ -141,46 +144,30 @@
 .rank-display.small { font-size: 0.8em; padding: 1px 6px; flex-basis: 110px; text-align: center; margin-right: 10px; }
 
 /* --- СТИЛИ ПРОГРЕСС-БАРА --- */
-.rank-progress-container {
-    background-color: #0A1014;
-    padding: 15px 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border: 1px solid #2c3e50;
-}
-.rank-progress-header {
-    display: flex;
-    justify-content: space-between;
+.rank-progress-container { background-color: #0A1014; padding: 15px 20px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; border: 1px solid #2c3e50; }
+.rank-progress-header { display: flex; justify-content: space-between; width: 100%; font-size: 0.9em; color: #a09480; margin-bottom: 4px; }
+.rank-progress-header strong { color: #F0E6D2; }
+.progress-bar-background { width: 100%; height: 20px; background-color: #1e2833; border: 1px solid #2c3e50; border-radius: 10px; overflow: hidden; }
+.progress-bar-fill { height: 100%; border-radius: 8px; transition: width 0.5s ease-in-out; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); }
+.rank-labels { display: flex; justify-content: space-between; width: 100%; font-family: 'Cinzel', serif; font-size: 1.2em; font-weight: bold; color: #a09480; }
+
+/* --- НОВЫЕ СТИЛИ ДЛЯ ЗАЛА СЛАВЫ --- */
+.hall-of-fame-entry {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 15px;
     width: 100%;
-    font-size: 0.9em;
-    color: #a09480;
-    margin-bottom: 4px;
 }
-.rank-progress-header strong {
-    color: #F0E6D2;
-}
-.progress-bar-background {
-    width: 100%;
-    height: 20px;
-    background-color: #1e2833;
-    border: 1px solid #2c3e50;
-    border-radius: 10px;
-    overflow: hidden;
-}
-.progress-bar-fill {
-    height: 100%;
-    border-radius: 8px;
-    transition: width 0.5s ease-in-out;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-}
-.rank-labels {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    font-family: 'Cinzel', serif;
-    font-size: 1.2em;
+.week-label {
     font-weight: bold;
     color: #a09480;
+}
+.winner-name {
+    font-weight: bold;
+    color: #c8aa6e;
+    text-align: center;
+}
+.winner-score {
+    font-weight: bold;
+    color: #f0e6d2;
 }
