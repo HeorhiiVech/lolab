@@ -39,15 +39,54 @@ const FAST_ATTACK_INTERVAL = 600;
 // Функция для определения ранга
 const getRankInfo = (points) => {
     const pts = points || 1000;
-    if (pts < 3000) return { name: 'Железо', color: '#817364' };
-    if (pts < 6000) return { name: 'Бронза', color: '#CD7F32' };
-    if (pts < 9000) return { name: 'Серебро', color: '#C0C0C0' };
-    if (pts < 12000) return { name: 'Платина', color: '#E5E4E2' };
-    if (pts < 15000) return { name: 'Изумруд', color: '#50C878' };
-    if (pts < 20000) return { name: 'Даймонд', color: '#B9F2FF' };
-    if (pts < 25000) return { name: 'Мастер', color: '#9d00ff' };
-    if (pts < 30000) return { name: 'Грандмастер', color: '#ff0000' };
-    return { name: 'Челленджер', color: '#F4C430' };
+
+    const ranks = [
+        { threshold: 0, name: 'Железо', color: '#817364' },
+        { threshold: 3000, name: 'Бронза', color: '#CD7F32' },
+        { threshold: 6000, name: 'Серебро', color: '#C0C0C0' },
+        { threshold: 9000, name: 'Платина', color: '#E5E4E2' },
+        { threshold: 12000, name: 'Изумруд', color: '#50C878' },
+        { threshold: 15000, name: 'Даймонд', color: '#B9F2FF' },
+        { threshold: 20000, name: 'Мастер', color: '#9d00ff' },
+        { threshold: 25000, name: 'Грандмастер', color: '#ff0000' },
+        { threshold: 30000, name: 'Челленджер', color: '#F4C430' }
+    ];
+
+    let currentRank = ranks[0];
+    let nextRank = ranks[1];
+
+    for (let i = 0; i < ranks.length; i++) {
+        if (pts >= ranks[i].threshold) {
+            currentRank = ranks[i];
+            nextRank = (i < ranks.length - 1) ? ranks[i + 1] : null;
+        }
+    }
+
+    if (!nextRank) {
+        return {
+            ...currentRank,
+            nextRankName: 'Максимум',
+            nextRankIn: null,
+            progress: 100,
+            totalPoints: pts
+        };
+    }
+
+    const rankStartPoints = currentRank.threshold;
+    const rankEndPoints = nextRank.threshold;
+    const pointsInCurrentRank = pts - rankStartPoints;
+    const pointsNeededForRank = rankEndPoints - rankStartPoints;
+    
+    const progress = (pointsInCurrentRank / pointsNeededForRank) * 100;
+    const nextRankIn = rankEndPoints - pts;
+
+    return {
+        ...currentRank,
+        nextRankName: nextRank.name,
+        nextRankIn,
+        progress,
+        totalPoints: pts
+    };
 };
 
 // Функция для проверки, прошла ли неделя
@@ -90,7 +129,7 @@ function SmiteTrainer({ currentUser }) {
     const [damageNumbers, setDamageNumbers] = useState([]);
     const [leaderboard, setLeaderboard] = useState([]);
     const [weeklyLeaderboard, setWeeklyLeaderboard] = useState([]);
-    const [hallOfFame, setHallOfFame] = useState([]); // НОВОЕ
+    const [hallOfFame, setHallOfFame] = useState([]);
     const [myRecord, setMyRecord] = useState(null);
     const [showEShockwave, setShowEShockwave] = useState(false);
     const [showQProjectile, setShowQProjectile] = useState(false);
@@ -113,7 +152,6 @@ function SmiteTrainer({ currentUser }) {
         } catch (error) { console.error(`Ошибка при загрузке ладдера (${type}):`, error); }
     }, []);
 
-    // НОВАЯ ФУНКЦИЯ
     const fetchHallOfFame = useCallback(async () => {
         try {
             const archivesCollection = collection(db, 'weekly_archives');
@@ -168,7 +206,7 @@ function SmiteTrainer({ currentUser }) {
     useEffect(() => {
         fetchLeaderboard('total');
         fetchLeaderboard('weekly');
-        fetchHallOfFame(); // НОВОЕ
+        fetchHallOfFame();
         fetchMyRecord();
     }, [fetchLeaderboard, fetchMyRecord, fetchHallOfFame, currentUser]);
 
@@ -426,86 +464,85 @@ function SmiteTrainer({ currentUser }) {
 
     return (
         <div className="smite-trainer-wrapper">
-            <div className="main-content-column">
-                <div className="card">
-                    <div className="trainer-container">
-                        <div className="character-area">
-                            <div className={`character ally ${allyAttack ? 'attacking' : ''}`}>
-                                {showEShockwave && <div className="shockwave"></div>}
-                                {showQProjectile && <div className="q-projectile"></div>}
-                            </div>
-                            <div className="skills-wrapper">
-                                <div className={`skill-icon q-skill ${playerQState !== 'ready' ? 'cooldown' : ''}`}>Q{playerQState === 'firstCastWindow' && <div className="recast-window"></div>}</div>
-                                <div className={`skill-icon e-skill ${playerEonCD ? 'cooldown' : ''}`}>E</div>
-                            </div>
+            {/* ИЗМЕНЕНО: Убрана лишняя обертка */}
+            <div className="card">
+                <div className="trainer-container">
+                    <div className="character-area">
+                        <div className={`character ally ${allyAttack ? 'attacking' : ''}`}>
+                            {showEShockwave && <div className="shockwave"></div>}
+                            {showQProjectile && <div className="q-projectile"></div>}
                         </div>
-                        <div className="dragon-area">
-                            <div className="dragon-wrapper">
-                                <div className={`dragon ${gameState === 'active' ? 'ready' : ''}`}></div>
-                                {damageNumbers.map(dn => (
-                                    <span key={dn.id} className={`damage-number ${dn.type}-damage`} style={{ left: dn.left, top: dn.top }}>
-                                        -{dn.amount}
-                                    </span>
-                                ))}
-                            </div>
-                            <div className="hp-bar-container">
-                                <div className={`hp-bar ${isBlinded ? 'blinded' : ''}`} style={{ width: `${healthPercentage}%` }}></div>
-                                {!isBlinded && <span className="hp-text">{Math.round(dragonHp)} / {DRAGON_MAX_HP}</span>}
-                                {isBlinded && <div className="hp-blind-overlay"></div>}
-                            </div>
-                        </div>
-                        <div className="character-area">
-                            <div className={`character enemy ${enemyAttack ? 'attacking' : ''}`}>
-                                {enemyQAnimation !== 'idle' && <div className={`enemy-q-wave ${enemyQAnimation}`}></div>}
-                            </div>
-                            <div className="skills-wrapper">
-                                <div className={`skill-icon enemy-q ${enemyQonCD ? 'cooldown' : 'ready'}`}>Q</div>
-                                <div className={`skill-icon enemy-w ${enemyWonCD ? 'cooldown' : 'ready'}`}>W</div>
-                            </div>
+                        <div className="skills-wrapper">
+                            <div className={`skill-icon q-skill ${playerQState !== 'ready' ? 'cooldown' : ''}`}>Q{playerQState === 'firstCastWindow' && <div className="recast-window"></div>}</div>
+                            <div className={`skill-icon e-skill ${playerEonCD ? 'cooldown' : ''}`}>E</div>
                         </div>
                     </div>
-                    
-                    {gameState !== 'active' && (
-                        <div className="game-controls">
-                            {resultMessage && <p className="result-message">{resultMessage}</p>}
-                            <button onClick={startGame} className="start-button">Начать</button>
-                            <div className="game-mechanics">
-                                <h4>Механика игры:</h4>
-                                <ul>
-                                    <li><b>Q</b> - Нанести {PLAYER_Q_DMG} урона. Можно повторно нажать в теч. 2с для еще {PLAYER_Q_DMG} урона.</li>
-                                    <li><b>E</b> - Нанести {PLAYER_E_DMG} урона (Перезарядка: 5 сек).</li>
-                                    <li><b>D/F</b> - Смайт: {SMITE_DMG} урона.</li>
-                                    <li>Использование Q или E ускоряет 2 ваши следующие авто-атаки.</li>
-                                </ul>
-                            </div>
+                    <div className="dragon-area">
+                        <div className="dragon-wrapper">
+                            <div className={`dragon ${gameState === 'active' ? 'ready' : ''}`}></div>
+                            {damageNumbers.map(dn => (
+                                <span key={dn.id} className={`damage-number ${dn.type}-damage`} style={{ left: dn.left, top: dn.top }}>
+                                    -{dn.amount}
+                                </span>
+                            ))}
                         </div>
-                    )}
-                    {gameState === 'active' && (<div className="smite-controls"><p className="smite-instruction"><b>Q, E</b> - Способности, <b>D/F</b> - Смайт</p></div>)}
-
-                    {blindCircles.map(circle => (<div key={circle.id} className="blind-circle" style={{ top: circle.top, left: circle.left }} onClick={() => handleCircleClick(circle.id)}></div>))}
+                        <div className="hp-bar-container">
+                            <div className={`hp-bar ${isBlinded ? 'blinded' : ''}`} style={{ width: `${healthPercentage}%` }}></div>
+                            {!isBlinded && <span className="hp-text">{Math.round(dragonHp)} / {DRAGON_MAX_HP}</span>}
+                            {isBlinded && <div className="hp-blind-overlay"></div>}
+                        </div>
+                    </div>
+                    <div className="character-area">
+                        <div className={`character enemy ${enemyAttack ? 'attacking' : ''}`}>
+                            {enemyQAnimation !== 'idle' && <div className={`enemy-q-wave ${enemyQAnimation}`}></div>}
+                        </div>
+                        <div className="skills-wrapper">
+                            <div className={`skill-icon enemy-q ${enemyQonCD ? 'cooldown' : 'ready'}`}>Q</div>
+                            <div className={`skill-icon enemy-w ${enemyWonCD ? 'cooldown' : 'ready'}`}>W</div>
+                        </div>
+                    </div>
                 </div>
-
-                {myRecord && (
-                     <div className="rank-progress-container on-trainer-page">
-                        <div className="rank-progress-header">
-                            <span>Всего очков: <strong>{userRankInfo.totalPoints} pt.</strong></span>
-                            {userRankInfo.nextRankIn !== null && (
-                                <span>До следующего ранга: <strong>{userRankInfo.nextRankIn} pt.</strong></span>
-                            )}
-                        </div>
-                        <div className="progress-bar-background">
-                            <div
-                                className="progress-bar-fill"
-                                style={{ width: `${userRankInfo.progress}%`, backgroundColor: userRankInfo.color }}
-                            ></div>
-                        </div>
-                        <div className="rank-labels">
-                            <span style={{ color: userRankInfo.color }}>{userRankInfo.name}</span>
-                            <span>{userRankInfo.nextRankName}</span>
+                
+                {gameState !== 'active' && (
+                    <div className="game-controls">
+                        {resultMessage && <p className="result-message">{resultMessage}</p>}
+                        <button onClick={startGame} className="start-button">Начать</button>
+                        <div className="game-mechanics">
+                            <h4>Механика игры:</h4>
+                            <ul>
+                                <li><b>Q</b> - Нанести {PLAYER_Q_DMG} урона. Можно повторно нажать в теч. 2с для еще {PLAYER_Q_DMG} урона.</li>
+                                <li><b>E</b> - Нанести {PLAYER_E_DMG} урона (Перезарядка: 5 сек).</li>
+                                <li><b>D/F</b> - Смайт: {SMITE_DMG} урона.</li>
+                                <li>Использование Q или E ускоряет 2 ваши следующие авто-атаки.</li>
+                            </ul>
                         </div>
                     </div>
                 )}
+                {gameState === 'active' && (<div className="smite-controls"><p className="smite-instruction"><b>Q, E</b> - Способности, <b>D/F</b> - Смайт</p></div>)}
+
+                {blindCircles.map(circle => (<div key={circle.id} className="blind-circle" style={{ top: circle.top, left: circle.left }} onClick={() => handleCircleClick(circle.id)}></div>))}
             </div>
+
+            {myRecord && (
+                 <div className="rank-progress-container on-trainer-page">
+                    <div className="rank-progress-header">
+                        <span>Всего очков: <strong>{userRankInfo.totalPoints} pt.</strong></span>
+                        {userRankInfo.nextRankIn !== null && (
+                            <span>До следующего ранга: <strong>{userRankInfo.nextRankIn} pt.</strong></span>
+                        )}
+                    </div>
+                    <div className="progress-bar-background">
+                        <div
+                            className="progress-bar-fill"
+                            style={{ width: `${userRankInfo.progress}%`, backgroundColor: userRankInfo.color }}
+                        ></div>
+                    </div>
+                    <div className="rank-labels">
+                        <span style={{ color: userRankInfo.color }}>{userRankInfo.name}</span>
+                        <span>{userRankInfo.nextRankName}</span>
+                    </div>
+                </div>
+            )}
             
             <div className="leaderboards-area">
                 <div className="leaderboard-container">
@@ -542,7 +579,6 @@ function SmiteTrainer({ currentUser }) {
                     </ol>
                 </div>
 
-                {/* НОВЫЙ БЛОК */}
                 <div className="leaderboard-container hall-of-fame">
                     <h3>Зал славы</h3>
                     <ol className="leaderboard-list">

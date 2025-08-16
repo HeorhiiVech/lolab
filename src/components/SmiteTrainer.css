@@ -1,16 +1,10 @@
 /* --- ГЛАВНЫЕ КОНТЕЙНЕРЫ --- */
 .smite-trainer-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column; /* ИЗМЕНЕНО */
+  align-items: center; /* ИЗМЕНЕНО */
   gap: 20px;
   flex-wrap: wrap;
-}
-
-.main-content-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 }
 
 .card {
@@ -21,8 +15,8 @@
 .leaderboards-area {
     display: flex;
     gap: 20px;
-    margin-top: 17px;
-    flex-wrap: wrap; /* Позволяет переносить блоки */
+    /* margin-top: 17px; - убрано, т.к. теперь есть gap у родителя */
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -35,7 +29,7 @@
   width: 380px; 
   display: flex;
   flex-direction: column;
-  flex-shrink: 0; /* Запрещает блокам сжиматься */
+  flex-shrink: 0;
 }
 
 .leaderboard-container h3 {
@@ -145,6 +139,7 @@
 
 /* --- СТИЛИ ПРОГРЕСС-БАРА --- */
 .rank-progress-container { background-color: #0A1014; padding: 15px 20px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; border: 1px solid #2c3e50; }
+.rank-progress-container.on-trainer-page { width: 650px; } /* ИЗМЕНЕНО */
 .rank-progress-header { display: flex; justify-content: space-between; width: 100%; font-size: 0.9em; color: #a09480; margin-bottom: 4px; }
 .rank-progress-header strong { color: #F0E6D2; }
 .progress-bar-background { width: 100%; height: 20px; background-color: #1e2833; border: 1px solid #2c3e50; border-radius: 10px; overflow: hidden; }
