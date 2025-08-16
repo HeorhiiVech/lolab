@@ -47,10 +47,11 @@ function LoginModal({ isOpen, onClose }) {
             await setDoc(doc(db, "users", userCredential.user.uid), {
                 email: userCredential.user.email,
                 nickname: nickname,
-                highScore: null,
-                winStreak: 0,
+                highScore: null, // Оставляем для совместимости, если нужно
+                winStreak: 0,    // Оставляем для совместимости, если нужно
+                rating: 1000,     // Новое поле рейтинга!
                 favoritePlayers: [],
-                favoriteTeams: [] // Добавляем поле для команд
+                favoriteTeams: [] 
             });
             onClose();
         } catch (error) {

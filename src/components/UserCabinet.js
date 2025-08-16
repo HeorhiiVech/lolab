@@ -1,9 +1,9 @@
 import React from 'react';
 import proData from '../data/pro_data.json';
-import teamData from '../data/team_data.json'; // Импортируем данные команд
+import teamData from '../data/team_data.json';
 import './UserCabinet.css';
 
-function UserCabinet({ userData, onPlayerSelect, onTeamSelect }) { // Добавляем onTeamSelect
+function UserCabinet({ userData, onPlayerSelect, onTeamSelect }) {
     if (!userData) {
         return (
             <div className="card cabinet-container">
@@ -29,12 +29,9 @@ function UserCabinet({ userData, onPlayerSelect, onTeamSelect }) { // Добав
                 <h3>Рекорды Тренажера Смайтов</h3>
                 <div className="smite-records">
                     <div className="record-item">
-                        <span className="record-label">Лучшая реакция</span>
-                        <span className="record-value">{userData.highScore ? `${userData.highScore} мс` : 'Нет рекорда'}</span>
-                    </div>
-                    <div className="record-item">
-                        <span className="record-label">Лучший стрик побед</span>
-                        <span className="record-value">{userData.winStreak || 0}</span>
+                        <span className="record-label">Текущий рейтинг</span>
+                        {/* ИСПРАВЛЕНО: RP на pt. */}
+                        <span className="record-value">{userData.rating || 1000} pt.</span>
                     </div>
                 </div>
             </div>
@@ -55,7 +52,6 @@ function UserCabinet({ userData, onPlayerSelect, onTeamSelect }) { // Добав
                 )}
             </div>
 
-            {/* НОВАЯ СЕКЦИЯ ДЛЯ КОМАНД */}
             <div className="cabinet-section">
                 <h3>Избранные команды</h3>
                 {favoriteTeamsData.length > 0 ? (

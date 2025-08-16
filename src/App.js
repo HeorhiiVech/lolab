@@ -155,7 +155,7 @@ function App() {
               <button className="dropbtn">Киберспорт</button>
               <div className="dropdown-content">
                 <button  onClick={() => setActiveTab('pro')}>Игроки</button>
-                <button  onClick={() => setActiveTab('teams')}>Команды</button>
+
               </div>
             </div>
 

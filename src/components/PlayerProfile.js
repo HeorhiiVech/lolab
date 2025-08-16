@@ -44,7 +44,7 @@ const PlayerProfile = ({ players, onBack, onPlayerSelect, onTeamSelect, onAddCom
     }, [comparisonTournament, player1.Pos]);
 
     const isLPL = player1.Tournament === 'LPL';
-    const lplRadarStats = ['KDA', 'CSPM', 'DPM', 'EGPM'];
+    const lplRadarStats = ['KDA', 'CSPM', 'DPM', 'EGPM', 'GOLD%', 'KP'];
     const otherRadarStats = ['KDA', 'KP', 'CSPM', 'EGPM', 'DPM', 'GD10', 'XPD10', 'CSD10'];
     const radarLabels = isLPL ? lplRadarStats : otherRadarStats;
 
