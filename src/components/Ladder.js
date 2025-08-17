@@ -5,13 +5,13 @@ import './Ladder.css';
 
 // Функция для форматирования времени
 const formatTime = (totalSeconds) => {
-    if (isNaN(totalSeconds) || totalSeconds < 0) return '0 сек.';
+    if (isNaN(totalSeconds) || totalSeconds < 0) return '0 с.';
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = Math.floor(totalSeconds % 60);
     if (minutes > 0) {
-        return `${minutes} мин. ${seconds} сек.`;
+        return `${minutes} м. ${seconds} с.`;
     }
-    return `${seconds} сек.`;
+    return `${seconds} с.`;
 };
 
 // Функция для определения ранга

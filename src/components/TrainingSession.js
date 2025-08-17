@@ -137,7 +137,7 @@ function TrainingSession({ deckName, mode, initialLives, currentUser, onExit }) 
         ) : (
           <>
             <p className="summary-score">Результат: {firstTryCorrect} / {decks[deckName].length}</p>
-            {perfectRun && <p className="summary-score">Время: {completionTime.toFixed(2)} сек.</p>}
+            {perfectRun && <p className="summary-score">Время: {completionTime.toFixed(2)} с.</p>}
             {!perfectRun && <p style={{color: '#a09480'}}>Рекорд не засчитан, так как были допущены ошибки.</p>}
           </>
         )}

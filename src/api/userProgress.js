@@ -55,7 +55,7 @@ export const updateChallengeBestTime = async (userId, deckName, newTime) => {
             await updateDoc(userRef, {
                 [`itemTrainerRecords.${deckName}`]: newTime
             });
-            console.log(`Новый рекорд для ${deckName}: ${newTime} сек!`);
+            console.log(`Новый рекорд для ${deckName}: ${newTime} с.!`);
         }
     }
 };
