@@ -3,7 +3,28 @@ import proData from '../data/pro_data.json';
 import teamData from '../data/team_data.json';
 import './UserCabinet.css';
 
-// ИЗМЕНЕНО: Функция теперь возвращает всю информацию для прогресс-бара
+// Вспомогательная функция для форматирования времени
+const formatTime = (totalSeconds) => {
+    if (isNaN(totalSeconds) || totalSeconds < 0) return '0 сек.';
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+    if (minutes > 0) {
+        return `${minutes} мин. ${seconds} сек.`;
+    }
+    return `${seconds} сек.`;
+};
+
+// Русские названия для колод
+const deckTranslations = {
+  tank: 'Танк',
+  mage: 'Маг',
+  fighter: 'Брузер',
+  assassin: 'Убийца',
+  marksman: 'Стрелок',
+  support: 'Саппорт',
+  all: 'Все предметы',
+};
+
 const getRankInfo = (points) => {
     const pts = points || 1000;
 
@@ -80,7 +101,6 @@ function UserCabinet({ userData, onPlayerSelect, onTeamSelect }) {
         <div className="card cabinet-container">
             <h2>Профиль: {userData.nickname}</h2>
             
-            {/* ИЗМЕНЕНО: Полностью новый блок рейтинга */}
             <div className="cabinet-section">
                 <h3>Прогресс ранга</h3>
                 <div className="rank-progress-container">
@@ -102,6 +122,20 @@ function UserCabinet({ userData, onPlayerSelect, onTeamSelect }) {
                     </div>
                 </div>
             </div>
+
+            {userData.itemTrainerRecords && Object.keys(userData.itemTrainerRecords).length > 0 && (
+                <div className="cabinet-section">
+                    <h3>Рекорды Тренажера Предметов</h3>
+                    <div className="favorites-grid">
+                        {Object.entries(userData.itemTrainerRecords).map(([deckName, time]) => (
+                            <div key={deckName} className="record-card">
+                                <span className="record-deck-name">{deckTranslations[deckName] || deckName}</span>
+                                <span className="record-time">{formatTime(time)}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             <div className="cabinet-section">
                 <h3>Избранные игроки</h3>

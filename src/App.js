@@ -17,6 +17,8 @@ import TeamAnalyzer from './components/TeamAnalyzer';
 import TeamProfile from './components/TeamProfile';
 import GlobalSearch from './components/GlobalSearch';
 import TierListMaker from './components/TierListMaker';
+import ItemTrainerDashboard from './components/ItemTrainerDashboard';
+import Ladder from './components/Ladder'; // <-- 1. ИМПОРТИРУЕМ НОВЫЙ КОМПОНЕНТ
 
 // Firebase
 import { auth, db } from './firebase-config';
@@ -89,7 +91,7 @@ function App() {
       return <TeamProfile
                 teams={viewingTeams}
                 onBack={handleBackToMain}
-                onPlayerSelect={handlePlayerSelect} // Добавлено
+                onPlayerSelect={handlePlayerSelect}
                 onTeamSelect={handleTeamSelect}
                 onAddCompare={addComparisonTeam}
                 onRemoveCompare={removeComparisonTeam}
@@ -102,9 +104,11 @@ function App() {
       case 'items': return <div className="calculators-container"><GoldEfficiencyCalculator /><AbilityHasteCalculator /></div>;
       case 'turret': return <TurretCalculator />;
       case 'smite': return <SmiteTrainer currentUser={currentUser} />;
+      case 'itemTrainer': return <ItemTrainerDashboard currentUser={currentUser} />;
       case 'pro': return <ProSceneAnalyzer onPlayerSelect={handlePlayerSelect} />;
       case 'teams': return <TeamAnalyzer onTeamSelect={handleTeamSelect} />;
       case 'tierlist': return <TierListMaker />;
+      case 'ladder': return <Ladder />; // <-- 2. ДОБАВЛЯЕМ РЕНДЕР ДЛЯ ЛАДДЕРА
       case 'cabinet': return <UserCabinet userData={userData} onPlayerSelect={handlePlayerSelect} onTeamSelect={handleTeamSelect} />;
       default: return <Home />;
     }
@@ -145,22 +149,29 @@ function App() {
             <div className="dropdown">
               <button className="dropbtn">Калькуляторы</button>
               <div className="dropdown-content">
-                <button  onClick={() => setActiveTab('farm')}>Калькулятор Фарма</button>
-                <button  onClick={() => setActiveTab('items')}>Калькуляторы Предметов</button>
-                <button  onClick={() => setActiveTab('turret')}>Калькулятор Башен</button>
+                <button onClick={() => setActiveTab('farm')}>Калькулятор Фарма</button>
+                <button onClick={() => setActiveTab('items')}>Калькуляторы Предметов</button>
+                <button onClick={() => setActiveTab('turret')}>Калькулятор Башен</button>
               </div>
             </div>
 
             <div className="dropdown">
               <button className="dropbtn">Киберспорт</button>
               <div className="dropdown-content">
-                <button  onClick={() => setActiveTab('pro')}>Игроки</button>
-
+                <button onClick={() => setActiveTab('pro')}>Игроки</button>
+              </div>
+            </div>
+            
+            <div className="dropdown">
+              <button className="dropbtn">Тренажеры</button>
+              <div className="dropdown-content">
+                <button onClick={() => setActiveTab('smite')}>Тренажер Смайта</button>
+                <button onClick={() => setActiveTab('itemTrainer')}>Тренажер Предметов</button>
               </div>
             </div>
 
-            <button className={activeTab === 'smite' ? 'active' : ''} onClick={() => setActiveTab('smite')}>Тренажер Смайта</button>
             <button className={activeTab === 'tierlist' ? 'active' : ''} onClick={() => setActiveTab('tierlist')}>Тирлист Мейкер</button>
+            <button className={activeTab === 'ladder' ? 'active' : ''} onClick={() => setActiveTab('ladder')}>Ладдер</button> {/* <-- 3. ДОБАВЛЯЕМ КНОПКУ */}
           </div>
         </nav>
       </div>

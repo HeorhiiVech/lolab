@@ -1,0 +1,11 @@
+.ladder-page-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+/* ... Скопируйте сюда стили .leaderboard-container, .leaderboard-list и т.д. из SmiteTrainer.css ... */
+.leaderboard-score.time {
+    color: #C89B3C;
+}

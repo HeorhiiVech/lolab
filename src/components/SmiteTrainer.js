@@ -6,15 +6,9 @@ import { db } from '../firebase-config';
 import {
   doc,
   getDoc,
-  collection,
-  query,
-  orderBy,
-  limit,
-  getDocs,
   updateDoc,
   serverTimestamp,
-  increment,
-  documentId
+  increment
 } from "firebase/firestore";
 
 // --- Константы игры ---
@@ -127,42 +121,12 @@ function SmiteTrainer({ currentUser }) {
     const [blindCircles, setBlindCircles] = useState([]);
     const blindTimeout = useRef(null);
     const [damageNumbers, setDamageNumbers] = useState([]);
-    const [leaderboard, setLeaderboard] = useState([]);
-    const [weeklyLeaderboard, setWeeklyLeaderboard] = useState([]);
-    const [hallOfFame, setHallOfFame] = useState([]);
     const [myRecord, setMyRecord] = useState(null);
     const [showEShockwave, setShowEShockwave] = useState(false);
     const [showQProjectile, setShowQProjectile] = useState(false);
     const [enemyQAnimation, setEnemyQAnimation] = useState('idle');
     
     const aiPlan = useRef(null);
-
-    const fetchLeaderboard = useCallback(async (type) => {
-        try {
-            const field = type === 'weekly' ? 'weekly_pt' : 'rating';
-            const usersCollection = collection(db, 'users');
-            const q = query(usersCollection, orderBy(field, 'desc'), limit(50));
-            const querySnapshot = await getDocs(q);
-            const leaders = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            if (type === 'weekly') {
-                setWeeklyLeaderboard(leaders);
-            } else {
-                setLeaderboard(leaders);
-            }
-        } catch (error) { console.error(`Ошибка при загрузке ладдера (${type}):`, error); }
-    }, []);
-
-    const fetchHallOfFame = useCallback(async () => {
-        try {
-            const archivesCollection = collection(db, 'weekly_archives');
-            const q = query(archivesCollection, orderBy(documentId(), 'desc'), limit(20));
-            const querySnapshot = await getDocs(q);
-            const archives = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            setHallOfFame(archives);
-        } catch (error) {
-            console.error("Ошибка при загрузке зала славы:", error);
-        }
-    }, []);
 
     const fetchMyRecord = useCallback(async () => {
         if (currentUser) {
@@ -195,20 +159,14 @@ function SmiteTrainer({ currentUser }) {
                 }
                 
                 await updateDoc(userRef, updates);
-
                 fetchMyRecord();
-                fetchLeaderboard('total');
-                fetchLeaderboard('weekly');
             }
         } catch (error) { console.error("Ошибка обновления рейтинга:", error); }
-    }, [currentUser, fetchMyRecord, fetchLeaderboard]);
+    }, [currentUser, fetchMyRecord]);
     
     useEffect(() => {
-        fetchLeaderboard('total');
-        fetchLeaderboard('weekly');
-        fetchHallOfFame();
         fetchMyRecord();
-    }, [fetchLeaderboard, fetchMyRecord, fetchHallOfFame, currentUser]);
+    }, [fetchMyRecord, currentUser]);
 
     const showDamageNumber = useCallback((amount, type) => {
         let leftPosition = '40%';
@@ -464,7 +422,6 @@ function SmiteTrainer({ currentUser }) {
 
     return (
         <div className="smite-trainer-wrapper">
-            {/* ИЗМЕНЕНО: Убрана лишняя обертка */}
             <div className="card">
                 <div className="trainer-container">
                     <div className="character-area">
@@ -543,55 +500,6 @@ function SmiteTrainer({ currentUser }) {
                     </div>
                 </div>
             )}
-            
-            <div className="leaderboards-area">
-                <div className="leaderboard-container">
-                    <h3>Таблица лидеров</h3>
-                    <ol className="leaderboard-list">
-                        {leaderboard.length > 0 ? (leaderboard.map((user, index) => {
-                            const rank = getRankInfo(user.rating);
-                            return (
-                                <li key={user.id} className={currentUser && user.id === currentUser.uid ? 'current-user-highlight' : ''}>
-                                    <span className="leaderboard-rank">{index + 1}.</span>
-                                    <span className="leaderboard-nickname">{user.nickname || '...'}</span>
-                                    <span className="rank-display small" style={{ color: rank.color, borderColor: rank.color }}>{rank.name}</span>
-                                    <span className="leaderboard-score">{user.rating || 0} pt.</span>
-                                </li>
-                            )
-                        })) : (<p>Загрузка...</p>)}
-                    </ol>
-                </div>
-
-                <div className="leaderboard-container">
-                    <h3>Лидеры недели</h3>
-                    <ol className="leaderboard-list">
-                        {weeklyLeaderboard.length > 0 ? (weeklyLeaderboard.map((user, index) => {
-                             const rank = getRankInfo(user.rating);
-                             return (
-                                <li key={user.id} className={currentUser && user.id === currentUser.uid ? 'current-user-highlight' : ''}>
-                                    <span className="leaderboard-rank">{index + 1}.</span>
-                                    <span className="leaderboard-nickname">{user.nickname || '...'}</span>
-                                    <span className="rank-display small" style={{ color: rank.color, borderColor: rank.color }}>{rank.name}</span>
-                                    <span className="leaderboard-score">{user.weekly_pt || 0} pt.</span>
-                                </li>
-                            )
-                        })) : (<p>На этой неделе еще никто не играл.</p>)}
-                    </ol>
-                </div>
-
-                <div className="leaderboard-container hall-of-fame">
-                    <h3>Зал славы</h3>
-                    <ol className="leaderboard-list">
-                        {hallOfFame.length > 0 ? (hallOfFame.map((archive) => (
-                            <li key={archive.id} className="hall-of-fame-entry">
-                                <span className="week-label">Неделя #{archive.id.split('-')[1]}</span>
-                                <span className="winner-name">🏆 {archive.winner.nickname}</span>
-                                <span className="winner-score">{archive.winner.weekly_pt} pt.</span>
-                            </li>
-                        ))) : (<p>Архив предыдущих недель пуст.</p>)}
-                    </ol>
-                </div>
-            </div>
         </div>
     );
 }
