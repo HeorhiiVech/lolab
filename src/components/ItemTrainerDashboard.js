@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { decks } from '../data/itemDecks';
 import TrainingSession from './TrainingSession';
-import { fetchUserMastery } from '../api/userProgress'; // <-- Импортируем новую функцию
+import { fetchUserMastery } from '../api/userProgress';
 import './ItemTrainer.css';
 
+// Русские названия для кнопок
 const deckTranslations = {
   tank: 'Танк',
   mage: 'Маг',
@@ -18,21 +19,20 @@ const deckNames = Object.keys(decks);
 
 function ItemTrainerDashboard({ currentUser }) {
   const [activeGame, setActiveGame] = useState(null);
-  const [masteryData, setMasteryData] = useState(new Map()); // <-- Состояние для прогресса
+  const [masteryData, setMasteryData] = useState(new Map());
 
-  // Загружаем прогресс пользователя при входе
   useEffect(() => {
     if (currentUser) {
       fetchUserMastery(currentUser.uid).then(data => {
         setMasteryData(data);
       });
     } else {
-      setMasteryData(new Map()); // Сбрасываем, если пользователь вышел
+      setMasteryData(new Map());
     }
   }, [currentUser]);
 
 
-  const startGame = (deckName, mode, lives = 2) => {
+  const startGame = (deckName, mode, lives = 1) => { // Устанавливаем 1 жизнь по умолчанию
     if (!currentUser && mode === 'learn') {
       alert('Пожалуйста, войдите в аккаунт, чтобы начать режим обучения и сохранять прогресс.');
       return;
@@ -40,12 +40,10 @@ function ItemTrainerDashboard({ currentUser }) {
     setActiveGame({ deckName, mode, lives });
   };
 
-  // Функция для проверки, пройдена ли колода
   const isDeckCompleted = (deckName) => {
     if (!masteryData || masteryData.size === 0) return false;
     
     const deckItemIds = decks[deckName].map(item => item.id);
-    // Проверяем, что для КАЖДОГО предмета в колоде есть запись о мастерстве с уровнем > 0
     return deckItemIds.every(id => masteryData.has(id) && masteryData.get(id).level > 0);
   };
 
@@ -75,7 +73,7 @@ function ItemTrainerDashboard({ currentUser }) {
         <div className="mode-selection">
           <h3>Режим Испытания</h3>
           <p>Проверьте свои знания. Одна ошибка — и игра окончена.</p>
-          <button className="challenge-btn" onClick={() => startGame('all', 'challenge', 2)}>
+          <button className="challenge-btn" onClick={() => startGame('all', 'challenge', 1)}> {/* ИЗМЕНЕНИЕ ЗДЕСЬ */}
             Начать Испытание
           </button>
         </div>
