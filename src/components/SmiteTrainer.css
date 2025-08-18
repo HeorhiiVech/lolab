@@ -166,3 +166,61 @@
     font-weight: bold;
     color: #f0e6d2;
 }
+/* =========================================== */
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ ТРЕНАЖЕРА СМАЙТА === */
+/* =========================================== */
+@media (max-width: 768px) {
+
+  /* --- 1. ГЛАВНЫЕ КОНТЕЙНЕРЫ --- */
+  .card,
+  .leaderboard-container,
+  .rank-progress-container.on-trainer-page {
+    /* Делаем все основные блоки гибкими по ширине */
+    width: 95%;
+    box-sizing: border-box;
+  }
+
+  /* --- 2. ИГРОВАЯ ЗОНА --- */
+  .trainer-container {
+    /* Ставим элементы друг под друга */
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px 10px;
+  }
+  
+  /* Переворачиваем порядок, чтобы враг был сверху (логичнее) */
+  .trainer-container .character-area:first-child {
+    order: 2;
+  }
+  .trainer-container .dragon-area {
+    order: 1;
+  }
+  .trainer-container .character-area:last-child {
+    order: 0;
+  }
+
+  .dragon {
+    /* Немного уменьшаем дракона */
+    transform: scale(1.5);
+  }
+
+  .hp-bar-container {
+    /* Делаем полоску HP чуть уже */
+    width: 90%;
+  }
+
+  /* --- 3. ТЕКСТ И КНОПКИ --- */
+  .smite-instruction {
+    font-size: 1.1em;
+    text-align: center;
+  }
+
+  .game-mechanics {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .game-mechanics h4 {
+    font-size: 1.2em;
+  }
+}

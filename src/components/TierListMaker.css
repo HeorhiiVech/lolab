@@ -255,3 +255,69 @@
 .tag-icon {
     font-size: 16px;
 }
+/* =========================================== */
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ ТИРЛИСТ МЕЙКЕРА === */
+/* =========================================== */
+@media (max-width: 768px) {
+
+  /* --- 1. ОСНОВНОЙ МАКЕТ --- */
+  .tierlist-layout {
+    /* Убираем жесткую ширину и ставим блоки в колонку */
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .tierlist-main,
+  .champion-pool-section.card {
+    /* Главные блоки теперь занимают всю ширину */
+    width: 100%;
+  }
+
+  .champion-pool-section.card {
+    margin-top: 20px; /* Отступ для пула чемпионов */
+  }
+
+  /* --- 2. ШАПКА С КНОПКАМИ --- */
+  .tierlist-header {
+    flex-direction: column;
+    align-items: flex-start; /* Прижимаем к левому краю */
+    gap: 15px;
+    max-width: 100%; /* Шапка тоже на всю ширину */
+  }
+
+  /* --- 3. РЯДЫ ТИРЛИСТА --- */
+  .tier-row {
+    min-height: 65px; /* Уменьшаем минимальную высоту ряда */
+  }
+  
+  .tier-label {
+    /* Делаем левую плашку с названием уже */
+    width: 80px;
+  }
+
+  .tier-label textarea {
+    font-size: 0.8em; /* Уменьшаем шрифт названия тира */
+    padding: 5px;
+  }
+
+  .champion-icon {
+    /* Уменьшаем иконки чемпионов */
+    width: 45px;
+    height: 45px;
+  }
+  
+  /* --- 4. ПУЛ ЧЕМПИОНОВ --- */
+  .tag-filters {
+    /* Уменьшаем отступ у фильтров по ролям */
+    margin-bottom: 10px;
+  }
+
+  .tag-filter-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .tag-icon {
+    font-size: 14px;
+  }
+}

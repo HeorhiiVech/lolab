@@ -42,3 +42,22 @@
 .home-credits p {
   margin: 2px 0;
 }
+
+/* --- Адаптивные стили для Home --- */
+@media (max-width: 768px) {
+  .home-title {
+    /* Уменьшаем заголовок на мобильных */
+    font-size: 2.2em;
+    line-height: 1.2; /* Слегка уменьшаем межстрочный интервал */
+  }
+
+  .home-description {
+    /* Уменьшаем текст описания для лучшей читаемости */
+    font-size: 1em;
+  }
+  
+  .home-container {
+    /* Уменьшаем отступы внутри блока */
+    padding: 20px 15px;
+  }
+}

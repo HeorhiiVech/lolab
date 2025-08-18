@@ -10,7 +10,6 @@ ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, ChartD
 const allMetricsForAxes = ['KDA', 'KP', 'KS%', 'DTH%', 'DPM', 'DMG%', 'CSPM', 'GOLD%', 'GD10', 'XPD10', 'EGPM', 'CSD10', 'WPM', 'CWPM', 'WCPM'];
 const allColumnsForTable = ['Player', 'Team', 'Pos', 'GP', 'W%', 'CTR%', 'K', 'D', 'A', 'KDA', 'KP', 'KS%', 'DTH%', 'FB%', 'GD10', 'XPD10', 'CSD10', 'CSPM', 'CS%P15', 'DPM', 'DMG%', 'D%P15', 'TDPG', 'EGPM', 'GOLD%', 'STL', 'WPM', 'CWPM', 'WCPM'];
 
-// Принимаем onPlayerSelect как свойство (prop)
 function ProSceneAnalyzer({ onPlayerSelect }) {
     const [tournament, setTournament] = useState('All');
     const [role, setRole] = useState('All');
@@ -62,15 +61,14 @@ function ProSceneAnalyzer({ onPlayerSelect }) {
             label: 'Игроки',
             data: filteredData.map(player => ({ x: player[xAxisStat], y: player[yAxisStat], player: player })),
             backgroundColor: 'rgba(200, 155, 60, 0.7)',
-            pointRadius: 10,
-            pointHoverRadius: 15,
+            pointRadius: 6,
+            pointHoverRadius: 10,
             pointBorderColor: '#0A1014',
             pointBorderWidth: 1,
         }]
     };
 
     const chartOptions = {
-        // При клике на точку на графике, вызываем onPlayerSelect
         onClick: (evt, elements) => {
             if (elements.length > 0) {
                 const playerIndex = elements[0].index;
@@ -91,7 +89,7 @@ function ProSceneAnalyzer({ onPlayerSelect }) {
                 }
             },
             datalabels: {
-                display: true,
+                display: true, // <-- ВОТ ГЛАВНОЕ ИЗМЕНЕНИЕ
                 color: '#F0E6D2',
                 align: 'bottom',
                 offset: 12,
@@ -157,7 +155,6 @@ function ProSceneAnalyzer({ onPlayerSelect }) {
                     </thead>
                     <tbody>
                         {sortedAndFilteredData.map((player, index) => (
-                            // При клике на строку таблицы, вызываем onPlayerSelect
                             <tr key={`${player.Player}-${index}`} onClick={() => onPlayerSelect(player)}>
                                 {allColumnsForTable.map(metric => (
                                     <td key={`${metric}-${player.Player}`}>{player[metric]}</td>
