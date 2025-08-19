@@ -18,7 +18,8 @@ import TeamProfile from './components/TeamProfile';
 import GlobalSearch from './components/GlobalSearch';
 import TierListMaker from './components/TierListMaker';
 import ItemTrainerDashboard from './components/ItemTrainerDashboard';
-import Ladder from './components/Ladder'; // <-- 1. ИМПОРТИРУЕМ НОВЫЙ КОМПОНЕНТ
+import Ladder from './components/Ladder';
+import DailyQuizzes from './components/DailyQuizzes'; // <-- 1. ИМПОРТИРУЕМ НОВЫЙ КОМПОНЕНТ
 
 // Firebase
 import { auth, db } from './firebase-config';
@@ -105,10 +106,11 @@ function App() {
       case 'turret': return <TurretCalculator />;
       case 'smite': return <SmiteTrainer currentUser={currentUser} />;
       case 'itemTrainer': return <ItemTrainerDashboard currentUser={currentUser} />;
+      case 'dailyQuizzes': return <DailyQuizzes currentUser={currentUser} />; // <-- 2. ДОБАВЛЯЕМ РЕНДЕР ДЛЯ КВИЗОВ
       case 'pro': return <ProSceneAnalyzer onPlayerSelect={handlePlayerSelect} />;
       case 'teams': return <TeamAnalyzer onTeamSelect={handleTeamSelect} />;
       case 'tierlist': return <TierListMaker />;
-      case 'ladder': return <Ladder />; // <-- 2. ДОБАВЛЯЕМ РЕНДЕР ДЛЯ ЛАДДЕРА
+      case 'ladder': return <Ladder />;
       case 'cabinet': return <UserCabinet userData={userData} onPlayerSelect={handlePlayerSelect} onTeamSelect={handleTeamSelect} />;
       default: return <Home />;
     }
@@ -140,7 +142,6 @@ function App() {
             <a href="https://t.me/heovechlolstats" target="_blank" rel="noopener noreferrer" className="telegram-link" title="Наш Telegram канал">
               <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-1.02.17-1.25l16.05-6.1c.78-.29 1.45.14 1.25 1.05l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.43.42-.83.42z" /></svg>
             </a>
-            {/* */}
             <a href="https://new.donatepay.ru/@1347624" target="_blank" rel="noopener noreferrer" className="donate-button" title="Поддержать проект">
                 <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             </a>
@@ -174,8 +175,9 @@ function App() {
               </div>
             </div>
 
+            <button className={activeTab === 'dailyQuizzes' ? 'active' : ''} onClick={() => setActiveTab('dailyQuizzes')}>Квизы</button> {/* <-- 3. НОВАЯ ОТДЕЛЬНАЯ КНОПКА */}
             <button className={activeTab === 'tierlist' ? 'active' : ''} onClick={() => setActiveTab('tierlist')}>Тирлист Мейкер</button>
-            <button className={activeTab === 'ladder' ? 'active' : ''} onClick={() => setActiveTab('ladder')}>Ладдер</button> {/* <-- 3. ДОБАВЛЯЕМ КНОПКУ */}
+            <button className={activeTab === 'ladder' ? 'active' : ''} onClick={() => setActiveTab('ladder')}>Ладдер</button>
           </div>
         </nav>
       </div>

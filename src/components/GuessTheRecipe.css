@@ -1,0 +1,182 @@
+.guess-recipe-container {
+    width: 100%;
+    max-width: 1200px; /* Увеличим максимальную ширину для 3х квизов */
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #0A1014;
+    border: 1px solid #2c3e50;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.guess-recipe-container h3 {
+    font-family: 'Cinzel', serif;
+    color: #C89B3C;
+    margin: 0;
+}
+
+.guess-recipe-container p {
+    color: #a09480;
+    margin: 0;
+}
+
+/* Новый контейнер для всех карточек квизов */
+.quizzes-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+}
+
+/* Стили для одной карточки с квизом */
+.recipe-quiz-card {
+    background-color: #0F1A20;
+    border: 1px solid #5a4b2c;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 350px;
+    transition: all 0.3s ease;
+}
+
+.recipe-quiz-card.solved {
+    background-color: #1a3c50;
+    border-color: #2ecc71;
+}
+
+.recipe-display {
+    display: flex;
+    gap: 15px;
+    min-height: 64px;
+}
+
+.recipe-display img {
+    width: 54px; /* Немного уменьшим для компактности */
+    height: 54px;
+    border-radius: 4px;
+}
+
+.options-display {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.options-display .option-btn {
+    background: none;
+    border: 2px solid #2c3e50;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.options-display .option-btn:not(.disabled):hover {
+    border-color: #C89B3C;
+    transform: scale(1.05);
+}
+
+.options-display .option-btn img {
+    width: 64px;
+    height: 64px;
+    display: block;
+}
+
+.options-display .option-btn.correct {
+    border-color: #2ecc71;
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+    transform: scale(1.05);
+}
+
+.options-display .option-btn.incorrect {
+    border-color: #e74c3c;
+    opacity: 0.5;
+}
+
+.options-display .option-btn.disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.result-area {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.result-area .next-btn {
+    margin-top: 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    background-color: #C89B3C;
+    color: #0A1014;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.correct-answer-reveal {
+    margin-top: 10px;
+    min-height: 24px;
+}
+
+.correct-answer-reveal span {
+    font-weight: bold;
+    color: #2ecc71;
+    font-size: 1.1em;
+}
+
+/* Тексты с результатом */
+.correct-answer-text { color: #2ecc71 !important; font-weight: bold; }
+.incorrect-answer-text { color: #e74c3c !important; font-weight: bold; }
+
+/* Добавить в конец GuessTheRecipe.css и Itemdle.css */
+.quiz-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Добавить в конец файла GuessTheRecipe.css */
+.quiz-feedback-area {
+    min-height: 80px; /* Резервируем место под кнопку и текст */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.result-area.all-solved {
+    margin-top: 50px;
+}
+/* Добавить в конец файла GuessTheRecipe.css */
+.reset-btn {
+    margin-top: 20px;
+    background: none;
+    border: 1px solid #5a4b2c;
+    color: #a09480;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+    color: #F0E6D2;
+    border-color: #c89b3c;
+}

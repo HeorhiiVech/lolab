@@ -8,7 +8,8 @@ import {
   getDoc,
   updateDoc,
   serverTimestamp,
-  increment
+  increment,
+  runTransaction 
 } from "firebase/firestore";
 
 // --- Константы игры ---
@@ -21,19 +22,16 @@ const PLAYER_E_DMG = 150;
 const ENEMY_Q_PRIMARY_DMG = 300;
 const ENEMY_Q_SECONDARY_DMG = 250;
 const ENEMY_Q_DMG_TOTAL = ENEMY_Q_PRIMARY_DMG + ENEMY_Q_SECONDARY_DMG;
-
 const PLAYER_Q_COOLDOWN = 6000;
 const PLAYER_E_COOLDOWN = 5000;
 const ENEMY_W_COOLDOWN = 12000;
 const ENEMY_Q_COOLDOWN = 7000;
-
 const NORMAL_ATTACK_INTERVAL = 850;
 const FAST_ATTACK_INTERVAL = 600;
 
-// Функция для определения ранга
+// --- Вспомогательные функции (getRankInfo, isNewWeek) ---
 const getRankInfo = (points) => {
     const pts = points || 1000;
-
     const ranks = [
         { threshold: 0, name: 'Железо', color: '#817364' },
         { threshold: 3000, name: 'Бронза', color: '#CD7F32' },
@@ -45,17 +43,14 @@ const getRankInfo = (points) => {
         { threshold: 25000, name: 'Грандмастер', color: '#ff0000' },
         { threshold: 30000, name: 'Челленджер', color: '#F4C430' }
     ];
-
     let currentRank = ranks[0];
     let nextRank = ranks[1];
-
     for (let i = 0; i < ranks.length; i++) {
         if (pts >= ranks[i].threshold) {
             currentRank = ranks[i];
             nextRank = (i < ranks.length - 1) ? ranks[i + 1] : null;
         }
     }
-
     if (!nextRank) {
         return {
             ...currentRank,
@@ -65,15 +60,12 @@ const getRankInfo = (points) => {
             totalPoints: pts
         };
     }
-
     const rankStartPoints = currentRank.threshold;
     const rankEndPoints = nextRank.threshold;
     const pointsInCurrentRank = pts - rankStartPoints;
     const pointsNeededForRank = rankEndPoints - rankStartPoints;
-    
     const progress = (pointsInCurrentRank / pointsNeededForRank) * 100;
     const nextRankIn = rankEndPoints - pts;
-
     return {
         ...currentRank,
         nextRankName: nextRank.name,
@@ -82,28 +74,21 @@ const getRankInfo = (points) => {
         totalPoints: pts
     };
 };
-
-// Функция для проверки, прошла ли неделя
 const isNewWeek = (timestamp) => {
     if (!timestamp) return true;
     const lastDate = timestamp.toDate();
     const now = new Date();
-    
     const lastDateUTC = new Date(Date.UTC(lastDate.getFullYear(), lastDate.getMonth(), lastDate.getDate()));
     const nowUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
-
     const lastMonday = new Date(lastDateUTC);
     lastMonday.setUTCDate(lastDateUTC.getUTCDate() - (lastDateUTC.getUTCDay() + 6) % 7);
-    
     const currentMonday = new Date(nowUTC);
     currentMonday.setUTCDate(nowUTC.getUTCDate() - (nowUTC.getUTCDay() + 6) % 7);
-
     return lastMonday.getTime() !== currentMonday.getTime();
 };
 
-
-function SmiteTrainer({ currentUser }) {
-    // ... состояния ...
+// --- КОМПОНЕНТ SMITE TRAINER ---
+function SmiteTrainer({ currentUser, isDailyChallenge = false, onChallengeFinish = () => {} }) {
     const [dragonHp, setDragonHp] = useState(DRAGON_MAX_HP);
     const [gameState, setGameState] = useState('ready');
     const [resultMessage, setResultMessage] = useState('');
@@ -125,70 +110,82 @@ function SmiteTrainer({ currentUser }) {
     const [showEShockwave, setShowEShockwave] = useState(false);
     const [showQProjectile, setShowQProjectile] = useState(false);
     const [enemyQAnimation, setEnemyQAnimation] = useState('idle');
-    
     const aiPlan = useRef(null);
+    
+    // Обертываем функции в useCallback, чтобы они не пересоздавались при каждом рендере
+    const getTodayDocId = useCallback(() => {
+        return new Date().toISOString().split('T')[0];
+    }, []);
 
+    const updateDailySmiteStats = useCallback(async (reactionTime) => {
+        const docId = getTodayDocId();
+        const statsRef = doc(db, "daily_stats", docId);
+        try {
+            await runTransaction(db, async (transaction) => {
+                const statsDoc = await transaction.get(statsRef);
+                if (!statsDoc.exists()) {
+                    transaction.set(statsRef, { smiteTotalMs: reactionTime, smiteCount: 1 });
+                } else {
+                    const newTotalMs = statsDoc.data().smiteTotalMs + reactionTime;
+                    const newCount = statsDoc.data().smiteCount + 1;
+                    transaction.update(statsRef, { smiteTotalMs: newTotalMs, smiteCount: newCount });
+                }
+            });
+        } catch (e) {
+            console.error("Ошибка при обновлении статистики:", e);
+        }
+    }, [getTodayDocId]);
+
+    const getAverageReaction = useCallback(async () => {
+        const docId = getTodayDocId();
+        const statsRef = doc(db, "daily_stats", docId);
+        const statsDoc = await getDoc(statsRef);
+        if (statsDoc.exists()) {
+            const data = statsDoc.data();
+            const average = data.smiteTotalMs / data.smiteCount;
+            return `Средняя реакция сегодня: ${Math.round(average)}мс (${data.smiteCount} игр)`;
+        } else {
+            return "Вы первый, кто прошел испытание сегодня!";
+        }
+    }, [getTodayDocId]);
+    
     const fetchMyRecord = useCallback(async () => {
         if (currentUser) {
             const userRef = doc(db, "users", currentUser.uid);
             const userDoc = await getDoc(userRef);
-            if (userDoc.exists()) {
-                setMyRecord(userDoc.data());
-            }
-        } else {
-            setMyRecord(null);
-        }
+            if (userDoc.exists()) { setMyRecord(userDoc.data()); }
+        } else { setMyRecord(null); }
     }, [currentUser]);
-    
+
     const updateRating = useCallback(async (points) => {
-        if (!currentUser) return;
+        if (!currentUser || isDailyChallenge) return;
         const userRef = doc(db, "users", currentUser.uid);
         try {
             const userDoc = await getDoc(userRef);
             if (userDoc.exists()) {
                 const data = userDoc.data();
-                const updates = {
-                    rating: increment(points),
-                    lastPlayedTimestamp: serverTimestamp()
-                };
-
+                const updates = { rating: increment(points), lastPlayedTimestamp: serverTimestamp() };
                 if (isNewWeek(data.lastPlayedTimestamp)) {
                     updates.weekly_pt = points > 0 ? points : 0;
                 } else {
                     updates.weekly_pt = increment(points > 0 ? points : 0);
                 }
-                
                 await updateDoc(userRef, updates);
                 fetchMyRecord();
             }
         } catch (error) { console.error("Ошибка обновления рейтинга:", error); }
-    }, [currentUser, fetchMyRecord]);
-    
-    useEffect(() => {
-        fetchMyRecord();
-    }, [fetchMyRecord, currentUser]);
+    }, [currentUser, fetchMyRecord, isDailyChallenge]);
+
+    useEffect(() => { fetchMyRecord(); }, [fetchMyRecord, currentUser]);
 
     const showDamageNumber = useCallback((amount, type) => {
         let leftPosition = '40%';
-        if (type === 'player-aa' || type === 'player-skill') {
-            leftPosition = `${5 + Math.random() * 20}%`; 
-        } else if (type === 'enemy-aa' || type === 'enemy-skill') {
-            leftPosition = `${75 - Math.random() * 20}%`; 
-        } else if (type === 'smite') {
-            leftPosition = `${40 + Math.random() * 10}%`; 
-        }
-
-        const newDamageNumber = {
-            id: Date.now() + Math.random(),
-            amount: amount,
-            type: type,
-            left: leftPosition,
-            top: `${40 + Math.random() * 20}%`
-        };
+        if (type === 'player-aa' || type === 'player-skill') { leftPosition = `${5 + Math.random() * 20}%`; }
+        else if (type === 'enemy-aa' || type === 'enemy-skill') { leftPosition = `${75 - Math.random() * 20}%`; }
+        else if (type === 'smite') { leftPosition = `${40 + Math.random() * 10}%`; }
+        const newDamageNumber = { id: Date.now() + Math.random(), amount: amount, type: type, left: leftPosition, top: `${40 + Math.random() * 20}%` };
         setDamageNumbers(current => [...current, newDamageNumber]);
-        setTimeout(() => {
-            setDamageNumbers(current => current.filter(dn => dn.id !== newDamageNumber.id));
-        }, 1200);
+        setTimeout(() => { setDamageNumbers(current => current.filter(dn => dn.id !== newDamageNumber.id)); }, 1200);
     }, []);
 
     const dealDamage = useCallback((amount, type, actor, isSmite = false) => {
@@ -200,49 +197,60 @@ function SmiteTrainer({ currentUser }) {
             
             if (gameState !== 'active') return newHp;
 
-            if (isSmite) {
+            const finishGame = async (success, baseMessage) => {
                 setGameState('finished');
+                let finalMessage = baseMessage;
+                if (isDailyChallenge && success && baseMessage.includes("Отличный смайт!")) {
+                    const averageString = await getAverageReaction();
+                    finalMessage += `\n${averageString}`;
+                }
+                setResultMessage(finalMessage);
+                if (isDailyChallenge) {
+                    onChallengeFinish(success, finalMessage);
+                }
+            };
+
+            if (isSmite) {
                 if (actor === 'player') {
                     if (hpBeforeAction <= SMITE_DMG) {
-                        let points = 60;
-                        const reaction = smiteableTimestamp ? Date.now() - smiteableTimestamp : null;
-                        if (reaction) {
-                            if (reaction <= 49) points = 60;
-                            else if (reaction <= 99) points = 25;
-                            else if (reaction <= 249) points = 15;
+                        const reaction = smiteableTimestamp ? Date.now() - smiteableTimestamp : 0;
+                        const resultText = reaction ? `Ваша реакция: ${reaction}мс.` : 'Комбо-убийство!';
+                        const points = !isDailyChallenge ? (reaction && reaction <= 49 ? 60 : (reaction && reaction <= 99 ? 25 : 15)) : 0;
+                        const message = `Отличный смайт! ${resultText}`;
+                        if (isDailyChallenge && reaction > 0) {
+                            updateDailySmiteStats(reaction);
                         }
-                        const resultText = reaction ? `Реакция: ${reaction}мс.` : 'Комбо-убийство!';
-                        setResultMessage(`Отличный смайт! ${resultText} (+${points} pt.)`);
-                        updateRating(points);
+                        if (!isDailyChallenge) updateRating(points);
+                        finishGame(true, message + (!isDailyChallenge ? ` (+${points} pt.)` : ''));
                     } else {
-                        setResultMessage(`Слишком рано! Оставалось ${Math.round(hpBeforeAction)} HP. (-60 pt.)`);
-                        updateRating(-60);
+                        const message = `Слишком рано! Оставалось ${Math.round(hpBeforeAction)} HP.`;
+                        if (!isDailyChallenge) updateRating(-60);
+                        finishGame(false, message + (!isDailyChallenge ? ` (-60 pt.)` : ''));
                     }
-                } else { // actor === 'enemy'
-                    setResultMessage(`Слишком медленно! Враг вас пересмайтил. (-60 pt.)`);
-                    updateRating(-60);
+                } else {
+                    const message = `Слишком медленно! Враг вас пересмайтил.`;
+                    if (!isDailyChallenge) updateRating(-60);
+                    finishGame(false, message + (!isDailyChallenge ? ` (-60 pt.)` : ''));
                 }
             } else if (newHp === 0) {
-                setGameState('finished');
                 if (actor === 'player') {
-                    setResultMessage(`Победа! Дракон добит умением. (+25 pt.)`);
-                    updateRating(25);
+                    const message = `Победа! Дракон добит умением.`;
+                    if (!isDailyChallenge) updateRating(25);
+                    finishGame(true, message + (!isDailyChallenge ? ` (+25 pt.)` : ''));
                 } else {
-                    setResultMessage(`Дракон убит, но не вами! (-60 pt.)`);
-                    updateRating(-60);
+                    const message = `Дракон убит, но не вами!`;
+                    if (!isDailyChallenge) updateRating(-60);
+                    finishGame(false, message + (!isDailyChallenge ? ` (-60 pt.)` : ''));
                 }
             }
             return newHp;
         });
-    }, [smiteableTimestamp, updateRating, gameState, showDamageNumber]);
+    // ----- ИСПРАВЛЕНИЕ ЗДЕСЬ -----
+    }, [smiteableTimestamp, updateRating, gameState, showDamageNumber, isDailyChallenge, onChallengeFinish, getAverageReaction, updateDailySmiteStats]);
 
     const handleKeyPress = useCallback((event) => {
         if (gameState !== 'active') return;
-
-        if (event.code === 'KeyD' || event.code === 'KeyF') {
-            dealDamage(SMITE_DMG, 'smite', 'player', true);
-        }
-
+        if (event.code === 'KeyD' || event.code === 'KeyF') { dealDamage(SMITE_DMG, 'smite', 'player', true); }
         if (event.code === 'KeyE' && !playerEonCD) {
             dealDamage(PLAYER_E_DMG, 'player-skill', 'player');
             setPlayerEonCD(true);
@@ -251,7 +259,6 @@ function SmiteTrainer({ currentUser }) {
             setTimeout(() => setShowEShockwave(false), 500);
             setTimeout(() => setPlayerEonCD(false), PLAYER_E_COOLDOWN);
         }
-        
         if (event.code === 'KeyQ') {
             if (playerQState === 'ready') {
                 dealDamage(PLAYER_Q_DMG, 'player-skill', 'player');
@@ -265,7 +272,6 @@ function SmiteTrainer({ currentUser }) {
                         setTimeout(() => setPlayerQState('ready'), PLAYER_Q_COOLDOWN);
                     }
                 }, 2000);
-
             } else if (playerQState === 'firstCastWindow') {
                 dealDamage(PLAYER_Q_DMG, 'player-skill', 'player');
                 clearTimeout(qRecastTimer.current);
@@ -274,10 +280,8 @@ function SmiteTrainer({ currentUser }) {
             }
         }
     }, [gameState, playerEonCD, playerQState, dealDamage]);
-    
-    const handleCircleClick = (circleId) => {
-        setBlindCircles(prev => prev.filter(c => c.id !== circleId));
-    };
+
+    const handleCircleClick = (circleId) => { setBlindCircles(prev => prev.filter(c => c.id !== circleId)); };
 
     useEffect(() => {
         if (isBlinded && blindCircles.length === 0) {
@@ -288,15 +292,12 @@ function SmiteTrainer({ currentUser }) {
 
     useEffect(() => {
         if (gameState !== 'active') return;
-
         const currentAttackInterval = (isPlayerTurn && attackSpeedBuffCount > 0) ? FAST_ATTACK_INTERVAL : NORMAL_ATTACK_INTERVAL;
-        
         const gameTick = setInterval(() => {
             if (gameState !== 'active') {
                 clearInterval(gameTick);
                 return;
             }
-
             if (isPlayerTurn) {
                 dealDamage(PLAYER_AA_DMG, 'player-aa', 'player');
                 setAllyAttack(true);
@@ -308,7 +309,6 @@ function SmiteTrainer({ currentUser }) {
                 setDragonHp(currentHp => {
                     const plan = aiPlan.current;
                     const hpPercent = currentHp / DRAGON_MAX_HP;
-
                     if (plan.willAttemptBurst && currentHp <= plan.burstThreshold && !enemyQonCD) {
                         dealDamage(ENEMY_Q_DMG_TOTAL + SMITE_DMG, 'smite', 'enemy', true);
                         setEnemyQAnimation('forward');
@@ -319,7 +319,6 @@ function SmiteTrainer({ currentUser }) {
                         dealDamage(SMITE_DMG, 'smite', 'enemy', true);
                         return Math.max(0, currentHp - SMITE_DMG);
                     }
-                    
                     if (!enemyWonCD && !plan.wUsed && hpPercent <= plan.wThreshold) {
                         plan.wUsed = true;
                         setEnemyWonCD(true);
@@ -333,29 +332,24 @@ function SmiteTrainer({ currentUser }) {
                         setEnemyQonCD(true);
                         setEnemyQAnimation('forward');
                         dealDamage(ENEMY_Q_PRIMARY_DMG, 'enemy-skill', 'enemy');
-                        
                         setTimeout(() => { 
                             dealDamage(ENEMY_Q_SECONDARY_DMG, 'enemy-skill', 'enemy');
                             setEnemyQAnimation('backward');
                         }, 500);
-
                         setTimeout(() => setEnemyQAnimation('idle'), 1000);
                         setTimeout(() => setEnemyQonCD(false), ENEMY_Q_COOLDOWN);
                     }
-
                     dealDamage(ENEMY_AA_DMG, 'enemy-aa', 'enemy');
                     setEnemyAttack(true);
                     setTimeout(() => setEnemyAttack(false), 150);
-                    
                     return currentHp;
                 });
             }
             setIsPlayerTurn(prev => !prev);
         }, currentAttackInterval);
-
         return () => clearInterval(gameTick);
     }, [gameState, isPlayerTurn, attackSpeedBuffCount, dealDamage, enemyQonCD, enemyWonCD]);
-    
+
     useEffect(() => {
         window.addEventListener('keydown', handleKeyPress);
         return () => {
@@ -377,17 +371,10 @@ function SmiteTrainer({ currentUser }) {
         const roll = Math.random();
         let plan;
         if (roll < 0.4) {
-            plan = {
-                willAttemptBurst: true,
-                burstThreshold: 1700
-            };
+            plan = { willAttemptBurst: true, burstThreshold: 1700 };
         } else {
-            plan = {
-                willAttemptBurst: false,
-                smiteThreshold: 1200
-            };
+            plan = { willAttemptBurst: false, smiteThreshold: 1200 };
         }
-
         const wRoll = Math.random();
         if (wRoll < 0.33) {
             plan.wThreshold = 0.95;
@@ -397,9 +384,7 @@ function SmiteTrainer({ currentUser }) {
             plan.wThreshold = 0.30;
         }
         plan.wUsed = false;
-
         aiPlan.current = plan;
-
         setDragonHp(DRAGON_MAX_HP);
         setGameState('active');
         setResultMessage('');
@@ -419,6 +404,7 @@ function SmiteTrainer({ currentUser }) {
 
     const healthPercentage = (dragonHp / DRAGON_MAX_HP) * 100;
     const userRankInfo = getRankInfo(myRecord?.rating);
+    const resultMessageStyle = { whiteSpace: 'pre-line', textAlign: 'center' };
 
     return (
         <div className="smite-trainer-wrapper">
@@ -460,9 +446,9 @@ function SmiteTrainer({ currentUser }) {
                     </div>
                 </div>
                 
-                {gameState !== 'active' && (
+                {gameState !== 'active' && !isDailyChallenge && (
                     <div className="game-controls">
-                        {resultMessage && <p className="result-message">{resultMessage}</p>}
+                        {resultMessage && <p className="result-message" style={resultMessageStyle}>{resultMessage}</p>}
                         <button onClick={startGame} className="start-button">Начать</button>
                         <div className="game-mechanics">
                             <h4>Механика игры:</h4>
@@ -475,12 +461,17 @@ function SmiteTrainer({ currentUser }) {
                         </div>
                     </div>
                 )}
+                {gameState === 'ready' && isDailyChallenge && (
+                     <div className="game-controls">
+                        <button onClick={startGame} className="start-button">Начать испытание</button>
+                    </div>
+                )}
                 {gameState === 'active' && (<div className="smite-controls"><p className="smite-instruction"><b>Q, E</b> - Способности, <b>D/F</b> - Смайт</p></div>)}
 
                 {blindCircles.map(circle => (<div key={circle.id} className="blind-circle" style={{ top: circle.top, left: circle.left }} onClick={() => handleCircleClick(circle.id)}></div>))}
             </div>
 
-            {myRecord && (
+            {!isDailyChallenge && myRecord && (
                  <div className="rank-progress-container on-trainer-page">
                     <div className="rank-progress-header">
                         <span>Всего очков: <strong>{userRankInfo.totalPoints} pt.</strong></span>
