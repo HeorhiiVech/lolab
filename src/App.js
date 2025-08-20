@@ -179,7 +179,7 @@ function App() {
           </header>
           <div className="header-buttons">
             <button onClick={() => setIsFaqOpen(true)} className="faq-button" title="FAQ">?</button>
-            <a href="https://t.me/heovechlolstats" target="_blank" rel="noopener noreferrer" className="telegram-link" title="Наш Telegram канал">
+            <a href="https://t.me/lablol" target="_blank" rel="noopener noreferrer" className="telegram-link" title="Наш Telegram канал">
               <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-1.02.17-1.25l16.05-6.1c.78-.29 1.45.14 1.25 1.05l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.43.42-.83.42z" /></svg>
             </a>
             <a href="https://new.donatepay.ru/@1347624" target="_blank" rel="noopener noreferrer" className="donate-button" title="Поддержать проект">
