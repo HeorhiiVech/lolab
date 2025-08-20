@@ -1,12 +1,12 @@
-// ... (все импорты и функция shuffleArray остаются без изменений)
+// src/components/TrainingSession.js
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { decks } from '../data/itemDecks';
-import ItemCard from './ItemCard';
+import ItemCard from './ItemCard'; // Предполагается, что этот компонент у вас есть
 import { updateItemMastery, updateChallengeBestTime } from '../api/userProgress';
 import './ItemTrainer.css';
 
 const shuffleArray = (array) => {
-    // ...
     let currentIndex = array.length, randomIndex;
     while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
@@ -16,10 +16,7 @@ const shuffleArray = (array) => {
     return array;
 };
 
-// ... (функция-заглушка updateUserProgress остается)
-
 function TrainingSession({ deckName, mode, initialLives, currentUser, onExit }) {
-  // ... (все состояния useState остаются без изменений)
   const [sessionDeck, setSessionDeck] = useState([]);
   const [mistakesQueue, setMistakesQueue] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,7 +30,6 @@ function TrainingSession({ deckName, mode, initialLives, currentUser, onExit }) 
   const [startTime, setStartTime] = useState(0);
   const [completionTime, setCompletionTime] = useState(0);
 
-  // ... (useEffect для инициализации колоды и генерации вопросов без изменений)
   useEffect(() => {
     const initialDeck = decks[deckName];
     setSessionDeck(shuffleArray([...initialDeck]));
@@ -63,7 +59,6 @@ function TrainingSession({ deckName, mode, initialLives, currentUser, onExit }) 
     }
   }, [sessionDeck, currentIndex, deckName]);
 
-  // ... (handleAnswer и handleNext без изменений)
   const handleAnswer = useCallback((selectedItemId) => {
     if (gameState !== 'playing') return;
     const correctItem = sessionDeck[currentIndex];
@@ -91,13 +86,15 @@ function TrainingSession({ deckName, mode, initialLives, currentUser, onExit }) 
   
   const handleNext = () => {
     const isLastQuestion = currentIndex >= sessionDeck.length - 1 && mistakesQueue.length === 0;
-    const hasLost = mode === 'challenge' && lives === 1 && !lastAnswerCorrect;
+    
+    // *** ИСПРАВЛЕНИЕ ЗДЕСЬ ***
+    // Проверяем, закончились ли жизни. lives < 1 корректно сработает, когда lives станет 0.
+    const hasLost = mode === 'challenge' && lives < 1;
     
     if (isLastQuestion || hasLost) {
-      if (mode === 'challenge' && !hasLost) { // Сохраняем, только если не проиграли
+      if (mode === 'challenge' && !hasLost) {
         const time = (Date.now() - startTime) / 1000;
         setCompletionTime(time);
-        // --- ИЗМЕНЕНИЕ ЗДЕСЬ: Проверяем, что все ответы верные ---
         if (incorrectCount === 0) {
             updateChallengeBestTime(currentUser?.uid, deckName, time);
         }
@@ -123,7 +120,6 @@ function TrainingSession({ deckName, mode, initialLives, currentUser, onExit }) 
   
   if (sessionDeck.length === 0) return <div>Загрузка...</div>;
   
-  // --- ОБНОВЛЕННЫЙ ЭКРАН ЗАВЕРШЕНИЯ ---
   if (gameState === 'finished') {
     const perfectRun = incorrectCount === 0;
     return (
@@ -136,9 +132,10 @@ function TrainingSession({ deckName, mode, initialLives, currentUser, onExit }) 
           </>
         ) : (
           <>
-            <p className="summary-score">Результат: {firstTryCorrect} / {decks[deckName].length}</p>
+            <p className="summary-score">Результат: {firstTryCorrect} / {sessionDeck.length}</p>
             {perfectRun && <p className="summary-score">Время: {completionTime.toFixed(2)} с.</p>}
-            {!perfectRun && <p style={{color: '#a09480'}}>Рекорд не засчитан, так как были допущены ошибки.</p>}
+            {!perfectRun && lives < 1 && <p style={{color: '#e74c3c'}}>Вы проиграли, допустив ошибку.</p>}
+            {!perfectRun && lives >= 1 && <p style={{color: '#a09480'}}>Рекорд не засчитан, так как были допущены ошибки.</p>}
           </>
         )}
         <button className="deck-btn" onClick={onExit}>Вернуться в меню</button>
@@ -146,13 +143,13 @@ function TrainingSession({ deckName, mode, initialLives, currentUser, onExit }) 
     );
   }
 
-  // ... (остальной JSX без изменений)
   const currentItem = sessionDeck[currentIndex];
   return (
     <div className="training-session">
       <div className="session-header">
         <span className="session-progress">{currentIndex + 1} / {sessionDeck.length}</span>
-        {mode === 'challenge' && <span className="session-lives">Жизни: {'❤'.repeat(lives)}</span>}
+        {/* Добавляем Math.max(0, lives) для дополнительной защиты от отрицательных значений */}
+        {mode === 'challenge' && <span className="session-lives">Жизни: {'❤'.repeat(Math.max(0, lives))}</span>}
       </div>
       {currentItem && (
         <ItemCard

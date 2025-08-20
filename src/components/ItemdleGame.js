@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import allItems from '../data/items_database.json';
 import GuessInput from './GuessInput';
 import GuessRow from './GuessRow';
-import CountdownTimer from './CountdownTimer'; // Импортируем таймер
-import { getTimeBlockSeed } from '../utils/time'; // Импортируем утилиту
+import CountdownTimer from './CountdownTimer';
+import { getTimeBlockSeed } from '../utils/time';
 import './Itemdle.css';
 
 const getDailyItem = () => {
-    const seed = getTimeBlockSeed(); // Используем наш 12-часовой ключ
+    const seed = getTimeBlockSeed();
     const dayIndex = seed % allItems.length;
     return allItems[dayIndex];
 };
@@ -16,6 +16,7 @@ function ItemdleGame({ onExit }) {
     const [secretItem, setSecretItem] = useState(null);
     const [guesses, setGuesses] = useState([]);
     const [isWon, setIsWon] = useState(false);
+    const [isFinished, setIsFinished] = useState(false); // Новое состояние для отслеживания конца игры
 
     useEffect(() => {
         const dailyItem = getDailyItem();
@@ -25,14 +26,12 @@ function ItemdleGame({ onExit }) {
         const savedProgress = localStorage.getItem('itemdleProgress');
 
         if (savedProgress) {
-            const { seed, savedGuesses, won } = JSON.parse(savedProgress);
+            const { seed, savedGuesses, won, finished } = JSON.parse(savedProgress);
             if (seed === currentSeed) {
-                // Восстанавливаем угаданные предметы, если они есть
                 const restoredGuesses = savedGuesses.map(gId => allItems.find(item => item.id === gId)).filter(Boolean);
                 setGuesses(restoredGuesses);
-                if (won) {
-                    setIsWon(true);
-                }
+                if (won) setIsWon(true);
+                if (finished) setIsFinished(true);
             } else {
                 localStorage.removeItem('itemdleProgress');
             }
@@ -40,19 +39,27 @@ function ItemdleGame({ onExit }) {
     }, []);
 
     useEffect(() => {
-        // Сохраняем прогресс после каждой попытки
         if (!secretItem) return;
-        const currentSeed = getTimeBlockSeed();
-        const dataToSave = {
-            seed: currentSeed,
-            savedGuesses: guesses.map(g => g.id),
-            won: isWon
-        };
-        localStorage.setItem('itemdleProgress', JSON.stringify(dataToSave));
-    }, [guesses, isWon, secretItem]);
+
+        // Определяем, закончилась ли игра (победа или 6 попыток)
+        const gameFinished = isWon || guesses.length >= 20;
+        if (gameFinished && !isFinished) {
+            setIsFinished(true); // Устанавливаем, что игра завершена
+            const currentSeed = getTimeBlockSeed();
+            const dataToSave = {
+                seed: currentSeed,
+                savedGuesses: guesses.map(g => g.id),
+                won: isWon,
+                finished: true // Добавляем флаг завершения
+            };
+            localStorage.setItem('itemdleProgress', JSON.stringify(dataToSave));
+            // Отправляем событие, чтобы прогресс-бар обновился
+            window.dispatchEvent(new CustomEvent('dailyQuizCompleted'));
+        }
+    }, [guesses, isWon, secretItem, isFinished]);
 
     const handleGuess = (itemName) => {
-        if (isWon) return;
+        if (isFinished) return;
 
         const guessedItem = allItems.find(item => item.name_ru.toLowerCase() === itemName.toLowerCase());
         
@@ -91,20 +98,19 @@ function ItemdleGame({ onExit }) {
                     <GuessRow key={guess.id} guessedItem={guess} secretItem={secretItem} />
                 ))}
             </div>
-            {isWon ? (
+            {isWon && (
                 <div className="win-message">
                     <h3>Поздравляю! Вы угадали: {secretItem.name_ru}</h3>
                     <button className="next-btn" onClick={onExit}>Отлично</button>
                 </div>
-            ) : (
-                guesses.length < 6 && <GuessInput allItems={allItems} onGuess={handleGuess} /> // Добавим лимит попыток для интереса
             )}
-            {!isWon && guesses.length >= 6 && (
+            {!isWon && guesses.length >= 20 && (
                  <div className="win-message">
                     <h3>Попытки закончились! Загаданный предмет: {secretItem.name_ru}</h3>
                     <button className="next-btn" onClick={onExit}>Понятно</button>
                 </div>
             )}
+            {!isFinished && <GuessInput allItems={allItems} onGuess={handleGuess} />}
         </div>
     );
 }

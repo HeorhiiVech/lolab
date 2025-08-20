@@ -9,7 +9,7 @@ import {
   updateDoc,
   serverTimestamp,
   increment,
-  runTransaction 
+  runTransaction
 } from "firebase/firestore";
 
 // --- Константы игры ---
@@ -200,10 +200,16 @@ function SmiteTrainer({ currentUser, isDailyChallenge = false, onChallengeFinish
             const finishGame = async (success, baseMessage) => {
                 setGameState('finished');
                 let finalMessage = baseMessage;
+
                 if (isDailyChallenge && success && baseMessage.includes("Отличный смайт!")) {
-                    const averageString = await getAverageReaction();
-                    finalMessage += `\n${averageString}`;
+                    try {
+                        const averageString = await getAverageReaction();
+                        finalMessage += `\n${averageString}`;
+                    } catch (error) {
+                        console.error("Не удалось получить среднюю статистику:", error);
+                    }
                 }
+                
                 setResultMessage(finalMessage);
                 if (isDailyChallenge) {
                     onChallengeFinish(success, finalMessage);
@@ -245,7 +251,6 @@ function SmiteTrainer({ currentUser, isDailyChallenge = false, onChallengeFinish
             }
             return newHp;
         });
-    // ----- ИСПРАВЛЕНИЕ ЗДЕСЬ -----
     }, [smiteableTimestamp, updateRating, gameState, showDamageNumber, isDailyChallenge, onChallengeFinish, getAverageReaction, updateDailySmiteStats]);
 
     const handleKeyPress = useCallback((event) => {

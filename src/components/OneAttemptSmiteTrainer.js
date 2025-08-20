@@ -1,37 +1,78 @@
 import React, { useState, useEffect } from 'react';
-import SmiteTrainer from './SmiteTrainer'; // Мы "оборачиваем" существующий тренажер
-import './SmiteTrainer.css'; // Используем те же стили
+import SmiteTrainer from './SmiteTrainer';
+import './SmiteTrainer.css';
+import { getTimeBlockSeed } from '../utils/time';
 
-function OneAttemptSmiteTrainer({ currentUser, onExit }) {
+function OneAttemptSmiteTrainer({ currentUser, onExit, onQuizComplete }) {
+  // Отвечает за блокировку квиза, если он УЖЕ УСПЕШНО пройден сегодня
   const [hasWonToday, setHasWonToday] = useState(false);
+  // Показывает экран результата после одной попытки
   const [sessionFinished, setSessionFinished] = useState(false);
+  // Хранит результат последней попытки
   const [sessionResult, setSessionResult] = useState({ message: '', success: false });
+  // Для экрана загрузки
+  const [isLoading, setIsLoading] = useState(true);
+  // Ключ для принудительной перезагрузки компонента SmiteTrainer при повторной попытке
+  const [gameKey, setGameKey] = useState(Date.now());
 
-  // При загрузке проверяем, была ли сегодня ПОБЕДА
   useEffect(() => {
-    if (!currentUser) {
-      const lastWinDate = localStorage.getItem('smiteChallengeWinDate');
-      const today = new Date().toDateString();
-      if (lastWinDate === today) {
-        setHasWonToday(true);
-      }
-    }
-  }, [currentUser]);
+    // Проверяем статус при загрузке компонента
+    const checkWinStatus = () => {
+      setIsLoading(true);
+      const currentSeed = getTimeBlockSeed();
+      const savedProgress = localStorage.getItem('smiteTrainerDailyProgress');
 
-  // SmiteTrainer вызовет эту функцию, когда игра закончится
+      if (savedProgress) {
+        const { seed, won } = JSON.parse(savedProgress);
+        // Блокируем игру, только если в записи есть seed этого дня И флаг won === true
+        if (seed === currentSeed && won === true) {
+          setHasWonToday(true);
+        }
+      }
+      setIsLoading(false);
+    };
+
+    checkWinStatus();
+  }, []);
+
   const handleGameFinish = (success, message) => {
-    // ----- КЛЮЧЕВОЕ ИЗМЕНЕНИЕ -----
-    // Сохраняем дату только в случае ПОБЕДЫ
-    if (success && !currentUser) {
-      localStorage.setItem('smiteChallengeWinDate', new Date().toDateString());
-      setHasWonToday(true);
+    // Эта функция вызывается после каждой попытки смайта
+    if (success) {
+      // Если попытка УСПЕШНАЯ
+      const currentSeed = getTimeBlockSeed();
+      const dataToSave = {
+          seed: currentSeed,
+          finished: true,
+          won: true // Сохраняем с флагом победы
+      };
+      localStorage.setItem('smiteTrainerDailyProgress', JSON.stringify(dataToSave));
+      
+      // Вызываем функцию из App.js напрямую для обновления
+      onQuizComplete(); 
     }
+    // Если попытка была НЕУСПЕШНОЙ, мы ничего не сохраняем в localStorage
+
+    // В любом случае показываем результат этой попытки
     setSessionResult({ message, success });
-    setSessionFinished(true); // Показываем экран с результатом
+    setSessionFinished(true);
+  };
+
+  const handleRetry = () => {
+    // Эта функция запускает новую попытку после неудачи
+    setSessionFinished(false); // Скрываем экран результата
+    setGameKey(Date.now()); // Меняем ключ, чтобы SmiteTrainer полностью перезагрузился
   };
   
-  // Если игрок уже побеждал сегодня, показываем экран успеха
+  if (isLoading) {
+      return (
+          <div className="daily-quiz-container">
+              <h3>Проверка вашего статуса...</h3>
+          </div>
+      );
+  }
+
   if (hasWonToday) {
+    // Если пользователь уже победил сегодня
     return (
       <div className="daily-quiz-container">
         <h3>Испытание пройдено!</h3>
@@ -41,22 +82,27 @@ function OneAttemptSmiteTrainer({ currentUser, onExit }) {
     );
   }
 
-  // Если текущая игровая сессия завершена, показываем ее результат
   if (sessionFinished) {
-      return (
-        <div className="daily-quiz-container">
-            <h3>{sessionResult.success ? 'Победа!' : 'Неудача!'}</h3>
-            <p>{sessionResult.message}</p>
-            <button className="start-button" onClick={onExit}>
-                {sessionResult.success ? 'Отлично' : 'Назад (чтобы попробовать снова)'}
-            </button>
+    // Если только что завершилась одна попытка
+    return (
+      <div className="daily-quiz-container">
+          <h3>{sessionResult.success ? 'Победа!' : 'Неудача!'}</h3>
+          <p style={{ whiteSpace: 'pre-line' }}>{sessionResult.message}</p>
+          {sessionResult.success ? (
+            // Если попытка была успешной, кнопка закрывает квиз
+            <button className="start-button" onClick={onExit}>Отлично</button>
+          ) : (
+            // Если попытка была неудачной, кнопка предлагает сыграть еще раз
+            <button className="start-button" onClick={handleRetry}>Попробовать снова</button>
+          )}
       </div>
-      )
+    );
   }
 
-  // Если попытки не было, запускаем тренажер в специальном режиме
+  // Если игра еще не началась или была перезапущена после неудачи
   return (
     <SmiteTrainer 
+        key={gameKey} // Ключ важен для сброса состояния
         currentUser={currentUser} 
         isDailyChallenge={true} 
         onChallengeFinish={handleGameFinish} 

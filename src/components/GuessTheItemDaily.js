@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from 'react';
-// Используем ваш оригинальный файл items.json
 import allDDragonItems from '../data/items.json'; 
 import CountdownTimer from './CountdownTimer';
 import { getTimeBlockSeed } from '../utils/time';
 import './GuessTheRecipe.css'; 
 
-// --- ВСЯ ЛОГИКА НАХОДИТСЯ ЗДЕСЬ ---
-
 const itemsById = allDDragonItems.data;
-// Фильтруем предметы, которые можно собрать
 const buildableItems = Object.values(itemsById).filter(item => 
     item.from && item.from.length > 0 && item.maps['11'] && item.gold.purchasable
 );
 
-// Функция для выбора ОДНОГО предмета дня
 const getDailyItem = () => {
     const seed = getTimeBlockSeed();
     const dayIndex = seed % buildableItems.length;
     return buildableItems[dayIndex];
 };
 
-// Функция для получения 3 случайных неправильных вариантов
 const getRandomOptions = (correctItem) => {
     const options = new Set([correctItem]);
     while (options.size < 4) {
@@ -32,29 +26,27 @@ const getRandomOptions = (correctItem) => {
     return Array.from(options).sort(() => Math.random() - 0.5);
 };
 
-
 function GuessTheItemDaily({ onExit }) {
     const [secretItem, setSecretItem] = useState(null);
     const [options, setOptions] = useState([]);
     
-    const [hasWonToday, setHasWonToday] = useState(false);
+    const [hasFinishedToday, setHasFinishedToday] = useState(false);
     const [isAnswered, setIsAnswered] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
 
-    // Инициализация игры при загрузке
     useEffect(() => {
         const dailyItem = getDailyItem();
         setSecretItem(dailyItem);
         setOptions(getRandomOptions(dailyItem));
 
         const currentSeed = getTimeBlockSeed();
-        const savedProgress = localStorage.getItem('recipeQuizProgressV3'); // Используем новый ключ для чистого старта
+        const savedProgress = localStorage.getItem('recipeQuizProgressV3');
         
         if (savedProgress) {
-            const { seed, won } = JSON.parse(savedProgress);
-            if (seed === currentSeed && won) {
-                setHasWonToday(true);
+            const { seed, finished } = JSON.parse(savedProgress);
+            if (seed === currentSeed && finished) {
+                setHasFinishedToday(true);
             } else if (seed !== currentSeed) {
                  localStorage.removeItem('recipeQuizProgressV3');
             }
@@ -67,16 +59,14 @@ function GuessTheItemDaily({ onExit }) {
         setIsCorrect(wasCorrect);
         setSelectedOption(selectedItem.image.full);
         setIsAnswered(true);
+        setHasFinishedToday(true); // В этой игре любая попытка - финальная
 
-        if (wasCorrect) {
-            setHasWonToday(true);
-            const currentSeed = getTimeBlockSeed();
-            const dataToSave = { seed: currentSeed, won: true };
-            localStorage.setItem('recipeQuizProgressV3', JSON.stringify(dataToSave));
-        }
+        const currentSeed = getTimeBlockSeed();
+        const dataToSave = { seed: currentSeed, won: wasCorrect, finished: true };
+        localStorage.setItem('recipeQuizProgressV3', JSON.stringify(dataToSave));
+        // Отправляем событие, чтобы прогресс-бар обновился
+        window.dispatchEvent(new CustomEvent('dailyQuizCompleted'));
     };
-
-    // --- УДАЛЕНА ФУНКЦИЯ handleReset ---
 
     const getImageUrl = (imageFilename) => `https://ddragon.leagueoflegends.com/cdn/${allDDragonItems.version}/img/item/${imageFilename}`;
 
@@ -84,8 +74,7 @@ function GuessTheItemDaily({ onExit }) {
         return <div>Загрузка...</div>;
     }
 
-    // Экран, если квиз уже пройден
-    if (hasWonToday) {
+    if (hasFinishedToday) {
         return (
             <div className="guess-recipe-container">
                 <div className="quiz-header">
@@ -93,19 +82,17 @@ function GuessTheItemDaily({ onExit }) {
                     <CountdownTimer />
                 </div>
                 <div className="result-area all-solved">
-                    <p className='correct-answer-text'>Отлично! Предмет угадан. Возвращайтесь позже!</p>
+                    <p className='correct-answer-text'>Попытка засчитана! Возвращайтесь завтра.</p>
                     <div className="correct-answer-reveal">
+                        <span>Правильный ответ: {secretItem.name}</span>
                         <img src={getImageUrl(secretItem.image.full)} alt={secretItem.name}/>
-                        <span>{secretItem.name}</span>
                     </div>
                     <button className="next-btn" onClick={onExit}>Вернуться</button>
-                    {/* --- УДАЛЕНА КНОПКА СБРОСА --- */}
                 </div>
             </div>
         );
     }
     
-    // Основной экран квиза
     return (
         <div className="guess-recipe-container">
             <div className="quiz-header">
@@ -147,14 +134,9 @@ function GuessTheItemDaily({ onExit }) {
                     {isAnswered && (
                         <div className="result-area">
                             <p className={isCorrect ? 'correct-answer-text' : 'incorrect-answer-text'}>
-                                {isCorrect ? `Верно! Это ${secretItem.name}.` : 'Неверно!'}
+                                {isCorrect ? `Верно! Это ${secretItem.name}.` : `Неверно! Правильный ответ: ${secretItem.name}.`}
                             </p>
-                            {!isCorrect && (
-                                <button className="next-btn" onClick={onExit}>Попробовать снова</button>
-                            )}
-                             {isCorrect && (
-                                <button className="next-btn" onClick={onExit}>Отлично!</button>
-                            )}
+                            <button className="next-btn" onClick={onExit}>Отлично!</button>
                         </div>
                     )}
                 </div>

@@ -1,0 +1,72 @@
+/* DailyActivityBar.css - Checklist version for Header */
+.daily-activity-bar {
+    max-width: 260px;
+    /* Возвращаем отступы для расположения под шапкой */
+    margin: 20px auto; 
+    padding: 12px 15px;
+    background-color: #0F1A20;
+    border: 1px solid #5a4b2c;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.daily-activity-bar:hover {
+    border-color: #C89B3C;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.activity-header strong {
+    font-family: 'Cinzel', serif;
+    font-size: 1em;
+    color: #F0E6D2;
+}
+
+.activity-header span {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #C89B3C;
+}
+
+.activity-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+}
+
+.activity-item .item-status {
+    font-weight: bold;
+    width: 15px;
+    text-align: center;
+    color: #a09480;
+}
+
+.activity-item .item-name {
+    color: #a09480;
+}
+
+.activity-item.completed .item-status {
+    color: #2ecc71;
+}
+
+.activity-item.completed .item-name {
+    color: #8a8174;
+    text-decoration: line-through;
+}

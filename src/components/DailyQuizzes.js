@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import OneAttemptSmiteTrainer from './OneAttemptSmiteTrainer';
 import GuessTheItemDaily from './GuessTheItemDaily';
-import ItemdleGame from './ItemdleGame'; // <-- 1. ИМПОРТ
+import ItemdleGame from './ItemdleGame';
 import './DailyQuizzes.css';
 
-function DailyQuizzes({ currentUser }) {
+// 1. ПРИНИМАЕМ НОВУЮ ФУНКЦИЮ onQuizComplete
+function DailyQuizzes({ currentUser, onQuizComplete }) {
   const [activeQuiz, setActiveQuiz] = useState(null);
+
+  const handleQuizExit = () => {
+    setActiveQuiz(null);
+  };
 
   const renderQuiz = () => {
     switch (activeQuiz) {
       case 'smite':
-        return <OneAttemptSmiteTrainer currentUser={currentUser} onExit={() => setActiveQuiz(null)} />;
+        // 2. ПЕРЕДАЕМ ФУНКЦИЮ ДАЛЬШЕ
+        return <OneAttemptSmiteTrainer currentUser={currentUser} onExit={handleQuizExit} onQuizComplete={onQuizComplete} />;
       case 'item':
-        return <GuessTheItemDaily onExit={() => setActiveQuiz(null)} />;
-      case 'itemdle': // <-- 2. ДОБАВЛЯЕМ НОВЫЙ CASE
-        return <ItemdleGame onExit={() => setActiveQuiz(null)} />;
+        return <GuessTheItemDaily onExit={handleQuizExit} onQuizComplete={onQuizComplete} />;
+      case 'itemdle':
+        return <ItemdleGame onExit={handleQuizExit} onQuizComplete={onQuizComplete} />;
       default:
         return null;
     }
@@ -23,7 +29,6 @@ function DailyQuizzes({ currentUser }) {
   if (activeQuiz) {
     return (
       <div>
-        <button className="back-to-quizzes-btn" onClick={() => setActiveQuiz(null)}>‹ Назад к списку квизов</button>
         {renderQuiz()}
       </div>
     );
@@ -40,7 +45,7 @@ function DailyQuizzes({ currentUser }) {
         </div>
         <div className="quiz-card" onClick={() => setActiveQuiz('item')}>
           <h3>Угадай предмет</h3>
-          <p>Угадайте предмет по его пассивному эффекту.</p>
+          <p>Угадайте предмет по его компонентам.</p>
         </div>
         <div className="quiz-card" onClick={() => setActiveQuiz('smite')}>
           <h3>Испытание смайта</h3>

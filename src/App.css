@@ -38,30 +38,48 @@ body {
 
 .App-header { 
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* <-- Добавьте это свойство */
   align-items: center;
   justify-content: center;
-  padding: 20px 0 60px 0;
+  padding: 20px 0 20px 0;
   position: relative;
+  min-height: 80px;
 }
 
 .App-header h1 {
   font-family: 'Cinzel', serif;
   font-size: 3em;
   color: #C89B3C;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px 0; /* <-- Этот отступ создает пространство до переключателя */
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
+.App-header h1 {
+    margin: 0 0 20px 0;
+}
 
+.App-header .player-search-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    z-index: 100;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 .login-controls {
   position: absolute;
   top: 20px;
   left: 20px;
   display: flex;
-  align-items: center;
-  gap: 15px;
+  flex-direction: column; /* Элементы друг под другом */
+  align-items: flex-start; /* Выравнивание по левому краю */
+  gap: 10px; /* Отступ между кнопками и чек-листом */
   z-index: 10;
 }
+
 
 .login-controls span {
   font-family: 'Cinzel', serif;
@@ -707,14 +725,32 @@ main {
     text-shadow: 0 0 5px rgba(200, 155, 60, 0.7);
 }
 
+.header-main-content {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Пространство между элементами */
+}
+
+.header-main-content h1 {
+    margin: 0;
+}
+
+.header-main-content .player-search-container {
+    width: 450px; /* Задаем ширину поиска */
+}
+
 
 /* =========================================== */
 /* === АДАПТИВНЫЕ СТИЛИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ === */
 /* =========================================== */
 @media (max-width: 768px) {
 
+  .header-main-content {
+    flex-direction: column;
+    gap: 15px;
+  }
   .App-header {
-    padding: 20px 0 20px 0;
+    padding-bottom: 60px; 
   }
 
   .App-header h1 {
@@ -895,4 +931,28 @@ main {
     .radar-stats-comparison {
     display: none; /* Полностью скрываем этот блок на мобильных */
   }
+}
+
+/* ... (существующие стили) */
+
+.modal-content.quiz-modal {
+    max-width: 950px; /* Ширина под контент квизов */
+    width: 95%;
+    padding: 20px;
+    background-color: #0A1014; /* Немного темнее, чтобы выделить */
+}
+
+/* Переопределяем кнопку "Назад к списку", чтобы она работала внутри DailyQuizzes, но не отображалась в модальном окне */
+.quiz-modal .back-to-quizzes-btn {
+    display: none;
+}
+
+/* Поправляем отступы для заголовка и кнопки закрытия */
+.quiz-modal .daily-quizzes-dashboard h2 {
+    margin-top: 0;
+}
+
+.quiz-modal .modal-close-button {
+    margin-top: 20px;
+    align-self: center; /* Центрируем кнопку "Закрыть" */
 }

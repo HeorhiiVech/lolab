@@ -32,13 +32,9 @@ function ItemTrainerDashboard({ currentUser }) {
   }, [currentUser]);
 
 
-  const startGame = (deckName, mode, lives = 1) => { // Устанавливаем 1 жизнь по умолчанию
-    if (!currentUser && mode === 'learn') {
-      alert('Пожалуйста, войдите в аккаунт, чтобы начать режим обучения и сохранять прогресс.');
-      return;
-    }
-    setActiveGame({ deckName, mode, lives });
-  };
+const startGame = (deckName, mode, lives = 1) => {
+  setActiveGame({ deckName, mode, lives });
+};
 
   const isDeckCompleted = (deckName) => {
     if (!masteryData || masteryData.size === 0) return false;

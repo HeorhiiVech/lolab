@@ -11,6 +11,11 @@ function ItemTooltip({ item, position }) {
     left: `${position.x + 15}px`,
   };
 
+  // Функция для безопасного рендеринга HTML из plaintext
+  const createMarkup = (htmlString) => {
+    return { __html: htmlString };
+  };
+
   return (
     <div className="item-tooltip" style={tooltipStyle}>
       <div className="tooltip-header">
@@ -25,7 +30,14 @@ function ItemTooltip({ item, position }) {
         {Object.entries(item.stats).map(([statName, value]) => (
           value > 0 && <p key={statName}>+{value.toFixed(0)} {statName}</p>
         ))}
-        {/* Строка, которая выводила item.plaintext, была здесь. Мы ее удалили. */}
+        
+        {/* ИСПРАВЛЕНИЕ: Возвращаем отображение описания предмета, используя dangerouslySetInnerHTML для корректной вставки HTML */}
+        {item.plaintext && (
+          <div 
+            className="plaintext" 
+            dangerouslySetInnerHTML={createMarkup(item.plaintext)} 
+          />
+        )}
       </div>
     </div>
   );
